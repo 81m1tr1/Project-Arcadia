@@ -1,8 +1,3 @@
 [
-null,
-{"id":1,"animationId":6,"description":"[Sword] You fixed the Broken Sword with the Help of\nthe Black Smith! Now you can use it!","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0}],"iconIndex":96,"name":"Sword","note":"","params":[0,0,5,0,0,0,0,0],"price":300,"wtypeId":2},
-{"id":2,"animationId":6,"description":"[Sword] You Upgraded your Sword, now you can do more\nDamge then before!","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0}],"iconIndex":96,"name":"Mithril Sword","note":"","params":[0,0,10,0,0,0,0,0],"price":670,"wtypeId":2},
-{"id":3,"animationId":6,"description":"[Sword] A Magical Aura begins to fill the Sword,\nnot only the Blade but you feel stronger too!","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0}],"iconIndex":97,"name":"Enchanted Sword","note":"","params":[0,0,15,0,0,0,0,0],"price":1480,"wtypeId":2},
-{"id":4,"animationId":6,"description":"[Sword] The Sword of Legends...all this time you had\nthe Holy Sword out of Ancient Time! It Choose you!","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0}],"iconIndex":97,"name":"Sword of the Heroin","note":"","params":[0,0,25,0,0,0,0,0],"price":3890,"wtypeId":2},
-{"id":5,"animationId":0,"description":"","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0}],"iconIndex":0,"name":"Nothing","note":"","params":[0,0,0,0,0,0,0,0],"price":0,"wtypeId":0}
+null
 ]

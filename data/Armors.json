@@ -1,6 +1,3 @@
 [
-null,
-{"id":1,"atypeId":1,"description":"you Normal everyday clothes, they have the smell of\nHome on them","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Normal Clothes","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
-{"id":2,"atypeId":1,"description":"A Tunic which you got for being a Offical Adventurer\nCuts Damage by 1/2 a Heart!","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Adventure Tunic","note":"","params":[0,0,0,1,0,0,0,0],"price":200},
-{"id":3,"atypeId":1,"description":"A Rubust Tunic which makes you feel way stronger!\nCuts Damage taken in Half and Doubles your Damage!","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Red Tunic","note":"","params":[0,0,0,3,0,0,0,0],"price":300}
+null
 ]
