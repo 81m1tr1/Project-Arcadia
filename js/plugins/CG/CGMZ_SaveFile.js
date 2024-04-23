@@ -13,10 +13,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.2.0
+ * Version: 1.3.1
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.7.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: This plugin modifies the save / load screens to show more
  * game information as well as providing additional customization options.
@@ -37,6 +37,11 @@
  * $gameVariables.setValue(13, "The Hero Returns");
  * where 13 would be the variable id, and the string would be what shows up on
  * the save screen.
+ * --------------------------Integrations--------------------------------------
+ * This plugin can display New Game Plus text from [CGMZ] New Game Plus. To 
+ * set this up, add New Game Plus as a line item in the Display Info parameter.
+ * This option in the Display Info parameter will have no effect if not using
+ * [CGMZ] New Game Plus.
  * ------------------------------Saved Games-----------------------------------
  * This plugin is fully compatible with saved games. This means you can:
  *
@@ -50,7 +55,7 @@
  * behaving incorrectly and your game will probably crash. Please do not
  * rename the js file.
  * -------------------------Version History------------------------------------
- * Version 1.0.1:
+ * Version 1.0.1
  * - Added ability to change the color of header / label text
  * - Added ability to change opacity of the black rectangle behind location
  *	 info
@@ -58,17 +63,17 @@
  * - Fix for location overlapping when no image
  * - Fix for image height ignoring height parameter
  *
- * Version 1.0.2:
+ * Version 1.0.2
  * - Fix for image height being stuck at 160px
  *
- * Version 1.0.3:
+ * Version 1.0.3
  * - Fix for autosave after battle not displaying correct info
  * - Updated documentation
  *
- * Version 1.0.4:
+ * Version 1.0.4
  * - Updated color parameter to use RMMZ 1.6.0 new color picker UI
  *
- * Version 1.1.0:
+ * Version 1.1.0
  * - Added drag and drop control over each item drawn in Save File Display
  * - Added option to display CGMZ achievement/achievement pts in save file
  * - Added option to hide touch UI space when touch UI is disabled
@@ -79,10 +84,10 @@
  * - Fix crash when using Event Test
  * - This plugin now reports JSON errors in the console instead of crashing
  *
- * Version 1.1.1:
+ * Version 1.1.1
  * - Fix crash when an old save from before this plugin is loaded
  *
- * Version 1.2.0:
+ * Version 1.2.0
  * - Added option to delete save files
  * - Added option to rename save files
  * - Added ability to show a confirm window before save
@@ -90,12 +95,36 @@
  * - Icon parameters now use icon selector ui
  * - You can now manually set character vertical space for larger sprites
  *
+ * Version 1.2.1
+ * - Added support for [CGMZ] New Game Plus
+ *
+ * Version 1.3.0
+ * - Added confirmation window option for delete save file
+ * - Added save and load scene background image options
+ * - Added options to change the windowskin for each window
+ * - Added option to change list window width
+ * - Added option to have transparent windows
+ * - Added option to hide autosave option in load mode
+ * - Fix bug with Blank Line option in Display Info parameter
+ * - Fix bug with Autosave losing renamed name after autosave occurs
+ * - Save File Display window now scrolls if needed
+ *
+ * Version 1.3.1
+ * - Added option to stretch the save file image
+ * - Removed Image, Gold from display info parameter default
+ *
  * @param Autosave Options
  * 
  * @param Show Autosave in Save Mode
  * @parent Autosave Options
  * @type boolean
  * @desc Show autosave in the save screen?
+ * @default false
+ * 
+ * @param Show Autosave in Load Mode
+ * @parent Autosave Options
+ * @type boolean
+ * @desc Show autosave in the load screen?
  * @default false
  *
  * @param File Options
@@ -140,6 +169,12 @@
  * @desc Height of the image to display
  * @default 160
  *
+ * @param Stretch Image
+ * @parent Image Options
+ * @type boolean
+ * @desc If true, will stretch the width to fit the window width
+ * @default false
+ *
  * @param Location Fade Opacity
  * @parent Image Options
  * @type number
@@ -173,6 +208,12 @@
  * @type boolean
  * @desc If true, will ask the player to confirm they want to save over that file
  * @default false
+ *
+ * @param Show Delete Confirm Window
+ * @parent Window Options
+ * @type boolean
+ * @desc If true, will ask the player to confirm they want to delete that file
+ * @default true
  * 
  * @param Display Options
  *
@@ -187,6 +228,97 @@
  * @type boolean
  * @desc If true, will not leave space for Touch UI buttons if Touch UI is disabled
  * @default false
+ *
+ * @param List Window Width
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @max 100
+ * @desc The width (as a percentage of screen width) to make the List Window
+ * @default 25
+ *
+ * @param Transparent Windows
+ * @parent Display Options
+ * @type boolean
+ * @desc If true, windows will be transparent
+ * @default false
+ *
+ * @param Load Background Image
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The image to show as the scene background in the Load scene
+ *
+ * @param Save Background Image
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The image to show as the scene background in the Save scene
+ *
+ * @param List Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the list window
+ *
+ * @param Display Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the display window
+ *
+ * @param Help Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the help window
+ *
+ * @param Option Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the option window (delete/rename/etc)
+ *
+ * @param Confirm Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the confirm window
+ *
+ * @param Name Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the name input/edit windows
+ *
+ * @param Scroll Speed
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @desc Speed at which the save display window scrolls (if needed)
+ * @default 1
+ *
+ * @param Scroll Wait
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @desc Amount of time (in frames) to wait before beginning to scroll
+ * @default 300
+ *
+ * @param Scroll Deceleration
+ * @parent Display Options
+ * @type number
+ * @min 0.01
+ * @max 0.99
+ * @decimals 2
+ * @desc Rate of deceleration after letting go of touch
+ * @default 0.92
+ *
+ * @param Auto Scroll
+ * @parent Display Options
+ * @type boolean
+ * @desc Determine if the display window should automatically scroll after so long of no user input
+ * @default true
  *
  * @param Show Step Anim
  * @parent Display Options
@@ -216,8 +348,9 @@
  * @option Achievements
  * @option Achievement Points
  * @option Blank Line
+ * @option New Game Plus
  * @desc Determines the order and what info the display window shows.
- * @default ["Image And Location","Date","Playtime","Gold","Faces"]
+ * @default ["Date","Playtime","Faces"]
  *
  * @param Text Options
  * 
@@ -325,10 +458,10 @@
  * alfa, ademas de otras cosas geniales!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Versión: 1.2.0
+ * Versión: 1.3.1
  * ----------------------------------------------------------------------------
  * Compatibilidad: Sólo probado con mis CGMZ plugins.
- * Hecho para RPG Maker MZ 1.7.0
+ * Hecho para RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Descripción: este complemento modifica las pantallas de guardar/cargar para 
  * mostrar más información del juego, además de proporcionar opciones de 
@@ -352,8 +485,13 @@
  * $gameVariables.setValue(13, "El Heroe regresa");
  * donde 13 sería el id de la variable y la cadena sería lo que aparece en
  * la pantalla de guardar.
+ * --------------------------Integrations--------------------------------------
+ * This plugin can display New Game Plus text from [CGMZ] New Game Plus. To 
+ * set this up, add New Game Plus as a line item in the Display Info parameter.
+ * This option in the Display Info parameter will have no effect if not using
+ * [CGMZ] New Game Plus.
  * ----------------------Historial de Versiones--------------------------------
- *	Versión 1.0.1:
+ *	Versión 1.0.1
  * - Se agregó la capacidad de cambiar el color del texto del
  *	 encabezado / etiqueta
  * - Se agregó la capacidad de cambiar la opacidad del rectángulo negro detrás
@@ -362,18 +500,18 @@
  * - Solución para la superposición de ubicaciones cuando no hay imagen
  * - Corrección para la altura de la imagen ignorando el parámetro de altura
  *
- * Versión 1.0.2:
+ * Versión 1.0.2
  * - Solución de la altura de la imagen atascada en 160px
  *
- * Versión 1.0.3:
+ * Versión 1.0.3
  * - Solución para el guardado automático después de la batalla que no muestra
  *	 la información correcta
  * - Documentación actualizada
  *
- * Versión 1.0.4:
+ * Versión 1.0.4
  * - Updated color parameter to use RMMZ 1.6.0 new color picker UI
  *
- * Version 1.1.0:
+ * Versión 1.1.0
  * - Added drag and drop control over each item drawn in Save File Display
  * - Added option to display CGMZ achievement/achievement pts in save file
  * - Added option to hide touch UI space when touch UI is disabled
@@ -384,16 +522,34 @@
  * - Fix crash when using Event Test
  * - This plugin now reports JSON errors in the console instead of crashing
  *
- * Version 1.1.1:
+ * Versión 1.1.1
  * - Fix crash when an old save from before this plugin is loaded
  *
- * Version 1.2.0:
+ * Versión 1.2.0
  * - Added option to delete save files
  * - Added option to rename save files
  * - Added ability to show a confirm window before save
  * - Added option to show step animation for character sprites
  * - Icon parameters now use icon selector ui
  * - You can now manually set character vertical space for larger sprites
+ *
+ * Versión 1.2.1
+ * - Added support for [CGMZ] New Game Plus
+ *
+ * Versión 1.3.0
+ * - Added confirmation window option for delete save file
+ * - Added save and load scene background image options
+ * - Added options to change the windowskin for each window
+ * - Added option to change list window width
+ * - Added option to have transparent windows
+ * - Added option to hide autosave option in load mode
+ * - Fix bug with Blank Line option in Display Info parameter
+ * - Fix bug with Autosave losing renamed name after autosave occurs
+ * - Save File Display window now scrolls if needed
+ *
+ * Versión 1.3.1
+ * - Added option to stretch the save file image
+ * - Removed Image, Gold from display info parameter default
  *
  * @param Autosave Options
  * @text Opciones de autoguardado
@@ -403,6 +559,12 @@
  * @parent Autosave Options
  * @type boolean
  * @desc Mostrar guardado automático en la pantalla de guardar.
+ * @default false
+ * 
+ * @param Show Autosave in Load Mode
+ * @parent Autosave Options
+ * @type boolean
+ * @desc Show autosave in the load screen?
  * @default false
  *
  * @param File Options
@@ -454,6 +616,12 @@
  * @desc Altura de la imagen a mostrar.
  * @default 160
  *
+ * @param Stretch Image
+ * @parent Image Options
+ * @type boolean
+ * @desc If true, will stretch the width to fit the window width
+ * @default false
+ *
  * @param Location Fade Opacity
  * @text Ubicación Desvanecimiento de Opacidad
  * @parent Image Options
@@ -490,6 +658,12 @@
  * @type boolean
  * @desc If true, will ask the player to confirm they want to save over that file
  * @default false
+ *
+ * @param Show Delete Confirm Window
+ * @parent Window Options
+ * @type boolean
+ * @desc If true, will ask the player to confirm they want to delete that file
+ * @default true
  * 
  * @param Display Options
  * @text Opciones de pantalla
@@ -507,6 +681,97 @@
  * @type boolean
  * @desc If true, will not leave space for Touch UI buttons if Touch UI is disabled
  * @default false
+ *
+ * @param List Window Width
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @max 100
+ * @desc The width (as a percentage of screen width) to make the List Window
+ * @default 25
+ *
+ * @param Transparent Windows
+ * @parent Display Options
+ * @type boolean
+ * @desc If true, windows will be transparent
+ * @default false
+ *
+ * @param Load Background Image
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The image to show as the scene background in the Load scene
+ *
+ * @param Save Background Image
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The image to show as the scene background in the Save scene
+ *
+ * @param List Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the list window
+ *
+ * @param Display Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the display window
+ *
+ * @param Help Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the help window
+ *
+ * @param Option Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the option window (delete/rename/etc)
+ *
+ * @param Confirm Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the confirm window
+ *
+ * @param Name Windowskin
+ * @parent Display Options
+ * @type file
+ * @dir img
+ * @desc The windowskin to use for the name input/edit windows
+ *
+ * @param Scroll Speed
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @desc Speed at which the save display window scrolls (if needed)
+ * @default 1
+ *
+ * @param Scroll Wait
+ * @parent Display Options
+ * @type number
+ * @min 0
+ * @desc Amount of time (in frames) to wait before beginning to scroll
+ * @default 300
+ *
+ * @param Scroll Deceleration
+ * @parent Display Options
+ * @type number
+ * @min 0.01
+ * @max 0.99
+ * @decimals 2
+ * @desc Rate of deceleration after letting go of touch
+ * @default 0.92
+ *
+ * @param Auto Scroll
+ * @parent Display Options
+ * @type boolean
+ * @desc Determine if the display window should automatically scroll after so long of no user input
+ * @default true
  *
  * @param Show Step Anim
  * @parent Display Options
@@ -536,8 +801,9 @@
  * @option Achievements
  * @option Achievement Points
  * @option Blank Line
+ * @option New Game Plus
  * @desc Determines the order and what info the display window shows.
- * @default ["Image And Location","Date","Playtime","Gold","Faces"]
+ * @default ["Date","Playtime","Faces"]
  *
  * @param Text Options
  * @text Opciones de texto
@@ -638,21 +904,23 @@
  * @desc El icono que se muestra junto a la variable. Establecer en -1 para no usar.
  * @default -1
 */
-var Imported = Imported || {};
 Imported.CGMZ_SaveFile = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Save File"] = "1.2.0";
+CGMZ.Versions["Save File"] = "1.3.1";
 CGMZ.SaveFile = {};
 CGMZ.SaveFile.parameters = PluginManager.parameters('CGMZ_SaveFile');
 CGMZ.SaveFile.CustomSaveInfo = CGMZ_Utils.parseJSON(CGMZ.SaveFile.parameters["Custom Save Variables"], [], "CGMZ Save File", "Your Custom Save Variables had incorrect JSON and could not be loaded.");
 CGMZ.SaveFile.DisplayInfo = CGMZ_Utils.parseJSON(CGMZ.SaveFile.parameters["Display Info"], [], "CGMZ Save File", "Your display info JSON was invalid and could not be loaded.");
 CGMZ.SaveFile.ShowAutosaveInSaveMode = (CGMZ.SaveFile.parameters["Show Autosave in Save Mode"] === "true");
+CGMZ.SaveFile.ShowAutosaveInLoadMode = (CGMZ.SaveFile.parameters["Show Autosave in Load Mode"] === "true");
 CGMZ.SaveFile.DisableTouchUISpace = (CGMZ.SaveFile.parameters["Disable Touch UI Space"] === "true");
 CGMZ.SaveFile.ShowStepAnim = (CGMZ.SaveFile.parameters["Show Step Anim"] === "true");
 CGMZ.SaveFile.ShowConfirmWindow = (CGMZ.SaveFile.parameters["Show Confirm Window"] === "true");
+CGMZ.SaveFile.ShowDeleteConfirmWindow = (CGMZ.SaveFile.parameters["Show Delete Confirm Window"] === "true");
 CGMZ.SaveFile.ShowDeleteOption = (CGMZ.SaveFile.parameters["Show Delete Option"] === "true");
 CGMZ.SaveFile.ShowRenameOption = (CGMZ.SaveFile.parameters["Show Rename Option"] === "true");
+CGMZ.SaveFile.TransparentWindows = (CGMZ.SaveFile.parameters["Transparent Windows"] === "true");
+CGMZ.SaveFile.AutoScroll = (CGMZ.SaveFile.parameters["Auto Scroll"] === "true");
+CGMZ.SaveFile.StretchImage = (CGMZ.SaveFile.parameters["Stretch Image"] === "true");
 CGMZ.SaveFile.MaxSaveFiles = Number(CGMZ.SaveFile.parameters["Max Save Files"]);
 CGMZ.SaveFile.MaxFilenameLength = Number(CGMZ.SaveFile.parameters["Max Filename Length"]);
 CGMZ.SaveFile.SaveIconUsed = Number(CGMZ.SaveFile.parameters["File Icon Used"]);
@@ -661,7 +929,19 @@ CGMZ.SaveFile.ImageHeight = Number(CGMZ.SaveFile.parameters["Image Height"]);
 CGMZ.SaveFile.FadeSpriteOpacity = Number(CGMZ.SaveFile.parameters["Location Fade Opacity"]);
 CGMZ.SaveFile.HeaderColor = Number(CGMZ.SaveFile.parameters["Header Color"]);
 CGMZ.SaveFile.CharHeight = Number(CGMZ.SaveFile.parameters["Character Height"]);
+CGMZ.SaveFile.ListWindowWidth = Number(CGMZ.SaveFile.parameters["List Window Width"]);
+CGMZ.SaveFile.ScrollSpeed = Number(CGMZ.SaveFile.parameters["Scroll Speed"]);
+CGMZ.SaveFile.ScrollWait = Number(CGMZ.SaveFile.parameters["Scroll Wait"]);
+CGMZ.SaveFile.ScrollDeceleration = parseFloat(CGMZ.SaveFile.parameters["Scroll Deceleration"]);
 CGMZ.SaveFile.DefaultImage = CGMZ.SaveFile.parameters["Default Image"];
+CGMZ.SaveFile.LoadBackgroundImage = CGMZ.SaveFile.parameters["Load Background Image"];
+CGMZ.SaveFile.SaveBackgroundImage = CGMZ.SaveFile.parameters["Save Background Image"];
+CGMZ.SaveFile.ListWindowskin = CGMZ.SaveFile.parameters["List Windowskin"];
+CGMZ.SaveFile.DisplayWindowskin = CGMZ.SaveFile.parameters["Display Windowskin"];
+CGMZ.SaveFile.HelpWindowskin = CGMZ.SaveFile.parameters["Help Windowskin"];
+CGMZ.SaveFile.ConfirmWindowskin = CGMZ.SaveFile.parameters["Confirm Windowskin"];
+CGMZ.SaveFile.OptionWindowskin = CGMZ.SaveFile.parameters["Option Windowskin"];
+CGMZ.SaveFile.NameWindowskin = CGMZ.SaveFile.parameters["Name Windowskin"];
 CGMZ.SaveFile.EmptyText = CGMZ.SaveFile.parameters["Empty Text"];
 CGMZ.SaveFile.LocationText = CGMZ.SaveFile.parameters["Location Text"];
 CGMZ.SaveFile.PlaytimeText = CGMZ.SaveFile.parameters["Playtime Text"];
@@ -689,11 +969,16 @@ CGMZ_Temp.prototype.createPluginData = function() {
 	alias_CGMZ_SaveFile_CGMZTemp_createPluginData.call(this);
 	this._saveFileTempImageURL = "";
 	this._saveFileTempMapName = "Unknown";
+	this.saveFileAutosaveFlag = false;
 };
 //-----------------------------------------------------------------------------
 // Get the save file's filename
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.getSaveFileFilename = function() {
+	if(this.saveFileAutosaveFlag) {
+		const info = DataManager._globalInfo[0];
+		if(info && info.cgmz_savefileName) return info.cgmz_savefileName;
+	}
 	const id = $gameSystem.savefileId();
 	if(id) {
 		const info = DataManager._globalInfo[id];
@@ -749,6 +1034,35 @@ Game_Party.prototype.CGMZ_SaveFile_actorInfoForSavefile = function() {
 	]);
 };
 //=============================================================================
+// Scene_Base
+//-----------------------------------------------------------------------------
+// Add tracking for autosaves
+//=============================================================================
+//-----------------------------------------------------------------------------
+// Set CGMZ flag before autosave
+//-----------------------------------------------------------------------------
+const alias_CGMZ_SaveFile_SceneBase_executeAutosave = Scene_Base.prototype.executeAutosave;
+Scene_Base.prototype.executeAutosave = function() {
+	$cgmzTemp.saveFileAutosaveFlag = true;
+    alias_CGMZ_SaveFile_SceneBase_executeAutosave.call(this);
+};
+//-----------------------------------------------------------------------------
+// Clear CGMZ flag after autosave
+//-----------------------------------------------------------------------------
+const alias_CGMZ_SaveFile_SceneBase_onAutosaveSuccess = Scene_Base.prototype.onAutosaveSuccess;
+Scene_Base.prototype.onAutosaveSuccess = function() {
+	alias_CGMZ_SaveFile_SceneBase_onAutosaveSuccess.call(this);
+    $cgmzTemp.saveFileAutosaveFlag = false;
+};
+//-----------------------------------------------------------------------------
+// Clear CGMZ flag after autosave
+//-----------------------------------------------------------------------------
+const alias_CGMZ_SaveFile_SceneBase_onAutosaveFailure = Scene_Base.prototype.onAutosaveFailure;
+Scene_Base.prototype.onAutosaveFailure = function() {
+	alias_CGMZ_SaveFile_SceneBase_onAutosaveFailure.call(this);
+    $cgmzTemp.saveFileAutosaveFlag = false;
+};
+//=============================================================================
 // DataManager
 //-----------------------------------------------------------------------------
 // Change max save file count and save file info
@@ -789,11 +1103,31 @@ DataManager.makeSavefileInfo = function() {
 // Do not include autosave if save mode and option disabled
 //=============================================================================
 //-----------------------------------------------------------------------------
+// Alias. Set window transparency
+//-----------------------------------------------------------------------------
+const alias_CGMZ_SaveFile_WindowSavefileList_initialize = Window_SavefileList.prototype.initialize;
+Window_SavefileList.prototype.initialize = function(rect) {
+	alias_CGMZ_SaveFile_WindowSavefileList_initialize.call(this, rect);
+	this.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
+};
+//-----------------------------------------------------------------------------
+// Load the list windowskin if needed
+//-----------------------------------------------------------------------------
+Window_SavefileList.prototype.loadWindowskin = function() {
+	if(CGMZ.SaveFile.ListWindowskin) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.ListWindowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+	} else {
+		Window_Selectable.prototype.loadWindowskin.call(this);
+	}
+};
+//-----------------------------------------------------------------------------
 // Alias. Do not include autosave if in save mode (optional)
 //-----------------------------------------------------------------------------
 const alias_CGMZ_SaveFile_WindowSavefileList_setMode = Window_SavefileList.prototype.setMode;
 Window_SavefileList.prototype.setMode = function(mode, autosave) {
 	if(mode === "save" && !CGMZ.SaveFile.ShowAutosaveInSaveMode) autosave = false;
+	if(mode === "load" && !CGMZ.SaveFile.ShowAutosaveInLoadMode) autosave = false;
 	alias_CGMZ_SaveFile_WindowSavefileList_setMode.call(this, mode, autosave);
 };
 //-----------------------------------------------------------------------------
@@ -855,7 +1189,7 @@ Window_SavefileList.prototype.callUpdateHelp = function() {
 //=============================================================================
 const alias_CGMZ_SaveFile_SceneFile_initialize = Scene_File.prototype.initialize;
 Scene_File.prototype.initialize = function() {
-    alias_CGMZ_SaveFile_SceneFile_initialize.call(this);
+	alias_CGMZ_SaveFile_SceneFile_initialize.call(this);
 	this._cgmz_needsRefresh = false;
 };
 //-----------------------------------------------------------------------------
@@ -866,9 +1200,23 @@ Scene_File.prototype.create = function() {
 	alias_CGMZ_SaveFile_SceneFile_create.call(this);
 	this.CGMZ_createDisplayWindow();
 	this.CGMZ_createConfirmWindow();
+	this.CGMZ_createDeleteConfirmWindow();
 	this.CGMZ_createDeleteRenameOptionWindow();
 	this.CGMZ_createFilenameEditWindow();
 	this.CGMZ_createFilenameInputWindow();
+	if(this._helpWindow) {
+		this._helpWindow.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
+		if(CGMZ.SaveFile.HelpWindowskin) {
+			const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.HelpWindowskin, "img");
+			this._helpWindow.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+		}
+	}
+	if(this._cgmz_filenameInputWindow) {
+		if(CGMZ.SaveFile.NameWindowskin) {
+			const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.NameWindowskin, "img");
+			this._cgmz_filenameInputWindow.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Alias. Change help window y if no touch ui
@@ -886,7 +1234,7 @@ Scene_File.prototype.helpWindowRect = function() {
 const alias_CGMZ_SaveFile_SceneFile_listWindowRect = Scene_File.prototype.listWindowRect;
 Scene_File.prototype.listWindowRect = function() {
 	const rect = alias_CGMZ_SaveFile_SceneFile_listWindowRect.call(this);
-	rect.width = Graphics.boxWidth / 4;
+	rect.width = Graphics.boxWidth * (CGMZ.SaveFile.ListWindowWidth / 100.0);
 	rect.y = this._helpWindow.height + this._helpWindow.y;
 	rect.height = Graphics.boxHeight - rect.y;
 	return rect;
@@ -897,7 +1245,7 @@ Scene_File.prototype.listWindowRect = function() {
 const alias_CGMZ_SaveFile_SceneFile_createListWindow = Scene_File.prototype.createListWindow;
 Scene_File.prototype.createListWindow = function() {
 	alias_CGMZ_SaveFile_SceneFile_createListWindow.call(this);
-	this._listWindow.width = Graphics.boxWidth / 4;
+	this._listWindow.width = Graphics.boxWidth * (CGMZ.SaveFile.ListWindowWidth / 100.0);
 };
 //-----------------------------------------------------------------------------
 // Create display window
@@ -941,6 +1289,28 @@ Scene_File.prototype.CGMZ_confirmWindowRect = function() {
 	return new Rectangle(x, y, width, height);
 };
 //-----------------------------------------------------------------------------
+// Create delete confirm window
+//-----------------------------------------------------------------------------
+Scene_File.prototype.CGMZ_createDeleteConfirmWindow = function() {
+	const rect = this.CGMZ_deleteConfirmWindowRect();
+	this._cgmz_deleteConfirmWindow = new CGMZ_Window_SaveFileConfirm(rect);
+	this._cgmz_deleteConfirmWindow.setHandler("confirm", this.CGMZ_onDeleteConfirm.bind(this));
+	this._cgmz_deleteConfirmWindow.setHandler("cancel", this.CGMZ_onDeleteCancel.bind(this));
+	this._cgmz_deleteConfirmWindow.deactivate();
+	this._cgmz_deleteConfirmWindow.hide();
+	this.addWindow(this._cgmz_deleteConfirmWindow);
+};
+//-----------------------------------------------------------------------------
+// Delete confirm window rect
+//-----------------------------------------------------------------------------
+Scene_File.prototype.CGMZ_deleteConfirmWindowRect = function() {
+	const width = this._cgmz_confirmWindow.width;
+	const height = this._cgmz_confirmWindow.height;
+	const x = this._cgmz_confirmWindow.x;
+	const y = this._cgmz_confirmWindow.y;
+	return new Rectangle(x, y, width, height);
+};
+//-----------------------------------------------------------------------------
 // Create delete/rename option window
 //-----------------------------------------------------------------------------
 Scene_File.prototype.CGMZ_createDeleteRenameOptionWindow = function() {
@@ -956,9 +1326,13 @@ Scene_File.prototype.CGMZ_createDeleteRenameOptionWindow = function() {
 };
 //-----------------------------------------------------------------------------
 // Copy help window rect for the delete/rename window rect
+// Need to re-set the height to prevent scrolling because VS changes it back
+// for the actual help window
 //-----------------------------------------------------------------------------
 Scene_File.prototype.CGMZ_deleteRenameWindowRect = function() {
-	return this.helpWindowRect();
+	const rect = this.helpWindowRect();
+	rect.height = this.calcWindowHeight(1, true);
+	return rect;
 };
 //-----------------------------------------------------------------------------
 // Create name edit window
@@ -991,6 +1365,7 @@ Scene_File.prototype.CGMZ_createFilenameInputWindow = function() {
 	this._cgmz_filenameInputWindow.setHandler("ok", this.CGMZ_onFilenameInputOk.bind(this));
 	this._cgmz_filenameInputWindow.hide();
 	this._cgmz_filenameInputWindow.deactivate();
+	this._cgmz_filenameInputWindow.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
 	this.addWindow(this._cgmz_filenameInputWindow);
 };
 //-----------------------------------------------------------------------------
@@ -1056,9 +1431,35 @@ Scene_File.prototype.CGMZ_postDROnSaveFileOk = function() {
 	//
 };
 //-----------------------------------------------------------------------------
-// Handle deleting the save file
+// Handle when delete option is selected
 //-----------------------------------------------------------------------------
 Scene_File.prototype.CGMZ_onDeleteOption = function() {
+	if(CGMZ.SaveFile.ShowDeleteConfirmWindow) {
+		this._cgmz_deleteRenameWindow.deactivate();
+		this._cgmz_deleteConfirmWindow.activate();
+		this._cgmz_deleteConfirmWindow.show();
+	} else {
+		this.CGMZ_deleteFile();
+	}
+};
+//-----------------------------------------------------------------------------
+// Handle when delete is canceled
+//-----------------------------------------------------------------------------
+Scene_File.prototype.CGMZ_onDeleteCancel = function() {
+	this._cgmz_deleteConfirmWindow.deactivate();
+	this._cgmz_deleteConfirmWindow.hide();
+	this._cgmz_deleteRenameWindow.activate();
+};
+//-----------------------------------------------------------------------------
+// Handle when delete is confirmed
+//-----------------------------------------------------------------------------
+Scene_File.prototype.CGMZ_onDeleteConfirm = function() {
+	this.CGMZ_deleteFile();
+};
+//-----------------------------------------------------------------------------
+// Handle deleting the save file
+//-----------------------------------------------------------------------------
+Scene_File.prototype.CGMZ_deleteFile = function() {
 	if(DataManager.savefileExists(this.savefileId())) {
 		const saveName = DataManager.makeSavename(this.savefileId());
 		StorageManager.remove(saveName);
@@ -1070,6 +1471,8 @@ Scene_File.prototype.CGMZ_onDeleteOption = function() {
 	}
 	this._cgmz_deleteRenameWindow.deactivate();
 	this._cgmz_deleteRenameWindow.hide();
+	this._cgmz_deleteConfirmWindow.deactivate();
+	this._cgmz_deleteConfirmWindow.hide();
 	this._helpWindow.show();
 	this._listWindow.activate();
 };
@@ -1167,6 +1570,18 @@ Scene_Save.prototype.CGMZ_postDROnSaveFileOk = function() {
 		alias_CGMZ_SaveFile_SceneSave_onSavefileOk.call(this);
 	}
 };
+//-----------------------------------------------------------------------------
+// Create the Save scene background image
+//-----------------------------------------------------------------------------
+Scene_Save.prototype.createBackground = function() {
+	Scene_File.prototype.createBackground.call(this);
+	if(CGMZ.SaveFile.SaveBackgroundImage) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.SaveBackgroundImage, "img");
+		this._backgroundCustomSprite = new Sprite();
+		this._backgroundCustomSprite.bitmap = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+		this.addChild(this._backgroundCustomSprite);
+	}
+};
 //=============================================================================
 // Scene_Load
 //-----------------------------------------------------------------------------
@@ -1198,6 +1613,18 @@ Scene_Load.prototype.onSavefileOk = function() {
 Scene_Load.prototype.CGMZ_postDROnSaveFileOk = function() {
 	alias_CGMZ_SaveFile_SceneLoad_onSavefileOk.call(this);
 };
+//-----------------------------------------------------------------------------
+// Create the Load scene background image
+//-----------------------------------------------------------------------------
+Scene_Load.prototype.createBackground = function() {
+	Scene_File.prototype.createBackground.call(this);
+	if(CGMZ.SaveFile.LoadBackgroundImage) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.LoadBackgroundImage, "img");
+		this._backgroundCustomSprite = new Sprite();
+		this._backgroundCustomSprite.bitmap = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+		this.addChild(this._backgroundCustomSprite);
+	}
+};
 //=============================================================================
 // CGMZ_Window_SaveFileDisplay
 //-----------------------------------------------------------------------------
@@ -1206,39 +1633,32 @@ Scene_Load.prototype.CGMZ_postDROnSaveFileOk = function() {
 function CGMZ_Window_SaveFileDisplay(rect) {
 	this.initialize.apply(this, arguments);
 }
-CGMZ_Window_SaveFileDisplay.prototype = Object.create(Window_Base.prototype);
+CGMZ_Window_SaveFileDisplay.prototype = Object.create(CGMZ_Window_Scrollable.prototype);
 CGMZ_Window_SaveFileDisplay.prototype.constructor = CGMZ_Window_SaveFileDisplay;
 //-----------------------------------------------------------------------------
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Window_SaveFileDisplay.prototype.initialize = function(rect) {
-	Window_Base.prototype.initialize.call(this, rect);
+	const heightMultiplier = 10;
+	CGMZ_Window_Scrollable.prototype.initialize.call(this, rect, heightMultiplier, CGMZ.SaveFile.ScrollWait, CGMZ.SaveFile.ScrollSpeed, CGMZ.SaveFile.AutoScroll, CGMZ.SaveFile.ScrollDeceleration);
+	this.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
 	this._info = null;
 	this._characterXOffset = 0;
 	this._characterHeight = -1;
 	this._isNegativeCharacter = false;
 	this._charStepAnimTimer = 0;
-	this.initSprites();
 	this.refresh();
 };
 //-----------------------------------------------------------------------------
-// Initialize sprites
+// Load the list windowskin if needed
 //-----------------------------------------------------------------------------
-CGMZ_Window_SaveFileDisplay.prototype.initSprites = function() {
-	this._saveSprite = new Sprite();
-	this._saveSprite.width = this.contents.width;
-	this._saveSprite.height = CGMZ.SaveFile.ImageHeight;
-	this._saveSpriteFade = new Sprite();
-	this._saveSpriteFade.width = this.contents.width;
-	this._saveSpriteFade.height = this.contents.height;
-	this._saveSpriteFade.bitmap = new Bitmap(this._saveSpriteFade.width, this._saveSpriteFade.height);
-	this._saveSpriteFade.bitmap.paintOpacity = CGMZ.SaveFile.FadeSpriteOpacity;
-	this._saveSprite.x = $gameSystem.windowPadding();
-	this._saveSprite.y = $gameSystem.windowPadding();
-	this._saveSpriteFade.x = $gameSystem.windowPadding();
-	this._saveSpriteFade.y = $gameSystem.windowPadding();
-	this.addChildToBack(this._saveSpriteFade);
-	this.addChildToBack(this._saveSprite);
+CGMZ_Window_SaveFileDisplay.prototype.loadWindowskin = function() {
+	if(CGMZ.SaveFile.DisplayWindowskin) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.DisplayWindowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+	} else {
+		CGMZ_Window_Scrollable.prototype.loadWindowskin.call(this);
+	}
 };
 //-----------------------------------------------------------------------------
 // Refresh
@@ -1246,8 +1666,6 @@ CGMZ_Window_SaveFileDisplay.prototype.initSprites = function() {
 CGMZ_Window_SaveFileDisplay.prototype.refresh = function() {
 	this.contents.clear();
 	this.contentsBack.clear();
-	this._saveSprite.hide();
-	this._saveSpriteFade.hide();
 	if(this._info) {
 		this.loadSaveImage();
 	} else {
@@ -1265,7 +1683,10 @@ CGMZ_Window_SaveFileDisplay.prototype.setInfo = function(info) {
 // Draw empty save file information
 //-----------------------------------------------------------------------------
 CGMZ_Window_SaveFileDisplay.prototype.drawEmptyInfo = function() {
+	this.setupWindowForNewEntry();
 	this.drawText(CGMZ.SaveFile.EmptyText, 0, 0, this.contents.width, 'center');
+	this._neededHeight = this.lineHeight() + $gameSystem.windowPadding() * 2;
+	this.checkForScroll();
 };
 //-----------------------------------------------------------------------------
 // Refresh
@@ -1278,28 +1699,26 @@ CGMZ_Window_SaveFileDisplay.prototype.loadSaveImage = function() {
 	}
 	if(!url.includes("/")) url = "pictures/" + url; // backwards compatibility with pre-1.1.0 where pictures folder was mandatory; if no folder detected chances are it's the pictures folder
 	const imgData = CGMZ_Utils.getImageData(url, "img");
-	this._saveSprite.bitmap = ImageManager.loadBitmap(imgData.folder, imgData.filename);
-	this._saveSprite.bitmap.addLoadListener(this.drawSaveFileInfo.bind(this));
+	const bitmap = ImageManager.loadBitmap(imgData.folder, imgData.filename);
+	bitmap.addLoadListener(this.drawSaveFileInfo.bind(this, bitmap));
 };
 //-----------------------------------------------------------------------------
 // Draw save file information
 //-----------------------------------------------------------------------------
-CGMZ_Window_SaveFileDisplay.prototype.drawSaveFileInfo = function() {
+CGMZ_Window_SaveFileDisplay.prototype.drawSaveFileInfo = function(bitmap) {
+	this.setupWindowForNewEntry();
 	let y = 0;
 	let customInfoIndex = 0;
 	for(const infoType of CGMZ.SaveFile.DisplayInfo) {
 		this.resetFontSettings();
 		switch(infoType) {
 			case "Image":
-				this._saveSprite.y = $gameSystem.windowPadding() + y;
-				this._saveSprite.show();
-				y += this._saveSprite.height;
+				this.drawSaveBitmap(y, bitmap);
+				y += CGMZ.SaveFile.ImageHeight;
 				break;
 			case "Image And Location": 
-				this._saveSprite.y = $gameSystem.windowPadding() + y;
-				this._saveSprite.show();
-				this._saveSpriteFade.show();
-				y += this._saveSprite.height - this.lineHeight();
+				this.drawSaveBitmap(y, bitmap);
+				y += CGMZ.SaveFile.ImageHeight - this.lineHeight();
 				this.drawLocationInfo(4, y, true);
 				y += this.lineHeight();
 				break;
@@ -1336,8 +1755,26 @@ CGMZ_Window_SaveFileDisplay.prototype.drawSaveFileInfo = function() {
 				this._characterHeight = y;
 				y += CGMZ.SaveFile.CharHeight;
 				break;
+			case "New Game Plus":
+				y += this.lineHeight() * this.drawNewGamePlus(y);
+				break;
 		}
 	}
+	this._neededHeight = y + $gameSystem.windowPadding() * 2;
+	this.checkForScroll();
+};
+//-----------------------------------------------------------------------------
+// Draw save bitmap
+//-----------------------------------------------------------------------------
+CGMZ_Window_SaveFileDisplay.prototype.drawSaveBitmap = function(y, bitmap) {
+	const sw = bitmap.width;
+	const sh = bitmap.height;
+	const sx = sy = 0;
+	const dw = (CGMZ.SaveFile.StretchImage) ? this.contents.width : bitmap.width;
+	const dh = CGMZ.SaveFile.ImageHeight;
+	const dx = 0;
+	const dy = 0;
+	this.contentsBack.blt(bitmap, sx, sy, sw, sh, dx, dy, dw, dh);
 };
 //-----------------------------------------------------------------------------
 // Draw location info
@@ -1347,8 +1784,15 @@ CGMZ_Window_SaveFileDisplay.prototype.drawLocationInfo = function(x, y, drawFade
 	this.CGMZ_drawTextLine(string, x, y, this.contents.width);
 	if(drawFadeSprite) {
 		const width = this.textSizeEx(string).width;
-		this._saveSpriteFade.bitmap.clear();
-		this._saveSpriteFade.bitmap.fillRect(0, y, width + x + 4, this.lineHeight(), "#000000");
+		const fadeBitmap = new Bitmap(width + x + 4, this.lineHeight());
+		fadeBitmap.paintOpacity = CGMZ.SaveFile.FadeSpriteOpacity;
+		fadeBitmap.fillRect(0, 0, fadeBitmap.width, fadeBitmap.height, "#000000");
+		const sx = sy = 0;
+		const sw = fadeBitmap.width;
+		const sh = fadeBitmap.height;
+		const dx = 0;
+		const dy = y;
+		this.contentsBack.blt(fadeBitmap, sx, sy, sw, sh, dx, dy, sw, sh);
 	}
 };
 //-----------------------------------------------------------------------------
@@ -1411,6 +1855,15 @@ CGMZ_Window_SaveFileDisplay.prototype.drawCustomInfo = function(y, index) {
 	if(Number(info.Icon) >= 0) string += '\\i[' + Number(info.Icon) + ']';
 	string += this._info.cgmz_custom[variable].toString() + info["Trailing Text"];
 	this.CGMZ_drawTextLine(string, x, y, this.contents.width);
+	return true;
+};
+//-----------------------------------------------------------------------------
+// Draw new game plus (if using [CGMZ] New Game Plus)
+//-----------------------------------------------------------------------------
+CGMZ_Window_SaveFileDisplay.prototype.drawNewGamePlus = function(y) {
+	if(!Imported.CGMZ_NewGamePlus) return false;
+	if(!this._info.cgmz_newGamePlus) return false;
+	this.CGMZ_drawTextLine(CGMZ.NewGamePlus.NewGamePlusText, 0, y, this.contents.width, "left");
 	return true;
 };
 //-----------------------------------------------------------------------------
@@ -1480,7 +1933,7 @@ CGMZ_Window_SaveFileDisplay.prototype.onCharLoaded = function(args) {
 // Update window if needed
 //-----------------------------------------------------------------------------
 CGMZ_Window_SaveFileDisplay.prototype.update = function() {
-	Window_Base.prototype.update.call(this);
+	CGMZ_Window_Scrollable.prototype.update.call(this);
 	if(CGMZ.SaveFile.ShowStepAnim && this._characterHeight > 0 && this._info) {
 		this.updateCharacterSprite();
 	}
@@ -1524,6 +1977,24 @@ function CGMZ_Window_SaveFileConfirm() {
 }
 CGMZ_Window_SaveFileConfirm.prototype = Object.create(Window_HorzCommand.prototype);
 CGMZ_Window_SaveFileConfirm.prototype.constructor = CGMZ_Window_SaveFileConfirm;
+//-----------------------------------------------------------------------------
+// Initialize
+//-----------------------------------------------------------------------------
+CGMZ_Window_SaveFileConfirm.prototype.initialize = function(rect) {
+	Window_HorzCommand.prototype.initialize.call(this, rect);
+	this.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
+};
+//-----------------------------------------------------------------------------
+// Load the confirm windowskin if needed
+//-----------------------------------------------------------------------------
+CGMZ_Window_SaveFileConfirm.prototype.loadWindowskin = function() {
+	if(CGMZ.SaveFile.ConfirmWindowskin) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.ConfirmWindowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+	} else {
+		Window_HorzCommand.prototype.loadWindowskin.call(this);
+	}
+};
 //-----------------------------------------------------------------------------
 // Get max columns
 //-----------------------------------------------------------------------------
@@ -1578,7 +2049,19 @@ CGMZ_Window_SaveFileDeleteRename.prototype.constructor = CGMZ_Window_SaveFileDel
 CGMZ_Window_SaveFileDeleteRename.prototype.initialize = function(rect, mode) {
 	Window_HorzCommand.prototype.initialize.call(this, rect);
 	this._saveMode = mode;
+	this.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
 	this.refresh();
+};
+//-----------------------------------------------------------------------------
+// Load the option windowskin if needed
+//-----------------------------------------------------------------------------
+CGMZ_Window_SaveFileDeleteRename.prototype.loadWindowskin = function() {
+	if(CGMZ.SaveFile.OptionWindowskin) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.OptionWindowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+	} else {
+		Window_HorzCommand.prototype.loadWindowskin.call(this);
+	}
 };
 //-----------------------------------------------------------------------------
 // Get max columns
@@ -1628,6 +2111,24 @@ CGMZ_SaveFile_Window_NameEdit.prototype.constructor = Window_NameEdit;
 //-----------------------------------------------------------------------------
 // Do not need to set up actor
 //-----------------------------------------------------------------------------
+CGMZ_SaveFile_Window_NameEdit.prototype.initialize = function(rect) {
+	Window_NameEdit.prototype.initialize.call(this, rect);
+	this.setBackgroundType(2 * (CGMZ.SaveFile.TransparentWindows));
+};
+//-----------------------------------------------------------------------------
+// Load the name windowskin if needed
+//-----------------------------------------------------------------------------
+CGMZ_SaveFile_Window_NameEdit.prototype.loadWindowskin = function() {
+	if(CGMZ.SaveFile.NameWindowskin) {
+		const imageData = CGMZ_Utils.getImageData(CGMZ.SaveFile.NameWindowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(imageData.folder, imageData.filename);
+	} else {
+		Window_NameEdit.prototype.loadWindowskin.call(this);
+	}
+};
+//-----------------------------------------------------------------------------
+// Do not need to set up actor
+//-----------------------------------------------------------------------------
 CGMZ_SaveFile_Window_NameEdit.prototype.setup = function(maxLength) {
 	this._saveFileId = 0;
 	this._maxLength = maxLength;
@@ -1665,9 +2166,9 @@ CGMZ_SaveFile_Window_NameEdit.prototype.makeDefaultName = function() {
 // Get the left most item
 //-----------------------------------------------------------------------------
 CGMZ_SaveFile_Window_NameEdit.prototype.left = function() {
-    const nameCenter = (this.innerWidth) / 2;
-    const nameWidth = (this._maxLength + 1) * this.charWidth();
-    return Math.min(nameCenter - nameWidth / 2, this.innerWidth - nameWidth);
+	const nameCenter = (this.innerWidth) / 2;
+	const nameWidth = (this._maxLength + 1) * this.charWidth();
+	return Math.min(nameCenter - nameWidth / 2, this.innerWidth - nameWidth);
 };
 //-----------------------------------------------------------------------------
 // Get the item rect

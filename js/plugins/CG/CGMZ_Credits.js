@@ -11,10 +11,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.1.0
+ * Version: 1.1.1
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.3.3
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: This plugin adds a "credits" option on the title screen which
  * allows you to enter in different categories such as art, programming, etc. 
@@ -32,17 +32,20 @@
  * your game menu if desired. To do so, use the JavaScript command below:
  * SceneManager.push(CGMZ_Scene_Credits);
  * ----------------------------Version History---------------------------------
- * Version 1.0.0 - Initial Release
- *
- * Version 1.0.1:
+ * Version 1.0.1
  * - Bugfix for cursor not returning to normal after exiting scene via keyboard
  * - Bugfix for line height not respecting text size differences
  * - Bugfix for credits not handling more than 1 line of text in comment
  *
- * Version 1.1.0:
+ * Version 1.1.0
  * - Added option to make the credits window transparent
  * - Added option to use custom background image in credits scene
  * - Removed automatic credit command in title screen
+ *
+ * Version 1.1.1
+ * - Added option to change credit window width/height
+ * - Added Spanish help language documentation
+ * - Invalid JSON now causes warning instead of crash
  *
  * @command Call Scene
  * @desc Calls the Credits Scene
@@ -83,6 +86,20 @@
  * @desc Determine if the window should automatically scroll after so long of no user input
  * @default true
  *
+ * @param Window Width
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Width (as a percentage of screen ui area) to make the window
+ * @default 75
+ *
+ * @param Window Height
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Height (as a percentage of screen ui area) to make the window
+ * @default 80
+ *
  * @param Credits Text
  * @parent Window Options
  * @desc Text to display at the top of the credits window.
@@ -102,7 +119,6 @@
 */
 /*~struct~CreditCategory:
  * @param Category
- * @default 
  * @desc The name of the category (ex. plugins, art, etc).
  *
  * @param Credit
@@ -112,19 +128,15 @@
 */
 /*~struct~CreditObject:
  * @param Name
- * @default 
  * @desc The name of the person / organization you wish to credit
  *
  * @param Comment
- * @default 
  * @desc A small note that will go next to the name
  *
  * @param URL
- * @default 
  * @desc The website of the person / organization to open when clicked (not displayed)
  *
  * @param URLText
- * @default 
  * @desc The website of the person / organization to display
 */
 /*:zh-CN
@@ -145,10 +157,10 @@
  * 然后获得作者和其插件的最新资讯，以及测试版插件的试用。
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * 【插件版本】V 1.1.0
+ * 【插件版本】V 1.1.1
  * ----------------------------------------------------------------------------
  * 【兼容性】仅测试作者所制作的插件
- * 【RM版本】RPG Maker MZ 1.3.3
+ * 【RM版本】RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * 【插件描述】
  * 本插件可制作一个类似“制作人员清单”之类的界面。
@@ -172,15 +184,18 @@
  *     如：类型Category，名字Name，简介Comment和网页链接描述URLText等。   
  * ---------------------------------------------------------------------------
  *【版本更新历史】
- * Version 1.0.0 - Initial Release
- * Version 1.0.1:
+ * Version 1.0.1
  * - Bugfix for cursor not returning to normal after exiting scene via keyboard
  * - Bugfix for line height not respecting text size differences
  * - Bugfix for credits not handling more than 1 line of text in comment
- * Version 1.1.0:
+ * Version 1.1.0
  * - Added option to make the credits window transparent
  * - Added option to use custom background image in credits scene
  * - Removed automatic credit command in title screen
+ * Version 1.1.1
+ * - Added option to change credit window width/height
+ * - Added Spanish help language documentation
+ * - Invalid JSON now causes warning instead of crash
  *
  * @command Call Scene
  * @text 打开制作名单界面
@@ -228,6 +243,20 @@
  * @desc Determine if the window should automatically scroll after so long of no user input
  * @default true
  *
+ * @param Window Width
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Width (as a percentage of screen ui area) to make the window
+ * @default 75
+ *
+ * @param Window Height
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Height (as a percentage of screen ui area) to make the window
+ * @default 80
+ *
  * @param Credits Text
  * @text 制作名单标题描述
  * @parent Window Options
@@ -251,7 +280,6 @@
 /*~struct~CreditCategory:zh-CN
  * @param Category
  * @text 类型
- * @default 
  * @desc 设置制作名单的类型。如插件类、立绘素材类、图块素材类等。
  *
  * @param Credit
@@ -263,34 +291,195 @@
 /*~struct~CreditObject:zh-CN
  * @param Name
  * @text 名字
- * @default 
  * @desc 设置你希望注明的资源、作者或团队的名字。
  *
  * @param Comment
  * @text 简介
- * @default 
  * @desc 设置一个关于该资源、作者或团队的简单的描述。
  *
  * @param URL
  * @text 网页链接（不显示）
- * @default 
  * @desc 设置一个网页链接，但这个链接不会被显示。
  *
  * @param URLText
  * @text 网页描述
- * @default 
  * @desc 设置一个关于网页链接的简单描述，点击该描述会跳转到指定网址。
 */
-var Imported = Imported || {};
+/*:es
+ * @author Casper Gaming
+ * @url https://www.caspergaming.com/plugins/cgmz/credits/
+ * @target MZ
+ * @plugindesc Crea una escena de créditos para tu juego.
+ * @help
+ * ============================================================================
+ * Para términos y condiciones de uso de este pluging en tu juego, por favor
+ * visita:
+ * https://www.caspergaming.com/terms-of-use/
+ * ============================================================================
+ * ¡Conviértete en un Patrocinador para obtener acceso a los plugings beta y
+ * alfa, ademas de otras cosas geniales!
+ * https://www.patreon.com/CasperGamingRPGM
+ * ============================================================================
+ * Versión: 1.1.1
+ * ----------------------------------------------------------------------------
+ * Compatibilidad: Sólo probado con mis CGMZ plugins.
+ * Hecho para RPG Maker MZ 1.8.0
+ * ----------------------------------------------------------------------------
+ * Descripción: Este plugin agrega una opción de "créditos" en la pantalla de 
+ * título que te permite ingresar en diferentes categorías, como arte, 
+ * programación, etc. y acreditar a las personas que lo ayudaron a crear su
+ * juego.
+ * ----------------------------------------------------------------------------
+ * Documentación:
+ * AGREGAR CRÉDITOS A LA VENTANA DE TÍTULO:
+ * Puedes usar la ventana de comandos de título CGMZ para agregar fácilmente 
+ * la escena de créditos a tu menú de juego si lo deseas. Para hacerlo, usa el 
+ * siguiente comando de JavaScript:
+ * this._commandWindow.close();
+ * SceneManager.push(CGMZ_Scene_Credits);
+ * 
+ * AGREGAR CRÉDITOS AL MENÚ PRINCIPAL:
+ * Puedes usar la ventana de comandos del menú CGMZ para agregar fácilmente la 
+ * escena de créditos a tu menú de juego si lo deseas. Para hacerlo, usa el 
+ * siguiente comando de JavaScript:
+ * SceneManager.push(CGMZ_Scene_Credits);
+ * -------------------------Historial de Versiones-----------------------------
+ * Versión 1.0.1
+ * - Corrección de errores para el cursor que no vuelve a la normalidad después 
+ *   de salir de la escena a través del teclado
+ * - Corrección de errores para la altura de la línea que no respeta las 
+ *   diferencias de tamaño del texto
+ * - Corrección de errores para créditos que no manejan más de 1 línea de texto 
+ *   en comentario
+ *
+ * Versión 1.1.0
+ * - Opción agregada para hacer transparente la ventana de créditos
+ * - Opción agregada para usar una imagen de fondo personalizada en la escena 
+ *   de créditos
+ * - Se eliminó el comando de crédito automático en la pantalla de título
+ *
+ * Versión 1.1.1
+ * - Added option to change credit window width/height
+ * - Added Spanish help language documentation
+ * - Invalid JSON now causes warning instead of crash
+ *
+ * @command Call Scene
+ * @text Escena de llamada
+ * @desc Calls the Credits Scene
+ *
+ * @param Credits
+ * @text Créditos
+ * @type struct<CreditCategory>[]
+ * @default []
+ * @desc Configure las categorías de crédito aquí.
+ *
+ * @param Window Options
+ * @text Opciones de ventana
+ *
+ * @param Scroll Speed
+ * @text Velocidad de desplazamiento
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Velocidad a la que se desplaza la visualización de la ventana de créditos (si es necesario).
+ * @default 1
+ *
+ * @param Scroll Wait
+ * @text Espera de desplazamiento
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Cantidad de tiempo (en fotogramas) a esperar antes de comenzar a desplazarse.
+ * @default 300
+ *
+ * @param Scroll Deceleration
+ * @text Desaceleración de desplazamiento
+ * @parent Window Options
+ * @type number
+ * @min 0.01
+ * @max 0.99
+ * @decimals 2
+ * @desc Tasa de desaceleración después de soltar el toque.
+ * @default 0.92
+ *
+ * @param Auto Scroll
+ * @text Desplazamiento automático
+ * @parent Window Options
+ * @type boolean
+ * @desc Determinar si la ventana debe desplazarse automáticamente después de tanto tiempo sin intervención del usuario.
+ * @default true
+ *
+ * @param Window Width
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Width (as a percentage of screen ui area) to make the window
+ * @default 75
+ *
+ * @param Window Height
+ * @parent Window Options
+ * @type number
+ * @min 0
+ * @desc Height (as a percentage of screen ui area) to make the window
+ * @default 80
+ *
+ * @param Credits Text
+ * @text Texto de Créditos
+ * @parent Window Options
+ * @desc Texto para mostrar en la parte superior de la ventana de créditos.
+ * @default Credits
+ *
+ * @param Transparent Window
+ * @text Ventana transparente
+ * @parent Window Options
+ * @type boolean
+ * @desc Si la ventana de créditos es transparente o no.
+ * @default false
+ *
+ * @param Background Image
+ * @text Imágen de Fondo
+ * @parent Window Options
+ * @type file
+ * @dir img/
+ * @desc Imagen para mostrar en el fondo de la escena. Se utiliza la imagen predeterminada si no se proporciona ninguna.
+*/
+/*~struct~CreditCategory:es
+ * @param Category
+ * @text Categoría
+ * @desc El nombre de la categoría (por ejemplo, complementos, arte, etc.).
+ *
+ * @param Credit
+ * @text Créditos
+ * @type struct<CreditObject>[]
+ * @default []
+ * @desc Configurar créditos aquí.
+*/
+/*~struct~CreditObject:es
+ * @param Name
+ * @text Nombre
+ * @desc El nombre de la persona/organización a la que desea acreditar.
+ *
+ * @param Comment
+ * @text Comentario
+ * @desc Una pequeña nota que irá junto al nombre.
+ *
+ * @param URL
+ * @text URL
+ * @desc El sitio web de la persona/organización que se abre al hacer clic (no se muestra).
+ *
+ * @param URLText
+ * @text Texto URL
+ * @desc El sitio web de la persona/organización a mostrar.
+*/
 Imported.CGMZ_Credits = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Credits"] = "1.1.0";
-CGMZ.Credits = CGMZ.Credits || {};
+CGMZ.Versions["Credits"] = "1.1.1";
+CGMZ.Credits = {};
 CGMZ.Credits.parameters = PluginManager.parameters('CGMZ_Credits');
-CGMZ.Credits.CreditList = JSON.parse(CGMZ.Credits.parameters["Credits"]);
+CGMZ.Credits.CreditList = CGMZ_Utils.parseJSON(CGMZ.Credits.parameters["Credits"], [], "CGMZ Credits", "Your Credits parameter was set up incorrectly and could not be read.");
 CGMZ.Credits.ScrollSpeed = Number(CGMZ.Credits.parameters["Scroll Speed"]);
 CGMZ.Credits.ScrollWait = Number(CGMZ.Credits.parameters["Scroll Wait"]);
+CGMZ.Credits.WindowWidth = Number(CGMZ.Credits.parameters["Window Width"]);
+CGMZ.Credits.WindowHeight = Number(CGMZ.Credits.parameters["Window Height"]);
 CGMZ.Credits.ScrollDeceleration = parseFloat(CGMZ.Credits.parameters["Scroll Deceleration"]);
 CGMZ.Credits.AutoScroll = (CGMZ.Credits.parameters["Auto Scroll"] === "true");
 CGMZ.Credits.TransparentWindow = (CGMZ.Credits.parameters["Transparent Window"] === "true");
@@ -308,24 +497,14 @@ function CGMZ_Credits() {
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Credits.prototype.initialize = function(credit) {
-	this._categoryName = credit.Category;
-	this._credits = [];
-	const creditArray = JSON.parse(credit.Credit);
+	this.categoryName = credit.Category;
+	this.credits = [];
+	const creditArray = CGMZ_Utils.parseJSON(credit.Credit, [], "CGMZ Credits", "Your credit of category '" + this._categoryName + "' was set up incorrectly and could not be read.");
 	for(let i = 0; i < creditArray.length; i++) {
-		this._credits.push(JSON.parse(creditArray[i]));
+		const credit = CGMZ_Utils.parseJSON(creditArray[i], null, "CGMZ Credits", "One of your credits for category '" + this._categoryName + "' was set up incorrectly and could not be read.");
+		if(!credit) continue;
+		this.credits.push(credit);
 	}
-};
-//-----------------------------------------------------------------------------
-// Get the credit category
-//-----------------------------------------------------------------------------
-CGMZ_Credits.prototype.getCategory = function() {
-	return this._categoryName;
-};
-//-----------------------------------------------------------------------------
-// Get the individual credits
-//-----------------------------------------------------------------------------
-CGMZ_Credits.prototype.getCredits = function() {
-	return this._credits;
 };
 //=============================================================================
 // CGMZ_Temp
@@ -361,7 +540,8 @@ CGMZ_Temp.prototype.pluginCommandCreditsCallScene = function() {
 CGMZ_Temp.prototype.initializeCreditsData = function() {
 	this._credits = [];
 	for(let i = 0; i < CGMZ.Credits.CreditList.length; i++) {
-		const credit = new CGMZ_Credits(JSON.parse(CGMZ.Credits.CreditList[i]));
+		const creditData = CGMZ_Utils.parseJSON(CGMZ.Credits.CreditList[i], null, "CGMZ Credits", "One of your credits was set up incorrectly and could not be read.");
+		const credit = new CGMZ_Credits(creditData);
 		this._credits.push(credit);
 	}
 };
@@ -382,12 +562,6 @@ function CGMZ_Scene_Credits() {
 CGMZ_Scene_Credits.prototype = Object.create(Scene_MenuBase.prototype);
 CGMZ_Scene_Credits.prototype.constructor = CGMZ_Scene_Credits;
 //-----------------------------------------------------------------------------
-// Initialize
-//-----------------------------------------------------------------------------
-CGMZ_Scene_Credits.prototype.initialize = function() {
-    Scene_MenuBase.prototype.initialize.call(this);
-};
-//-----------------------------------------------------------------------------
 // Create credits window
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Credits.prototype.create = function() {
@@ -407,22 +581,23 @@ CGMZ_Scene_Credits.prototype.createCreditsWindow = function() {
 // Get the rect for the credits window
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Credits.prototype.creditsWindowRect = function() {
-	const x = Graphics.boxWidth / 8;
-	const y = Graphics.boxHeight / 10;
-	const height = Graphics.boxHeight - Graphics.boxHeight / 5;
-	const width = Graphics.boxWidth - Graphics.boxWidth / 4;
+	const height = Graphics.boxHeight * (CGMZ.Credits.WindowHeight / 100.0);
+	const width = Graphics.boxWidth * (CGMZ.Credits.WindowWidth / 100.0);
+	const x = Graphics.boxWidth / 2 - width / 2;
+	const y = Graphics.boxHeight / 2 - height / 2;
 	return new Rectangle(x, y, width, height);
 };
 //-----------------------------------------------------------------------------
 // Add background image
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Credits.prototype.createBackground = function() {
-	Scene_MenuBase.prototype.createBackground.call(this);
 	if(CGMZ.Credits.BackgroundImage) {
 		const imageData = $cgmzTemp.getImageData(CGMZ.Credits.BackgroundImage);
 		this._backgroundCustomSprite = new Sprite();
 		this._backgroundCustomSprite.bitmap = ImageManager.loadBitmap(imageData.folder, imageData.filename);
 		this.addChild(this._backgroundCustomSprite);
+	} else {
+		Scene_MenuBase.prototype.createBackground.call(this);
 	}
 };
 //=============================================================================
@@ -480,16 +655,13 @@ CGMZ_Window_Credits.prototype.drawTitle = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Window_Credits.prototype.drawCredits = function(y) {
 	const credits = $cgmzTemp.getCredits();
-	if(!credits || credits.length === 0) { // Error loading credits data
-		$cgmzTemp.reportError("Error loading credits data", "CGMZ Credits", "Check credits entry configuration");
-		return y;
-	}
+	if(!credits || credits.length === 0) return y;
 	for(let i = 0; i < credits.length; i++) {
 		this.contents.fontBold = true;
-		this.CGMZ_drawText(credits[i].getCategory(), 0, 0, y, this.contents.width, 'center');
+		this.CGMZ_drawText(credits[i].categoryName, 0, 0, y, this.contents.width, 'center');
 		this.contents.fontBold = false;
 		y += this.lineHeight();
-		const creditEntries = credits[i].getCredits();
+		const creditEntries = credits[i].credits;
 		for(let j = 0; j < creditEntries.length; j++) {
 			y += this.CGMZ_drawText(creditEntries[j].Name, 0, 0, y, this.contents.width, 'center');
 			if(creditEntries[j].Comment) {

@@ -13,10 +13,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.3.0
+ * Version: 1.3.1
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.6.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: This plugin creates up to 3 toast windows in each scene (some
  * exceptions) which will display brief information or images to the player
@@ -73,6 +73,10 @@
  * - Added option to set the toast window's height
  * - Fixed bug when using same custom width twice in a row
  * - Optimized image loading for image toasts
+ *
+ * Version 1.3.1:
+ * - Added Spanish help language documentation
+ * - Now warns instead of crash when invalid JSON detected
  *
  * @command Create Text Toast
  * @text Create Text Toast
@@ -306,10 +310,10 @@
  * 然后获得作者和其插件的最新资讯，以及测试版插件的试用。
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * 【插件版本】V 1.3.0
+ * 【插件版本】V 1.3.1
  * ----------------------------------------------------------------------------
  * 【兼容性】仅测试作者所制作的插件
- * 【RM版本】RPG Maker MZ 1.6.0
+ * 【RM版本】RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * 【插件描述】
  * 在游戏中可以跳出弹窗，来提示玩家获得成就、专业升级、习得配方等。
@@ -356,6 +360,9 @@
  * - Added option to set the toast window's height
  * - Fixed bug when using same custom width twice in a row
  * - Optimized image loading for image toasts
+ * Version 1.3.1:
+ * - Added Spanish help language documentation
+ * - Now warns instead of crash when invalid JSON detected
  *
  * @command Create Text Toast
  * @text 制作文字弹窗
@@ -577,12 +584,315 @@
  * @desc Amount of blue in the tone
  * @default 0
 */
-var Imported = Imported || {};
+/*:es
+ * @author Casper Gaming
+ * @url https://www.caspergaming.com/plugins/cgmz/toastmanager/
+ * @target MZ
+ * @base CGMZ_Core
+ * @orderAfter CGMZ_Core
+ * @plugindesc Administra las ventanas emergentes de CGMZ para tu juego
+ * @help
+ * ============================================================================
+ * Para términos y condiciones de uso de este pluging en tu juego, por favor
+ * visita:
+ * https://www.caspergaming.com/terms-of-use/
+ * ============================================================================
+ * ¡Conviértete en un Patrocinador para obtener acceso a los plugings beta y
+ * alfa, ademas de otras cosas geniales!
+ * https://www.patreon.com/CasperGamingRPGM
+ * ============================================================================
+ * Versión: 1.3.1
+ * ----------------------------------------------------------------------------
+ * Compatibilidad: Sólo probado con mis CGMZ plugins.
+ * Hecho para RPG Maker MZ 1.8.0
+ * ----------------------------------------------------------------------------
+ * Descripción: Este plugin crea hasta 3 ventanas emergentes en cada escena
+ * (hay algunas excepciones) que mostrará información breve o imágenes al
+ * jugador por un corto período de tiempo. Las ventanas se mostrarán a medida
+ * que se liberan en el caso de una cola de mas de 3 mensajes/avisos. 
+ * ----------------------------------------------------------------------------
+ * Documentación:
+ * ---------------------------Comandos de Plugin-------------------------------
+ * • Crear notificación de texto
+ * Crea una nueva notificación de texto con opciones, que se agrega a la cola
+ * 
+ * • Crear notificación de imagen
+ * Crea una nueva notificación de imagen con opciones, que se agrega a la cola
+ *
+ * Las dimensiones de la imagen deben ser 336x72 por defecto (si cambia el 
+ * ancho, restar 24 del valor del ancho).
+ * ------------------------------Saved Games-----------------------------------
+ * This plugin is fully compatible with saved games. This means you can:
+ *
+ * ✓ Add this plugin to a saved game and it will work as expected
+ * ✓ Change any plugin params and changes will be reflected in saved games
+ * ✓ Remove the plugin with no issue to save data
+ * -----------------------------Filename---------------------------------------
+ * The filename for this plugin MUST remain CGMZ_ToastManager.js
+ * This is what it comes as when downloaded. The filename is used to load
+ * parameters and execute plugin commands. If you change it, things will begin
+ * behaving incorrectly and your game will probably crash. Please do not
+ * rename the js file.
+ * ------------------------Historial de Versiones------------------------------
+ * Versión 1.0.1:
+ * - Los efectos de sonido ya no son obligatorios en los mensajes
+ *
+ * Versión 1.0.2:
+ * - Las ventanas de mensajes ya no se actualizan si no están visibles
+ * - Solución del bloqueo con VS Debugger (con suerte)
+ *
+ * Versión 1.0.3:
+ * - Solución del error con los anchos personalizados de la ventana de mensajes
+ *   que no están centrados
+ *
+ * Versión 1.1.0:
+ * - Parámetro agregado para cambiar el tiempo de visualización del mensaje
+ *
+ * Versión 1.2.0:
+ * - Parámetro agregado para la apariencia de Ventana/Dim/Transparente de la
+ *   ventana
+ * - Parámetro agregado para cambiar el color de la ventana
+ * 
+ * Versión 1.3.0:
+ * - Added option to use a different windowskin for each toast
+ * - Added option to set the toast window's height
+ * - Fixed bug when using same custom width twice in a row
+ * - Optimized image loading for image toasts
+ *
+ * Versión 1.3.1:
+ * - Added Spanish help language documentation
+ * - Now warns instead of crash when invalid JSON detected
+ *
+ * @command Create Text Toast
+ * @text Crear Mensaje de respuesta
+ * @desc Crea una ventana de mensaje basada en texto
+ *
+ * @arg lineOne
+ * @type text
+ * @text Línea 1
+ * @desc Texto para mostrar en la Línea 1 del mensaje. Admite la variable \v, el nombre del personaje\n, 
+ * el número de serie del compañero de equipo\p y la unidad monetaria\g comandos de texto.
+ * @default 
+ *
+ * @arg lineOneAlignment
+ * @type combo
+ * @text Alineación de la línea 1
+ * @option left
+ * @option center
+ * @option right
+ * @desc Alinear el texto en la línea 1 a la izquierda, al centro o a la derecha.
+ * @default center
+ *
+ * @arg lineOneColor
+ * @type number
+ * @min 0
+ * @text Color del texto de la primera línea
+ * @desc El color del texto de la línea 1 (igual que en el comando Mostrar evento de texto)
+ * @default 0
+ *
+ * @arg lineTwo
+ * @type text
+ * @text Línea 2
+ * @desc Texto para mostrar en la Línea 2 del mensaje. Admite la variable \v, el nombre del personaje\n, 
+ * el número de serie del compañero de equipo\p y la unidad monetaria\g comandos de texto.
+ * @default 
+ *
+ * @arg lineTwoAlignment
+ * @type combo
+ * @text Alineación de la línea 2
+ * @option left
+ * @option center
+ * @option right
+ * @desc Alinear el texto en la línea 2 a la izquierda, al centro o a la derecha.
+ * @default center
+ *
+ * @arg lineTwoColor
+ * @type number
+ * @min 0
+ * @text Color del texto de la segunda línea
+ * @desc El color del texto de la línea 2 (igual que en el comando Mostrar evento de texto).
+ * @default 0
+ *
+ * @arg width
+ * @type number
+ * @min 1
+ * @text Ancho
+ * @desc Ancho (en píxeles) para hacer la ventana del mensaje si no se usa el parámetro de plugin de ancho fijo.
+ * @default 360
+ *
+ * @arg height
+ * @type number
+ * @min 1
+ * @desc Height (in text lines) to make the toast window if not using fixed height parameter
+ * @default 2
+ *
+ * @arg SE
+ * @type file
+ * @dir audio/se
+ * @text Efecto de sonido
+ * @desc Efecto de sonido para reproducir cuando aparece el mensaje.
+ * @default 
+ *
+ * @arg Display Time
+ * @type number
+ * @min 0
+ * @text Tiempo de visualización
+ * @desc Tiempo de visualización para mostrar el mensaje (en fotogramas). Si es 0, vuelve al parámetro de tiempo de visualización global.
+ * @default 0
+ *
+ * @arg backgroundStyle
+ * @type select
+ * @option Window
+ * @option Dim
+ * @option Transparent
+ * @text Estilo de fondo
+ * @desc Estilo de fondo de ventana. Igual que el comando de evento Mostrar texto.
+ * @default Window
+ *
+ * @arg windowskinTone
+ * @type struct<Tone>
+ * @text Tono de piel de ventana
+ * @desc Tono de piel de ventana (color).
+ *
+ * @arg windowskin
+ * @type file
+ * @dir img/
+ * @desc The windowskin file to use for the toast window.
+ *
+ * @command Create Image Toast
+ * @text Crear mensaje de imagen
+ * @desc Crea una ventana de mensaje basada en imágenes.
+ *
+ * @arg image
+ * @type file
+ * @dir img/pictures
+ * @text Imagen
+ * @desc Imagen para mostrar en el mensaje.
+ * @default 
+ *
+ * @arg showBackground
+ * @type boolean
+ * @text Mostrar fondo
+ * @desc Mostrar o no el fondo de la ventana.
+ * @default false
+ *
+ * @arg width
+ * @type number
+ * @min 1
+ * @text Ancho
+ * @desc Ancho (en píxeles) para hacer la ventana del mensaje si no se usa el parámetro de plugin de ancho fijo.
+ * @default 360
+ *
+ * @arg height
+ * @type number
+ * @min 1
+ * @desc Height (in text lines) to make the toast window if not using fixed height parameter
+ * @default 2
+ *
+ * @arg SE
+ * @type file
+ * @dir audio/se
+ * @text Efecto de sonido
+ * @desc Efecto de sonido para reproducir cuando aparece el mensaje.
+ * @default 
+ *
+ * @arg Display Time
+ * @type number
+ * @min 0
+ * @text Tiempo de visualización
+ * @desc Tiempo de visualización para mostrar el mensaje (en fotogramas). Si es 0, vuelve al parámetro de tiempo de visualización global.
+ * @default 0
+ *
+ * @arg windowskinTone
+ * @type struct<Tone>
+ * @text Tono de piel de ventana
+ * @desc Tono de piel de ventana (color).
+ *
+ * @arg windowskin
+ * @type file
+ * @dir img/
+ * @desc The windowskin file to use for the toast window.
+ * 
+ * @param Max Window Count
+ * @type number
+ * @min 1
+ * @max 3
+ * @text Recuento máximo de ventanas
+ * @desc Determina la cantidad máxima de ventanas de mensaje que se muestran a la vez.
+ * @default 1
+ *
+ * @param Spacing
+ * @type number
+ * @min 0
+ * @text Espaciado
+ * @desc Determina los píxeles entre cada ventana de mensaje si se muestran varias.
+ * @default 12
+ *
+ * @param Width
+ * @type number
+ * @min 0
+ * @text Ancho
+ * @desc Determina el ancho predeterminado (en píxeles) de las ventanas de mensaje.
+ * @default 360
+ *
+ * @param Fixed Width
+ * @type boolean
+ * @text Ancho fijo
+ * @desc Determina si los mensajes deben ajustar el ancho o no. Si es verdadero, los mensajes siempre usan el parámetro de ancho anterior.
+ * @default false
+ *
+ * @param Height
+ * @type number
+ * @min 1
+ * @desc Determines default height (in text lines) of the toast windows
+ * @default 2
+ *
+ * @param Fixed Height
+ * @type boolean
+ * @desc Determines if toasts should adjust height or not. If true, toasts always use the above height parameter.
+ * @default true
+ *
+ * @param Display Time
+ * @type number
+ * @min 0
+ * @text Tiempo de visualización
+ * @desc Duración del tiempo que se muestra el mensaje (en fotogramas)
+ * @default 240
+ *
+ * @param Display From Bottom
+ * @type boolean
+ * @text Mostrar desde abajo
+ * @desc Determina si los mensajes deben mostrarse desde la parte inferior de la pantalla hacia arriba o desde arriba hacia abajo.
+ * @default true
+*/
+/*~struct~Tone:es
+ * @param Red
+ * @text Rojo
+ * @type number
+ * @min -255
+ * @max 255
+ * @desc Cantidad de rojo en el tono.
+ * @default 0
+ *
+ * @param Green
+ * @text Verde
+ * @type number
+ * @min -255
+ * @max 255
+ * @desc Cantidad de verde en el tono.
+ * @default 0
+ *
+ * @param Blue
+ * @text Azul
+ * @type number
+ * @min -255
+ * @max 255
+ * @desc Cantidad de azul en el tono.
+ * @default 0
+*/
 Imported.CGMZ_ToastManager = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Toast Manager"] = "1.3.0";
-CGMZ.ToastManager = CGMZ.ToastManager || {};
+CGMZ.Versions["Toast Manager"] = "1.3.1";
+CGMZ.ToastManager = {};
 CGMZ.ToastManager.parameters = PluginManager.parameters('CGMZ_ToastManager');
 CGMZ.ToastManager.MaxWindowCount = Number(CGMZ.ToastManager.parameters["Max Window Count"]);
 CGMZ.ToastManager.Spacing = Number(CGMZ.ToastManager.parameters["Spacing"]);
@@ -1007,7 +1317,7 @@ CGMZ_Window_Toast.prototype.doCommonEffects = function(toastObject) {
 		this._showBG = (this._bgType === 2);
 	}
 	if(toastObject.hasOwnProperty('windowskinTone') && toastObject.windowskinTone) {
-		const tone = JSON.parse(toastObject.windowskinTone);
+		const tone = CGMZ_Utils.parseJSON(toastObject.windowskinTone, {Red: 0, Blue: 0, Green: 0}, "CGMZ Toast Manager", "Your windowskinTone argument had invalid JSON and could not be read.");
 		this._tone = [Number(tone.Red), Number(tone.Green), Number(tone.Blue)];
 	}
 	if(toastObject.hasOwnProperty('windowskin')) {

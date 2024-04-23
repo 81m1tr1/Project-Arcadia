@@ -13,10 +13,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.1.0
+ * Version: 1.1.1
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.4.3
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: Allows you to show multiple images or maps in a cycle on the
  * title screen. It will cycle between each map/image in order, and can handle
@@ -38,14 +38,16 @@
  *
  * If not using CGMZ Global Data, leave the global data params empty.
  * ----------------------------Version History---------------------------------
- * 1.0.0 - Initial Release
- *
- * 1.0.1:
+ * Version 1.0.1
  * - Fixed bug with title music still playing after starting new game
  *
- * 1.1.0:
+ * Version 1.1.0
  * - Added integration with CGMZ Global Data to show images/maps by player
  *   accomplishments in game.
+ *
+ * Version 1.1.1
+ * - Added Spanish help language documentation
+ * - This plugin now warns instead of crash when set up incorrectly
  * 
  * @param Maps
  * @type struct<Map>[]
@@ -87,15 +89,118 @@
  * 
  * @param Global Data Info
  * @desc What to check the global data key for equivalency with (string)
- */
-var Imported = Imported || {};
+*/
+/*:es
+ * @author Casper Gaming
+ * @url https://www.caspergaming.com/plugins/cgmz/titlesystem/
+ * @target MZ
+ * @base CGMZ_Core
+ * @orderAfter CGMZ_Core
+ * @plugindesc Muestra una cola de imágenes/mapas en la pantalla de título.
+ * @help
+ * ============================================================================
+ * Para términos y condiciones de uso de este pluging en tu juego, por favor
+ * visita:
+ * https://www.caspergaming.com/terms-of-use/
+ * ============================================================================
+ * ¡Conviértete en un Patrocinador para obtener acceso a los plugings beta y
+ * alfa, ademas de otras cosas geniales!
+ * https://www.patreon.com/CasperGamingRPGM
+ * ============================================================================
+ * Versión: 1.1.1
+ * ----------------------------------------------------------------------------
+ * Compatibilidad: Sólo probado con mis CGMZ plugins.
+ * Hecho para RPG Maker MZ 1.8.0
+ * ----------------------------------------------------------------------------
+ * Descripción: Permite mostrar múltiples imágenes o mapas en un ciclo en la
+ * pantalla de título. Alternará entre cada mapa/imagen en orden y puede manejar
+ * efectos de pantalla y otros comandos de eventos.
+ * ----------------------------------------------------------------------------
+ * Documentación:
+ * Las imágenes de título deben colocarse en img/titles1 e img/titles2. Los
+ * mapas son solo mapas normales y soporta eventos/la mayoría de los comandos
+ * de eventos. Puedes configurar los efectos del clima, tintes, mover la cámara
+ * y más.
+ * ---------------------Integración de datos globales--------------------------
+ * Este plugin se puede usar con Datos Globales de CGMZ para mostrar solo
+ * ciertos mapas o imágenes si el jugador ha hecho algo dentro de un archivo
+ * guardado. Por ejemplo, podrías mostrar una imagen específica solo si el
+ * jugador ha ganado el juego en un archivo guardado
+ *
+ * Para configurar esto, use los parámetros Clave e Información de los datos
+ * globales. La clave de datos globales es la clave con la que se guardaron
+ * estos datos y la información de datos globales es lo que se comparará con
+ * estos datos almacenados.
+ *
+ * Si no usa los datos globales de CGMZ, deje los parámetros de datos globales
+ * vacíos.
+ * ------------------------Historial de Versiones------------------------------
+ * Versión 1.0.1
+ * - Se corrigió el error con la música del título que aún se reproducía
+ *   después de comenzar un nuevo juego
+ *
+ * Versión 1.1.0
+ * - Se agregó integración con la data global de CGMZ, para mostrar
+ *   imágenes/mapas por logros de los jugadores en el juego.
+ *
+ * Versión 1.1.1
+ * - Added Spanish help language documentation
+ * - This plugin now warns instead of crash when set up incorrectly
+ * 
+ * @param Maps
+ * @text Mapas
+ * @type struct<Map>[]
+ * @default []
+ * @desc Conjunto de mapas/imágenes para recorrer.
+ *
+ * @param Fade Speed
+ * @text Velocidad de desvanecimiento
+ * @type number
+ * @min 1
+ * @max 255
+ * @default 16
+ * @desc Velocidad de desvanecimiento. Cantidad de cambio de opacidad por fotograma. Predeterminado 16.
+*/
+/*~struct~Map:es
+ * @param Image1
+ * @text Imagen 1
+ * @type file
+ * @dir img/titles1
+ * @desc Imagen1 para mostrar. Si se usa esta opción, la opción de mapa no se usará para esta entrada
+ *
+ * @param Image2
+ * @text Imagen 2
+ * @type file
+ * @dir img/titles2
+ * @desc Imagen2 para mostrar. Si se usa esta opción, la opción de mapa no se usará para esta entrada.
+ * 
+ * @param Map
+ * @text Mapa
+ * @type number
+ * @default 0
+ * @min 0
+ * @desc Mapa para mostrar. Si se usa esta opción, la opción de imagen no se usará para esta entrada.
+ * 
+ * @param DisplayTime
+ * @text Tiempo de Visualización
+ * @type number
+ * @min 1
+ * @default 600
+ * @desc Cantidad de fotogramas para mostrar el mapa/imagen.
+ * 
+ * @param Global Data Key
+ * @text Clave de datos globales
+ * @desc Clave de datos globales que determina si este mapa/imagen se muestra en el ciclo.
+ * 
+ * @param Global Data Info
+ * @text Inormación de datos globales
+ * @desc Qué verificar en la clave de datos globales para la equivalencia con (cadena).
+*/
 Imported.CGMZ_TitleSystem = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Title System"] = "1.1.0";
-CGMZ.TitleSystem = CGMZ.TitleSystem || {};
+CGMZ.Versions["Title System"] = "1.1.1";
+CGMZ.TitleSystem = {};
 CGMZ.TitleSystem.parameters = PluginManager.parameters('CGMZ_TitleSystem');
-CGMZ.TitleSystem.cycle = JSON.parse(CGMZ.TitleSystem.parameters["Maps"]);
+CGMZ.TitleSystem.cycle = CGMZ_Utils.parseJSON(CGMZ.TitleSystem.parameters["Maps"], [], "CGMZ Title System", "Your Maps parameter was set up incorrectly and could not be read.");
 CGMZ.TitleSystem.fadeSpeed = Number(CGMZ.TitleSystem.parameters["Fade Speed"]);
 //=============================================================================
 // Scene_Title
@@ -107,8 +212,8 @@ CGMZ.TitleSystem.fadeSpeed = Number(CGMZ.TitleSystem.parameters["Fade Speed"]);
 //-----------------------------------------------------------------------------
 const alias_CGMZ_TitleSystem_initialize = Scene_Title.prototype.initialize;
 Scene_Title.prototype.initialize = function() {
-    alias_CGMZ_TitleSystem_initialize.call(this);
-    this._CGMZ_titleSystem_mapLoaded = false;
+	alias_CGMZ_TitleSystem_initialize.call(this);
+	this._CGMZ_titleSystem_mapLoaded = false;
 	this._CGMZ_titleSystem_cycle = ($cgmzTemp) ? $cgmzTemp._titleCycle : 0;
 	this._CGMZ_titleSystem_maxCycle = CGMZ.TitleSystem.cycle.length;
 	$gamePlayer._followers = new Game_Followers();
@@ -119,11 +224,11 @@ Scene_Title.prototype.initialize = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_TitleSystem_createBackground = Scene_Title.prototype.createBackground;
 Scene_Title.prototype.createBackground = function() {
-    alias_CGMZ_TitleSystem_createBackground.call(this);
+	alias_CGMZ_TitleSystem_createBackground.call(this);
 	this._CGMZ_titleSystem_backSpriteSet = new Sprite();
 	this._CGMZ_titleSystem_fadeSprite = new ScreenSprite();
 	this.addChild(this._CGMZ_titleSystem_backSpriteSet);
-    this.addChild(this._CGMZ_titleSystem_fadeSprite);
+	this.addChild(this._CGMZ_titleSystem_fadeSprite);
 	this._CGMZ_titleSystem_fadeSprite.setBlack();
 	this.CGMZ_titleSystem_setupCycle();
 };
@@ -131,7 +236,7 @@ Scene_Title.prototype.createBackground = function() {
 // Advance to the next map/image in the cycle
 //-----------------------------------------------------------------------------
 Scene_Title.prototype.CGMZ_titleSystem_advanceCycle = function() {
-    this._CGMZ_titleSystem_cycle++;
+	this._CGMZ_titleSystem_cycle++;
 	if(this._CGMZ_titleSystem_cycle >= this._CGMZ_titleSystem_maxCycle) {
 		this._CGMZ_titleSystem_cycle = 0;
 	}
@@ -141,7 +246,11 @@ Scene_Title.prototype.CGMZ_titleSystem_advanceCycle = function() {
 // Setup new map/image in the cycle.
 //-----------------------------------------------------------------------------
 Scene_Title.prototype.CGMZ_titleSystem_setupCycle = function() {
-    this._CGMZ_titleSystem_currentDisplay = JSON.parse(CGMZ.TitleSystem.cycle[this._CGMZ_titleSystem_cycle]);
+	this._CGMZ_titleSystem_currentDisplay = CGMZ_Utils.parseJSON(CGMZ.TitleSystem.cycle[this._CGMZ_titleSystem_cycle], null, "CGMZ Title System", "One of your title displays was set up incorrectly and could not be read");
+	if(!this._CGMZ_titleSystem_currentDisplay) {
+		this.CGMZ_titleSystem_advanceCycle();
+		return;
+	}
 	if(this._CGMZ_titleSystem_currentDisplay["Global Data Key"]) {
 		const key = this._CGMZ_titleSystem_currentDisplay["Global Data Key"];
 		const info = this._CGMZ_titleSystem_currentDisplay["Global Data Info"];
@@ -196,7 +305,7 @@ Scene_Title.prototype.CGMZ_titleSystem_clearMap = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_TitleSystem_update = Scene_Title.prototype.update;
 Scene_Title.prototype.update = function() {
-    alias_CGMZ_TitleSystem_update.call(this);
+	alias_CGMZ_TitleSystem_update.call(this);
 	if(SceneManager.isSceneChanging() || this.isBusy()) {
 		return;
 	}
@@ -224,7 +333,7 @@ Scene_Title.prototype.update = function() {
 // Update Fade In
 //-----------------------------------------------------------------------------
 Scene_Title.prototype.CGMZ_titleSystem_updateFadeIn = function() {
-    this._CGMZ_titleSystem_fadeSprite.opacity -= CGMZ.TitleSystem.fadeSpeed;
+	this._CGMZ_titleSystem_fadeSprite.opacity -= CGMZ.TitleSystem.fadeSpeed;
 	if(this._CGMZ_titleSystem_fadeSprite.opacity <= 0) {
 		this._needsFadeIn = false;
 	}
@@ -233,7 +342,7 @@ Scene_Title.prototype.CGMZ_titleSystem_updateFadeIn = function() {
 // Update Fade Out. Advance the cycle when done fading out
 //-----------------------------------------------------------------------------
 Scene_Title.prototype.CGMZ_titleSystem_updateFadeOut = function() {
-    this._CGMZ_titleSystem_fadeSprite.opacity += CGMZ.TitleSystem.fadeSpeed;
+	this._CGMZ_titleSystem_fadeSprite.opacity += CGMZ.TitleSystem.fadeSpeed;
 	if(this._CGMZ_titleSystem_fadeSprite.opacity >= 255) {
 		this._needsFadeOut = false;
 		this.CGMZ_titleSystem_advanceCycle();
@@ -266,7 +375,7 @@ Scene_Title.prototype.CGMZ_titleSystem_onMapLoaded = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_TitleSystem_stop = Scene_Title.prototype.stop;
 Scene_Title.prototype.stop = function() {
-    $cgmzTemp._titleCycle = this._CGMZ_titleSystem_cycle;
+	$cgmzTemp._titleCycle = this._CGMZ_titleSystem_cycle;
 	alias_CGMZ_TitleSystem_stop.call(this);
 };
 //=============================================================================

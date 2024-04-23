@@ -13,10 +13,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.5.0
+ * Version: 1.5.1
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.6.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: Adds an achievements system including achievement points,
  * secret achievements, difficulty, and more. Achievements offer automatic
@@ -77,15 +77,15 @@
  * in the Mining profession"
  * ---------------------------Date Formats-------------------------------------
  * The following numbers correspond to the following date formats:
- * 0: MM/DD/YYYY     (ex: 1/20/2001)
- * 1: DD/MM/YYYY     (ex: 20/1/2001)
- * 2: YYYY/MM/DD     (ex: 2001/1/20)
- * 3: Month DD, YYYY (ex: January 20, 2001)
- * 4: DD Month YYYY  (ex: 20 January 2001)
- * 5: Mon. DD, YYYY  (ex: Jan 20, 2001)
- * 6: DD Mon. YYYY   (ex: 20 Jan 2001)
- * 7: MM/DD          (ex: 1/20)
- * 8: DD/MM          (ex: 20/1)
+ * 0-2: Day / Month / Year are numeric
+ * 3-4: Day and Year numeric, Month long string
+ * 5-6: Day and Year numeric, Month short string
+ * 7-8: Day and Month numeric, no Year
+ *
+ * These will be according to the user's locale (or the forced locale as set
+ * in CGMZ Core). For example, USA may see March 22, 2024 while Mexico may see
+ * 22 de marzo de 2024. This helps your users see dates for achievements that
+ * make sense to them.
  * -----------------------------Colors-----------------------------------------
  * If using CGMZ Infinite Colors, you will not be able to select the custom
  * colors via the plugin parameters. In this case, please switch to the text
@@ -102,16 +102,14 @@
  * behaving incorrectly and your game will probably crash. Please do not
  * rename the js file.
  * -------------------------Version History------------------------------------
- * Version 1.0 - Initial Release
- *
- * Version 1.1.0:
+ * Version 1.1.0
  * - Fixed crash if there are no achievements
  * - Added support for CGMZ Professions
  *
- * Version 1.1.1:
+ * Version 1.1.1
  * - Fixed bug with variable tracking when using the "=" operator
  *
- * Version 1.2.0:
+ * Version 1.2.0
  * - Added ability to use text codes in achievement descriptions
  * - New achievements should now be automatically recognized by saved games
  * - Added ability to change pre and post descriptions
@@ -123,19 +121,19 @@
  * - Removed plugin command to manually recognize new achievements in saved
  *   game
  *
- * Version 1.2.1:
+ * Version 1.2.1
  * - Fixed crash when not using CGMZ Encyclopedia
  *
- * Version 1.2.2:
+ * Version 1.2.2
  * - Fixed bug with variable achievements not auto completing when they should
  *
- * Version 1.2.3:
+ * Version 1.2.3
  * - Fixed crash with achievements that had switch/variable rewards
  *
- * Version 1.2.4:
+ * Version 1.2.4
  * - Compatibility for VS plugins
  *
- * Version 1.3.0:
+ * Version 1.3.0
  * - Added ability to choose which order & info to display for achievements
  * - Added param for Points text in total window (separate from Display window)
  * - Added param to display total achievements possible in total window
@@ -143,18 +141,26 @@
  * - Added text params for achievement requirement text (on progress bar)
  * - Documentation Updated
  *
- * Version 1.4.0:
+ * Version 1.4.0
  * - Added categories of achievements
  * - Added plugin command to change an achievement's secret property
  * - Added param for transparent windows in achievement scene
  * - Added param to use a custom background image in achievement scene
  * - Updated color parameters to use the new color selector for plugins
  *
- * Version 1.5.0:
+ * Version 1.5.0
  * - Added common event as reward for achievement
  * - Added ability to mark an achievement as failed via Plugin Command
  * - Added some display window options for failed achievements
  * - Added option to fill space where touch UI buttons would be
+ *
+ * Version 1.5.1
+ * - Added Spanish language help documentation
+ * - Fix bug where some text would not fit on small resolution sizes
+ * - Removed deprecated CGMZ Core functions from this plugin
+ * - Date Format now takes user locale into account
+ * - Text codes now work in the Totals window among other areas
+ * - Now warns instead of crash when invalid JSON detected
  *
  * @command Earn Achievement By Name
  * @desc Earns an achievement by its name
@@ -989,10 +995,10 @@
  * 然后获得作者和其插件的最新资讯，以及测试版插件的试用。
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * 【插件版本】V 1.5.0
+ * 【插件版本】V 1.5.1
  * ----------------------------------------------------------------------------
  * 【兼容性】仅测试作者所制作的插件
- * 【RM版本】RPG Maker MZ 1.6.0
+ * 【RM版本】RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * 【插件描述】
  * 支持成就点数的获得、显示未达成的成就、成就拥有不同难度的达成方式。
@@ -1015,15 +1021,15 @@
  * 6、使用脚本命令打开成就界面：SceneManager.push(CGMZ_Scene_Achievements);
  * 
  * 二、时间显示格式的选项说明: MM-月，DD-日，YYYY-年
- * 0: MM/DD/YYYY     (ex: 1/20/2001)
- * 1: DD/MM/YYYY     (ex: 20/1/2001)
- * 2: YYYY/MM/DD     (ex: 2001/1/20)
- * 3: Month DD, YYYY (ex: January 20, 2001)
- * 4: DD Month YYYY  (ex: 20 January 2001)
- * 5: Mon. DD, YYYY  (ex: Jan 20, 2001)
- * 6: DD Mon. YYYY   (ex: 20 Jan 2001)
- * 7: MM/DD          (ex: 1/20)
- * 8: DD/MM          (ex: 20/1)
+ * The following numbers correspond to the following date formats:
+ * 0-2: Day / Month / Year are numeric
+ * 3-4: Day and Year numeric, Month long string
+ * 5-6: Day and Year numeric, Month short string
+ * 7-8: Day and Month numeric, no Year
+ * These will be according to the user's locale (or the forced locale as set
+ * in CGMZ Core). For example, USA may see March 22, 2024 while Mexico may see
+ * 22 de marzo de 2024. This helps your users see dates for achievements that
+ * make sense to them.
  * 
  * 三、关于所有设置中的成就名称或其他插件引用的名称：
  *     字符必须一致，并区分大小写。如Kill the dragon和Kill the DRAGON会定义为不同的配方或专业。
@@ -1038,13 +1044,12 @@
  * rewards based on plugin parameter Show Rewards After Fail.
  * ---------------------------------------------------------------------------
  *【版本更新历史】
- * Version 1.0 - Initial Release
- * Version 1.1.0:
+ * Version 1.1.0
  * - Fixed crash if there are no achievements
  * - Added support for CGMZ Professions
- * Version 1.1.1:
+ * Version 1.1.1
  * - Fixed bug with variable tracking when using the "=" operator
- * Version 1.2.0:
+ * Version 1.2.0
  * - Added ability to use text codes in achievement descriptions
  * - New achievements should now be automatically recognized by saved games
  * - Added ability to change pre and post descriptions
@@ -1055,32 +1060,39 @@
  * - Fixed bug with padding on list window
  * - Removed plugin command to manually recognize new achievements in saved
  *   game
- * Version 1.2.1:
+ * Version 1.2.1
  * - Fixed crash when not using CGMZ Encyclopedia
- * Version 1.2.2:
+ * Version 1.2.2
  * - Fixed bug with variable achievements not auto completing when they should
- * Version 1.2.3:
+ * Version 1.2.3
  * - Fixed crash with achievements that had switch/variable rewards
- * Version 1.2.4:
+ * Version 1.2.4
  * - Compatibility for VS plugins
- * Version 1.3.0:
+ * Version 1.3.0
  * - Added ability to choose which order & info to display for achievements
  * - Added param for Points text in total window (separate from Display window)
  * - Added param to display total achievements possible in total window
  * - Added param to display total points possible in total window
  * - Added text params for achievement requirement text (on progress bar)
  * - Documentation Updated
- * Version 1.4.0:
+ * Version 1.4.0
  * - Added categories of achievements
  * - Added plugin command to change an achievement's secret property
  * - Added param for transparent windows in achievement scene
  * - Added param to use a custom background image in achievement scene
  * - Updated color parameters to use the new color selector for plugins
- * Version 1.5.0:
+ * Version 1.5.0
  * - Added common event as reward for achievement
  * - Added ability to mark an achievement as failed via Plugin Command
  * - Added some display window options for failed achievements
  * - Added option to fill space where touch UI buttons would be
+ * Version 1.5.1
+ * - Added Spanish language help documentation
+ * - Fix bug where some text would not fit on small resolution sizes
+ * - Removed deprecated CGMZ Core functions from this plugin
+ * - Date Format now takes user locale into account
+ * - Text codes now work in the Totals window among other areas
+ * - Now warns instead of crash when invalid JSON detected
  * 
  * @command Earn Achievement By Name
  * @text 根据名称获得成就
@@ -1998,12 +2010,1149 @@
  * @param Name
  * @desc The display name for the category
 */
-var Imported = Imported || {};
+/*:es
+ * @author Casper Gaming
+ * @url https://www.caspergaming.com/plugins/cgmz/achievements/
+ * @target MZ
+ * @base CGMZ_Core
+ * @orderAfter CGMZ_Core
+ * @plugindesc Crea un poderoso sistema de logros
+ * @help
+ * ============================================================================
+ * Para términos y condiciones de uso de este pluging en tu juego, por favor
+ * visita:
+ * https://www.caspergaming.com/terms-of-use/
+ * ============================================================================
+ * ¡Conviértete en un Patrocinador para obtener acceso a los plugings beta y
+ * alfa, ademas de otras cosas geniales!
+ * https://www.patreon.com/CasperGamingRPGM
+ * ============================================================================
+ * Versión: 1.5.1
+ * ----------------------------------------------------------------------------
+ * Compatibilidad: Sólo probado con mis CGMZ plugins.
+ * Hecho para RPG Maker MZ 1.8.0
+ * ----------------------------------------------------------------------------
+ * Descripción: Agrega un sistema de logros que incluye puntos de logro, logros
+ * secretos, dificultad y más. Los logros ofrecen seguimiento automático y 
+ * desbloqueo manual. Los logros también pueden tener recompensas como 
+ * artículos u oro, o incluso cambios/variables. Este plugin funciona bien con
+ * CGMZ Toast  Manager para ventanas emergentes cuando se obtiene un logro.
+ * Este plugin  también permite logros basados en la Enciclopedia CGMZ y el
+ * porcentaje de  finalización del Bestiario.
+ * ----------------------------------------------------------------------------
+ * Documentación:
+ * ------------------------Comandos de Plugin----------------------------------
+ * Este plugin admite los siguientes comandos de plugin:
+ *
+ * • Obtener logros por nombre
+ * Esto gana el logro con el nombre proporcionado, distingue entre mayúsculas
+ * y minúsculas.
+ *
+ * • Obtenga Logros por ID
+ * Esto gana el logro con la identificación proporcionada. Los ID son el orden
+ * en que los logros se enumeran en el administrador de complementos y
+ * comienzan en 1.
+ *
+ * • Escena de llamada
+ * Esto llama la escena del logro.
+ *
+ * • Cambiar Descripción
+ * Esto te permitirá cambiar la descripción anterior y posterior de un logro.
+ *
+ * • Cambiar secreto
+ * Esto te permitirá cambiar la propiedad secreta de un logro
+ *
+ * • Fail Achievement
+ * Marks an achievement as failed
+ *
+ * • Reiniciar
+ * Esto restablecerá todo el progreso de los logros como si hubieras comenzado
+ * un nuevo juego.
+ * ---------------------------JavaScript---------------------------------------
+ * Para llamar a la escena de logros a través del comando JavaScript, usa:
+ * SceneManager.push(CGMZ_Scene_Achievements);
+ * ----------------------Failed Achievements-----------------------------------
+ * If an achievement is failed, it will no longer check for automatic
+ * completion. However, you can still manually complete failed achievements
+ * via plugin command. Failed achievements do not show criteria, but can show
+ * rewards based on plugin parameter Show Rewards After Fail.
+ * --------------------------Integraciones-------------------------------------
+ * CGMZ Toast Manager
+ * Este plugin tiene una funcionalidad adicional cuando se usa CGMZ Toast
+ * Manager. CGMZ Toast permite mostrar una ventana emergente en la pantalla
+ * del mapa cuando  se obtiene un logro. La configuración para esto se puede
+ * encontrar en la configuración emergente para un logro.
+ *
+ * Enciclopedia CGMZ
+ * Este plugin tiene una funcionalidad adicional cuando se usa la Enciclopedia
+ * CGMZ. La Enciclopedia CGMZ se puede utilizar para logros como "Descubre la
+ * enciclopedia completa"
+ *
+ * Profesiones CGMZ
+ * Este complemento tiene una funcionalidad adicional al usar CGMZ Professions.
+ * Las profesiones CGMZ se pueden usar para crear logros como "Alcanzar el
+ * nivel 5 en la profesión Minera"
+ * ----------------------Formatos de fecha-------------------------------------
+ * Los siguientes números corresponden a los siguientes formatos de fecha:
+ * 0-2: Day / Month / Year are numeric
+ * 3-4: Day and Year numeric, Month long string
+ * 5-6: Day and Year numeric, Month short string
+ * 7-8: Day and Month numeric, no Year
+ *
+ * These will be according to the user's locale (or the forced locale as set
+ * in CGMZ Core). For example, USA may see March 22, 2024 while Mexico may see
+ * 22 de marzo de 2024. This helps your users see dates for achievements that
+ * make sense to them.
+ * -----------------------Partidas guardadas-----------------------------------
+ * Este plugin admite parcialmente juegos guardados.
+ * ✓ Puede agregar nuevos logros y un juego guardado debería reconocerlos.
+ * ✘ La modificación de logros existentes no se admite en partidas guardadas.
+ * ✘ La eliminación de logros no es compatible con los juegos guardados.
+ * ------------------------Nombre del archivo----------------------------------
+ * El nombre de archivo del archivo JavaScript de este complemento DEBE ser 
+ * CGMZ_Achievements.js Esto es lo que se obtiene cuando se descarga. El nombre 
+ * de archivo se usa para cargar parámetros y ejecutar comandos de complemento. 
+ * Si lo cambias, las cosas comenzarán a comportarse incorrectamente y su juego 
+ * probablemente se bloquee. No cambie el nombre del archivo js.
+ * ----------------------Historial de versiones--------------------------------
+ * Versión 1.1.0:
+ * - Se corrigió el bloqueo si no hay logros
+ * - Soporte agregado para profesiones CGMZ
+ *
+ * Versión 1.1.1:
+ * - Se corrigió un error con el seguimiento de variables al usar el operador
+ *   "="
+ *
+ * Versión 1.2.0:
+ * - Se agregó la capacidad de usar códigos de texto en las descripciones de
+ *   los logros
+ * - Los nuevos logros ahora deberían ser reconocidos automáticamente por los
+ *   juegos guardados
+ * - Se agregó la capacidad de cambiar las descripciones previas y posteriores
+ * - Opción agregada para cambiar el color del texto de la
+ *   etiqueta / encabezado
+ * - Opción agregada para cambiar la alineación del texto de la ventana de
+ *   lista
+ * - Opción agregada para cambiar la alineación del texto de la ventana de
+ *   totales
+ * - Se corrigió un error con el audio del brindis al obtener logros
+ * - Error solucionado con relleno en la ventana de lista
+ * - Comando de complemento eliminado para reconocer manualmente nuevos logros
+ *   en el juego guardado
+ *
+ * Versión 1.2.1:
+ * - Se corrigió el bloqueo cuando no se usaba la Enciclopedia CGMZ
+ *
+ * Versión 1.2.2:
+ * - Se corrigió un error con logros variables que no se completaban
+ *   automáticamente cuando deberían
+ *
+ * Versión 1.2.3:
+ * - Se corrigió el bloqueo con logros que tenían recompensas de
+ *   cambio/variable
+ *
+ * Versión 1.2.4:
+ * - Compatibilidad para complementos VS
+ *
+ * Versión 1.3.0:
+ * - Se agregó la capacidad de elegir qué orden e información mostrar para los
+ *   logros
+ * - Se agregó un parámetro para el texto de puntos en la ventana total
+ *   (separado de la ventana de visualización)
+ * - Se agregó un parámetro para mostrar los logros totales posibles en la
+ *   ventana total
+ * - Se agregó un parámetro para mostrar el total de puntos posibles en la
+ *   ventana total
+ * - Se agregaron parámetros de texto para el texto de requisito de logro
+ *   (en la barra de progreso)
+ * - Documentación actualizada
+ *
+ * Versión 1.4.0:
+ * - Categorías añadidas de logros
+ * - Comando de complemento agregado para cambiar la propiedad secreta de un
+ *   logro
+ * - Se agregó un parámetro para ventanas transparentes en la escena de logros
+ * - Se agregó un parámetro para usar una imagen de fondo personalizada en la
+ *   escena de logros
+ *
+ * Versión 1.5.0
+ * - Added common event as reward for achievement
+ * - Added ability to mark an achievement as failed via Plugin Command
+ * - Added some display window options for failed achievements
+ * - Added option to fill space where touch UI buttons would be
+ *
+ * Versión 1.5.1
+ * - Added Spanish language help documentation
+ * - Fix bug where some text would not fit on small resolution sizes
+ * - Removed deprecated CGMZ Core functions from this plugin
+ * - Date Format now takes user locale into account
+ * - Text codes now work in the Totals window among other areas
+ * - Now warns instead of crash when invalid JSON detected
+ *
+ * @command Earn Achievement By Name
+ * @text Obtener logros por nombre
+ * @desc Obtiene un logro por su nombre.
+ *
+ * @arg name
+ * @type text
+ * @text Nombre de logro 
+ * @desc El nombre del logro a ganar.
+ * @default
+ *
+ * @command Earn Achievement By ID
+ * @text Ganar logros 
+ * @desc Obtiene un logro por su id.
+ *
+ * @arg id
+ * @type number
+ * @text ID del logro
+ * @desc El id del logro a ganar.
+ * @default 0
+ *
+ * @command Call Scene
+ * @text Llamada de escena 
+ * @desc Llama a la escena del logro.
+ *
+ * @command Change Description
+ * @text Cambio de Descripción
+ * @desc Cambia la descripción previa o posterior de un logro.
+ *
+ * @arg name
+ * @type text
+ * @text Nombre del logro
+ * @desc El nombre del logro para cambiar la descripción. Deje en blanco si usa identificación.
+ * @default
+ *
+ * @arg id
+ * @type number
+ * @text ID del logro
+ * @desc El id del logro para cambiar la descripción. No se usa si se usa el nombre en su lugar.
+ * @default 0
+ *
+ * @arg Pre Description
+ * @type note
+ * @text Pre Descripción 
+ * @default ""
+ * @desc Descripción del logro antes de que se gane. Dejar en blanco para ningún cambio.
+ *
+ * @arg Post Description
+ * @type note
+ * @text Post Descripción 
+ * @default ""
+ * @desc Descripción del logro después de obtenerlo. Dejar en blanco para ningún cambio.
+ *
+ * @command Change Secret
+ * @text Cambiar secreto
+ * @desc Cambiar una propiedad secreta de logro.
+ *
+ * @arg name
+ * @type text
+ * @text Nombre del logro
+ * @desc El nombre del logro para cambiar la descripción. Deje en blanco si usa la identificación.
+ * @default
+ *
+ * @arg id
+ * @type number
+ * @text ID de logro
+ * @desc La identificación del logro a cambiar. No se usa si se usa el nombre en su lugar.
+ * @default 0
+ *
+ * @arg secret
+ * @text Logro secreto 
+ * @type boolean
+ * @desc Si el logro ahora será secreto o no.
+ * @default false
+ *
+ * @command Fail Achievement
+ * @desc Marks the provided achievement as failed
+ *
+ * @arg name
+ * @desc The name of the achievement to mark as failed. Leave blank if using ID.
+ *
+ * @arg id
+ * @type number
+ * @desc The id of the achievement to mark as failed. Not used if using name instead.
+ * @default 0
+ *
+ * @command Reinitialize
+ * @text Reinicializar
+ * @desc Restablece todos los datos de logros. Úsalo para juegos guardados para reconocer datos modificados.
+ *
+ * @param CGMZ Achievements
+ * @text Logros CGMZ
+ *
+ * @param Achievements
+ * @text Logros
+ * @parent CGMZ Achievements
+ * @type struct<Achievement>[]
+ * @default []
+ * @desc Logros
+ *
+ * @param Categories
+ * @text Categorias
+ * @parent CGMZ Achievements
+ * @type struct<Category>[]
+ * @default []
+ * @desc Achievement Categories
+ *
+ * @param Requires CGMZ Toast Plugin
+ * @text Requiere plugin de mensajes CGMZ
+ * 
+ * @param ShowAchievementPop
+ * @text Mostrar ventana emergente de logro
+ * @parent Requires CGMZ Toast Plugin
+ * @type boolean
+ * @desc Determina si se muestra una ventana emergente cuando se obtiene el logro.
+ * @default false
+ *
+ * @param AchievementEarnedText
+ * @text Texto de logro ganado
+ * @parent Requires CGMZ Toast Plugin
+ * @desc Texto para mostrar en la primera línea de la ventana emergente de logros.
+ * @default Achievement Earned
+ *
+ * @param AchievementEarnedColor
+ * @text Color de Logro obtenido
+ * @parent Requires CGMZ Toast Plugin
+ * @type number
+ * @min 0
+ * @max 31
+ * @desc Color para el texto en la primera línea de la ventana emergente de logros. Utiliza colores de piel de ventana. Rango: 0-31.
+ * @default 3
+ *
+ * @param AchievementEarnedAlignment
+ * @text Alineación de Logro obtenido
+ * @parent Requires CGMZ Toast Plugin
+ * @desc Alineación para texto emergente. Valores válidos: izquierda, derecha, centro.
+ * @default center
+ *
+ * @param AchievementEarnedSound
+ * @text Sonido de Logro obtenido
+ * @parent Requires CGMZ Toast Plugin
+ * @type file
+ * @dir audio/se/
+ * @desc Sonido predeterminado para reproducir cuando aparece la ventana emergente de logro.
+ * @default Applause1
+ *
+ * @param Achievement Scene Options
+ * @text Opciones de escena de logros
+ *
+ * @param Achievement Display Info
+ * @text Información de visualización de logros
+ * @parent Achievement Scene Options
+ * @type select[]
+ * @option Name
+ * @option Earn Date
+ * @option Difficulty
+ * @option Points
+ * @option Description
+ * @option Requirements
+ * @option Rewards
+ * @option Basic Info Header
+ * @option Description Header
+ * @option Requirement Header
+ * @option Reward Header
+ * @option Blank Line
+ * @desc Información de logros y orden para mostrar en la ventana de visualización.
+ * @default ["Name","Earn Date","Difficulty","Points","Description","Requirements","Rewards"]
+ *
+ * @param Disable Touch UI Space
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc If true, will not leave space for Touch UI buttons if Touch UI is disabled
+ * @default false
+ *
+ * @param ShowSecretAchievements
+ * @text Mostrar logros secretos
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Determinar si los logros secretos se muestran en la escena de logros.
+ * @default false
+ *
+ * @param SecretText
+ * @text Texto secreto
+ * @parent Achievement Scene Options
+ * @desc Texto para mostrar como nombre de logro si se muestra un logro secreto en la escena.
+ * @default ??????
+ *
+ * @param ShowCriteriaAfterCompletion
+ * @text Mostrar criterios después de la finalización
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Verdadero = aún muestra los criterios, falso = deja de mostrar los criterios después de la finalización.
+ * @default true
+ *
+ * @param Show Rewards After Fail
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc true = still show rewards, false = stop showing rewards after fail.
+ * @default true
+ *
+ * @param DateFormat
+ * @text Formato de fecha
+ * @parent Achievement Scene Options
+ * @type number
+ * @min 0
+ * @max 8
+ * @desc Número que especifica el formato de fecha. Consulta la documentación para obtener ayuda. Rango válido: 0-8.
+ * @default 0
+ *
+ * @param ScrollSpeed
+ * @text Velocidad de desplazamiento
+ * @parent Achievement Scene Options
+ * @type number
+ * @min 0
+ * @desc Velocidad a la que se desplaza la visualización de la ventana de logros (si es necesario).
+ * @default 1
+ *
+ * @param ScrollWait
+ * @text Espera de desplazamiento
+ * @parent Achievement Scene Options
+ * @type number
+ * @min 0
+ * @desc Cantidad de tiempo (en fotogramas) a esperar antes de comenzar a desplazarse.
+ * @default 300
+ *
+ * @param Scroll Deceleration
+ * @text Desaceleración de desplazamiento
+ * @parent Achievement Scene Options
+ * @type number
+ * @min 0.01
+ * @max 0.99
+ * @decimals 2
+ * @desc Tasa de desaceleración después de soltar el toque.
+ * @default 0.92
+ *
+ * @param Auto Scroll
+ * @text Desplazamiento automático
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Determina si la ventana de visualización debe desplazarse automáticamente después de tanto tiempo sin intervención del usuario.
+ * @default true
+ *
+ * @param Show Total Points
+ * @text Mostrar puntos totales
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Si es verdadero, mostrará la cantidad total de puntos posibles en la ventana total.
+ * @default false
+ *
+ * @param Show Total Achievements
+ * @text Mostrar logros totales
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Si es verdadero, mostrará la cantidad total de logros posibles en la ventana total.
+ * @default false
+ *
+ * @param Transparent Windows
+ * @text Ventana transparente
+ * @parent Achievement Scene Options
+ * @type boolean
+ * @desc Si es verdadero, las ventanas tendrán un fondo transparente.
+ * @default false
+ *
+ * @param Scene Background
+ * @text Fondo de escena
+ * @parent Achievement Scene Options
+ * @type file
+ * @dir img/pictures
+ * @desc Imagen para usar como fondo de la escena (déjala en blanco si no usas una imagen personalizada).
+ *
+ * @param Category Columns
+ * @text Columnas de Categoría
+ * @parent Achievement Scene Options
+ * @type number
+ * @min 1
+ * @desc Cantidad de columnas para tener en la ventana de categoría.
+ * @default 4
+ *
+ * @param Text Options
+ * @text Opciones de texto
+ *
+ * @param Reward Text
+ * @text Texto de Recompensa
+ * @parent Text Options
+ * @desc Texto para describir Recompensa.
+ * @default Rewards:
+ *
+ * @param Requirement Text
+ * @text Texto de Requerimientos
+ * @parent Text Options
+ * @desc Texto para describir Requerimientos.
+ * @default Requirements:
+ *
+ * @param Difficulty Text
+ * @text Texto de Dificultad
+ * @parent Text Options
+ * @desc Texto para describir Dificultad.
+ * @default Difficulty:
+ *
+ * @param Description Text
+ * @text Texto de Descripción
+ * @parent Text Options
+ * @desc Texto para describir Descripción.
+ * @default Description:
+ *
+ * @param Points Text
+ * @text Texto de puntos
+ * @parent Text Options
+ * @desc Texto para describir Puntos.
+ * @default Points:
+ *
+ * @param Points Window Text
+ * @text Texto de Ventana de puntos
+ * @parent Text Options
+ * @desc Texto para describir puntos en la ventana de Puntos.
+ * @default Points:
+ *
+ * @param Unearned Text
+ * @text Texto de No ganado
+ * @parent Text Options
+ * @desc Texto que aparecerá en la parte superior de la ventana de logros cuando no se gane.
+ * @default Keep playing to earn this achievement
+ *
+ * @param Earned Text
+ * @text Texto de Ganado
+ * @parent Text Options
+ * @desc Texto que aparecerá en la parte superior de la ventana de logros cuando se gane.
+ * @default Achievement earned on:
+ *
+ * @param Failed Text
+ * @parent Text Options
+ * @desc Text to appear at the top of the achievement window when failed
+ * @default \c[2]Achievement Failed\c[0]
+ *
+ * @param Earned Count Text
+ * @text Texto de Recuento ganado
+ * @parent Text Options
+ * @desc Texto que aparecerá al contar los logros obtenidos.
+ * @default Earned:
+ *
+ * @param Basic Info Header Text
+ * @text Texto del encabezado de información básica
+ * @parent Text Options
+ * @desc Texto para mostrar en el encabezado de información básica.
+ * @default Info
+ *
+ * @param Description Header Text
+ * @text Texto de Descripción del encabezado
+ * @parent Text Options
+ * @desc Texto para mostrar en el encabezado de descripción.
+ * @default Description
+ *
+ * @param Requirement Header Text
+ * @text Texto del encabezado del requisito
+ * @parent Text Options
+ * @desc Texto para mostrar en el encabezado del requisito.
+ * @default Requirements
+ *
+ * @param Reward Header Text
+ * @text Texto de encabezado de recompensa
+ * @parent Text Options
+ * @desc Texto para mostrar en el encabezado de la recompensa.
+ * @default Rewards
+ *
+ * @param Steps Text
+ * @text Texto de pasos
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso del requisito de pasos.
+ * @default Steps
+ *
+ * @param Saves Text
+ * @text Texto de Guardados
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos para guardar.
+ * @default Saves
+ *
+ * @param Battles Text
+ * @text Texto de Batallas
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de batalla.
+ * @default Battles
+ *
+ * @param Wins Text
+ * @text Texto de Victorias
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso del requisito de victorias.
+ * @default Wins
+ *
+ * @param Escapes Text
+ * @text Texto de Escapes
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso del requisito de escape.
+ * @default Escapes
+ *
+ * @param Achievements Progress Text
+ * @text Texto de Progreso de logros
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso del requisito de logro.
+ * @default Achievements
+ *
+ * @param Points Progress Text
+ * @text Texto de Progreso de puntos
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de puntos.
+ * @default Points
+ *
+ * @param Prof Level Text
+ * @text Texto de Nivel profesional
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de nivel profesional.
+ * @default Level
+ *
+ * @param Played Text
+ * @text Texto Reproducido
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso del requisito reproducido.
+ * @default Played
+ *
+ * @param Enc Total Text
+ * @text Texto de la enciclopedia total
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos totales de la enciclopedia.
+ * @default % Enc. Total
+ *
+ * @param Enc Bestiary Text
+ * @text Texto del bestiario de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos del bestiario de la Enciclopedia.
+ * @default % Enc. Bestiary
+ *
+ * @param Enc Items Text
+ * @text Texto del bestiario de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos del artículo de la Enciclopedia.
+ * @default % Enc. Items
+ *
+ * @param Enc Weapons Text
+ * @text Texto de armas de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de armas de la Enciclopedia.
+ * @default % Enc. Weapons
+ *
+ * @param Enc Armors Text
+ * @text Texto de armaduras de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de armaduras de la Enciclopedia.
+ * @default % Enc. Armors
+ *
+ * @param Enc Skills Text
+ * @text Texto de habilidades de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos de habilidades de la Enciclopedia.
+ * @default % Enc. Skills
+ *
+ * @param Enc States Text
+ * @text Texto de estados de la enciclopedia
+ * @parent Text Options
+ * @desc Texto que aparecerá en la barra de progreso de requisitos del estado de la Enciclopedia.
+ * @default % Enc. States
+ * 
+ * @param Total Window Alignment
+ * @text Alineación total de ventanas
+ * @parent Text Options
+ * @type select
+ * @option left
+ * @option center
+ * @option right
+ * @desc La alineación del texto en la ventana de totales.
+ * @default left
+ *
+ * @param List Window Alignment
+ * @text Alineación de ventana de lista
+ * @parent Text Options
+ * @type select
+ * @option left
+ * @option center
+ * @option right
+ * @desc La alineación del texto en la ventana de la lista de logros.
+ * @default left
+ *
+ * @param Category Window Alignment
+ * @text Alineación de ventana de categoría
+ * @parent Text Options
+ * @type select
+ * @option left
+ * @option center
+ * @option right
+ * @desc La alineación del texto en la ventana de categoría de logro.
+ * @default center
+ *
+ * @param Currency Unit Space
+ * @text Espacio de unidad de moneda
+ * @parent Text Options
+ * @type boolean
+ * @desc ¿Agregar un espacio entre el valor de moneda y la unidad de moneda?
+ * @default false
+ *
+ * @param Label Color
+ * @text Color de la etiqueta
+ * @parent Text Options
+ * @type number
+ * @min 0
+ * @desc Color para dibujar el texto de la etiqueta.
+ * @default 16
+ * 
+ * @param Gauge Colors
+ * @text Colores de calibre
+ * 
+ * @param CurrencyGaugeColor1
+ * @text Color 1 de indicador.
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 1 para indicador de moneda.
+ * @default 6
+ *
+ * @param CurrencyGaugeColor2
+ * @text Color 2 de indicador
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 2 para indicador de moneda.
+ * @default 17
+ *
+ * @param GenericGaugeColor1
+ * @text Color 1 de calibres
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 1 para varios calibres. 
+ * @default 28
+ *
+ * @param GenericGaugeColor2
+ * @text Color 2 de calibres
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 2 para varios calibres. 
+ * @default 29
+ *
+ * @param ItemGaugeColor1
+ * @text Color 1 de calibres
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 1 para calibres de artículos.
+ * @default 22
+ *
+ * @param ItemGaugeColor2
+ * @text Color 2 de calibres
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 2 para calibres de artículos.
+ * @default 23
+ *
+ * @param SwitchVarGaugeColor1
+ * @text Color 1 del interruptor
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 1 para interruptores y calibres variables.
+ * @default 20
+ *
+ * @param SwitchVarGaugeColor2
+ * @text Color 2 del interruptor
+ * @type number
+ * @min 0
+ * @parent Gauge Colors
+ * @desc Color 2 para interruptores y calibres variables.
+ * @default 21
+*/
+/*~struct~Item:es
+ * @param Item
+ * @text Artículo
+ * @type item
+ * 
+ * @param Amount
+ * @text Cantidad
+ * @type number
+ * @min 1
+ * @max 99
+ * @default 1
+*/
+/*~struct~Weapon:es
+ * @param Weapon
+ * @text Arma
+ * @type weapon
+ * 
+ * @param Amount
+ * @text Cantidad
+ * @type number
+ * @min 1
+ * @max 99
+ * @default 1
+*/
+/*~struct~Armor:es
+ * @param Armor
+ * @text Armadura
+ * @type armor
+ * 
+ * @param Amount
+ * @text Cantidad
+ * @type number
+ * @min 1
+ * @max 99
+ * @default 1
+*/
+/*~struct~Switch:es
+ * @param Switch
+ * @text Interruptor
+ * @type switch
+ * 
+ * @param On/Off
+ * @text Encender/apagar
+ * @type boolean
+ * @on Encender
+ * @off Apagar
+ * @default true
+ *
+ * @param Description
+ * @text Descripción 
+ * @type text
+ * @default
+ * @desc Descripción de este Interruptor.
+*/
+/*~struct~Variable:es
+ * @param Variable
+ * @text Variable
+ * @type variable
+ * 
+ * @param Operator
+ * @text Operador
+ * @type text
+ * @desc Operadores válidos para criterios: < <= > >= =
+ * Operadores válidos para recompensa: + - / * % =
+ * @default >
+ *
+ * @param Amount
+ * @text Cantidad
+ * @type number
+ * @default 0
+ * @desc Criterios: el valor con el que comparar la variable.
+ * Recompensa: el valor a otorgar a la variable.
+ *
+ * @param Description
+ * @text Descripción 
+ * @type text
+ * @default
+ * @desc Descripción de esta variable.
+*/
+/*~struct~Requirement:es
+ * @param Currency
+ * @text Moneda
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Cantidad de moneda necesaria para obtener el logro.
+ * 
+ * @param Items
+ * @text Artículos
+ * @type struct<Item>[]
+ * @desc Artículos necesarios para obtener el logro.
+ * @default []
+ *
+ * @param Weapons
+ * @text Armas
+ * @type struct<Weapon>[]
+ * @desc Armas necesarias para obtener el logro.
+ * @default []
+ *
+ * @param Armors
+ * @text Armadura
+ * @type struct<Armor>[]
+ * @desc Armaduras necesarias para obtener el logro.
+ * @default []
+ *
+ * @param Switches
+ * @text Interruptores
+ * @type struct<Switch>[]
+ * @desc Interruptores necesarios para obtener el logro.
+ * @default []
+ *
+ * @param Variables
+ * @text Variables
+ * @type struct<Variable>[]
+ * @desc Variables necesarias para obtener el logro.
+ * @default []
+ *
+ * @param Saves
+ * @text Guardados
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Establece el número de guardados necesarios para obtener el logro.
+ *
+ * @param Playtime
+ * @text Tiempo de juego
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Tiempo de juego necesario para obtener el logro. En cuadros (60f/1seg).
+ *
+ * @param Steps
+ * @text Pasos
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Número de pasos necesarios para obtener el logro.
+ *
+ * @param Battles
+ * @text Batallas
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Recuento de batalla necesario para obtener el logro.
+ *
+ * @param Wins
+ * @text Victorias
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Cantidad de victorias necesarias para obtener el logro.
+ *
+ * @param Escapes
+ * @text Escapes
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Número de escape necesario para obtener el logro.
+ *
+ * @param Achievements Earned
+ * @text Logros obtenidos
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Logros obtenidos necesarios para obtener el logro.
+ *
+ * @param Achievement Points
+ * @text Puntos de Logro
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Puntos de logro necesarios para obtener el logro.
+ *
+ * @param Encyclopedia Total
+ * @text Total de enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia Bestiary
+ * @text Bestiario de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de bestiarios totales de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia Items
+ * @text Artículos de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de artículos totales de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia Armors
+ * @text Armaduras de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de armaduras totales de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia Weapons
+ * @text Armas de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de armas totales de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia Skills
+ * @text Habilidades de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de habilidades totales de la Enciclopedia para obtener el logro.
+ *
+ * @param Encyclopedia States
+ * @text Estados de la enciclopedia
+ * @type number
+ * @min 0
+ * @max 100
+ * @default 0
+ * @desc % necesario descubierto de la enciclopedia total para obtener el logro.
+ *
+ * @param Professions
+ * @text Profesiones
+ * @type struct<Profession>[]
+ * @default []
+ * @desc Requerimientos de profesión.
+*/
+/*~struct~Reward:es
+ * @param Currency
+ * @text Moneda
+ * @type number
+ * @default 0
+ * @desc Cantidad de moneda a otorgar al obtener el logro.
+ * 
+ * @param Items
+ * @text Artículos
+ * @type struct<Item>[]
+ * @desc Artículos para otorgar al lograr el logro.
+ * @default []
+ *
+ * @param Weapons
+ * @text Armas
+ * @type struct<Weapon>[]
+ * @desc Armas para otorgar al logro de ganar.
+ * @default []
+ *
+ * @param Armors
+ * @text Armaduras
+ * @type struct<Armor>[]
+ * @desc Armaduras para otorgar al logro de ganar.
+ * @default []
+ *
+ * @param Switches
+ * @text Interruptores
+ * @type struct<Switch>[]
+ * @desc Interruptores para manipular al obtener logros
+ * @default []
+ *
+ * @param Variables
+ * @text Variables 
+ * @type struct<Variable>[]
+ * @desc Variables para manipular sobre la obtención de logros.
+ * @default []
+ *
+ * @param Common Event
+ * @type common_event
+ * @default 0
+ * @desc Common event to queue upon achievement earn
+*/
+/*~struct~Popup:es
+ * @param Display?
+ * @text ¿Mostrar?
+ * @type boolean
+ * @default true
+ * @desc ¿Mostrar una ventana emergente en el mapa sobre la obtención de logros? No se mostrará ninguna ventana emergente si no se usa CGMZ Toast Manager.
+ *
+ * @param Sound
+ * @text Sonido
+ * @type file
+ * @dir audio/se/
+ * @desc Sonido para jugar en la obtención de logros.
+ * 
+ * @param Image
+ * @text Imagen
+ * @type file
+ * @dir img/pictures
+ * @desc Imagen para mostrar en la obtención de logros. Déjelo en blanco para mostrar una ventana de texto en su lugar.
+ * 
+ * @param Color
+ * @text Color
+ * @type number
+ * @min 0
+ * @default 0
+ * @desc Color para mostrar el nombre del logro en la ventana de texto al ganar. No hay efecto si se muestra una imagen en su lugar.
+*/
+/*~struct~Achievement:es
+ * @param Name
+ * @text Nombre
+ * @type text
+ * @desc Nombre del logro.
+ * 
+ * @param Points
+ * @text Puntos
+ * @type number
+ * @min 0
+ * @default 10
+ * @desc Cantidad de puntos que vale el logro.
+ *
+ * @param Pre Description
+ * @text Pre Descripción
+ * @type note
+ * @default ""
+ * @desc Descripción del logro antes de que se gane.
+ *
+ * @param Post Description
+ * @text Post Descripción 
+ * @type note
+ * @default ""
+ * @desc Descripción del logro después de obtenerlo. Déjelo en blanco para usar siempre Pre descripción.
+ *
+ * @param Category
+ * @text Categoría
+ * @desc Categoría a la que pertenece el logro.
+ *
+ * @param Difficulty
+ * @text Dificultad
+ * @type text
+ * @default Easy
+ * @desc Dificultad de logro.
+ *
+ * @param Secret
+ * @text Logro secreto
+ * @type boolean
+ * @default false
+ * @desc ¿Es el logro un logro secreto?
+ *
+ * @param Automatic
+ * @text Automático
+ * @type boolean
+ * @default false
+ * @desc ¿Seguir automáticamente el progreso del logro?
+ *
+ * @param Rewards
+ * @text Recompensas
+ * @type struct<Reward>
+ * @default {"Currency":"0","Items":"[]","Weapons":"[]","Armors":"[]","Switches":"[]","Variables":"[]"}
+ * @desc Recompensas de logros.
+ *
+ * @param Requirements
+ * @text Requerimientos
+ * @type struct<Requirement>
+ * @default {"Currency":"0","Items":"[]","Weapons":"[]","Armors":"[]","Switches":"[]","Variables":"[]","Saves":"0","Playtime":"0","Steps":"0","Battles":"0","Wins":"0","Escapes":"0","Achievements Earned":"0","Achievement Points":"0","Encyclopedia Total":"0","Encyclopedia Bestiary":"0","Encyclopedia Items":"0","Encyclopedia Armors":"0","Encyclopedia Weapons":"0","Encyclopedia Skills":"0","Encyclopedia States":"0","Professions":"[]"}
+ * @desc Requisitos de logro.
+ *
+ * @param Popup
+ * @text Ventana emergente
+ * @type struct<Popup>
+ * @default {"Display?":"true","Sound":"Applause1","Image":"","Color":"0"}
+ * @desc Configuraciones para la ventana emergente si usa CGMZ Toast Manager.
+*/
+/*~struct~Profession:es
+ * @param Name
+ * @text Nombre
+ * @type text
+ * @desc El nombre de la profesión a rastrear.
+ * 
+ * @param Level Requirement
+ * @text Requerimiento de nivel
+ * @type number
+ * @min 1
+ * @default 1
+ * @desc El requisito de nivel para la profesión.
+*/
+/*~struct~Category:es
+ * @param id
+ * @text ID
+ * @desc La identificación única de la categoría.
+ * 
+ * @param Name
+ * @text Nombre
+ * @desc El nombre para mostrar de la categoría.
+*/
 Imported.CGMZ_Achievements = true;
-var CGMZ = CGMZ || {};
-CGMZ.Achievements = CGMZ.Achievements || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Achievements"] = "1.5.0";
+CGMZ.Versions["Achievements"] = "1.5.1";
+CGMZ.Achievements = {};
 CGMZ.Achievements.parameters = PluginManager.parameters('CGMZ_Achievements');
 CGMZ.Achievements.ShowAchievementPop = (CGMZ.Achievements.parameters["ShowAchievementPop"] === "true");
 CGMZ.Achievements.AchievementEarnedText = CGMZ.Achievements.parameters["AchievementEarnedText"];
@@ -2068,16 +3217,16 @@ CGMZ.Achievements.ListWindowAlignment = CGMZ.Achievements.parameters["List Windo
 CGMZ.Achievements.CategoryWindowAlignment = CGMZ.Achievements.parameters["Category Window Alignment"];
 CGMZ.Achievements.SceneBackground = CGMZ.Achievements.parameters["Scene Background"];
 CGMZ.Achievements.LabelColor = Number(CGMZ.Achievements.parameters["Label Color"]);
-CGMZ.Achievements.Achievements = JSON.parse(CGMZ.Achievements.parameters["Achievements"]);
-CGMZ.Achievements.Categories = JSON.parse(CGMZ.Achievements.parameters["Categories"]);
-CGMZ.Achievements.AchievementDisplayInfo = JSON.parse(CGMZ.Achievements.parameters["Achievement Display Info"]);
+CGMZ.Achievements.Achievements = CGMZ_Utils.parseJSON(CGMZ.Achievements.parameters["Achievements"], [], "CGMZ Achievements", "Your Achievements parameter was set up incorrectly and could not be read.");
+CGMZ.Achievements.Categories = CGMZ_Utils.parseJSON(CGMZ.Achievements.parameters["Categories"], [], "CGMZ Achievements", "Your Categories parameter was set up incorrectly and could not be read.");
+CGMZ.Achievements.AchievementDisplayInfo = CGMZ_Utils.parseJSON(CGMZ.Achievements.parameters["Achievement Display Info"], [], "CGMZ Achievements", "Your Achievement Display Info parameter was set up incorrectly and could not be read.");
 //=============================================================================
 // CGMZ_Achievement
 //-----------------------------------------------------------------------------
 // Store and manage achievement data.
 //=============================================================================
 function CGMZ_Achievement() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 //-----------------------------------------------------------------------------
 // Initialize Achievement
@@ -2087,22 +3236,20 @@ CGMZ_Achievement.prototype.initialize = function(achievementData, id) {
 	this._earned = false;
 	this._failed = false;
 	this._earndate = "";
-	achievementData = JSON.parse(achievementData);
 	this._name = achievementData["Name"];
 	this._points = Number(achievementData["Points"]);
 	this._difficulty = achievementData["Difficulty"];
 	this._category = achievementData.Category;
-	this._predesc = JSON.parse(achievementData["Pre Description"]);
-	this._postdesc = JSON.parse(achievementData["Post Description"]);
-	if(this._postdesc === "") {
-		this._postdesc = this._predesc;
-	}
+	this._predesc = CGMZ_Utils.parseJSON(achievementData["Pre Description"], "", "CGMZ Achievements", `Achievement with id ${id} had an invalid Pre Description parameter.`);
+	this._postdesc = CGMZ_Utils.parseJSON(achievementData["Post Description"], "", "CGMZ Achievements", `Achievement with id ${id} had an invalid Post Description parameter.`);
+	if(this._postdesc === "") this._postdesc = this._predesc;
 	this._automatic = (achievementData["Automatic"] === "true");
 	this._secret = (achievementData["Secret"] === "true");
-	const popupData = JSON.parse(achievementData["Popup"]);
+	const defaultPopup = {"Display?": false, "Sound":"", "Image":"", "Color":0};
+	const popupData = CGMZ_Utils.parseJSON(achievementData["Popup"], defaultPopup, "CGMZ Achievements", `Your Popup parameter for achievement ${id} was set up incorrectly and could not be read.`);
 	this._popup = {"display": (popupData["Display?"] === "true"), "sound": popupData["Sound"],
 					"image": popupData["Image"], "color": Number(popupData["Color"])};
-	const rewards = JSON.parse(achievementData["Rewards"]);
+	const rewards = CGMZ_Utils.parseJSON(achievementData["Rewards"], {}, "CGMZ Achievements", `Your Rewards parameter for achievement ${id} was set up incorrectly and could not be read.`);
 	this._rewards = {};
 	this._rewards["items"] = [];
 	this._rewards["switches"] = [];
@@ -2114,7 +3261,7 @@ CGMZ_Achievement.prototype.initialize = function(achievementData, id) {
 	this.initializeItems(this._rewards.items, rewards["Armors"], "Armor", "Amount", "armor");
 	this.initializeSwitches(this._rewards.switches, rewards["Switches"], "Switch", "On/Off", "Description");
 	this.initializeVariables(this._rewards.variables, rewards["Variables"], "Variable", "Amount", "Description", "Operator");
-	const requirements = JSON.parse(achievementData["Requirements"]);
+	const requirements = CGMZ_Utils.parseJSON(achievementData["Requirements"], {}, "CGMZ Achievements", `Your Requirements parameter for achievement ${id} was set up incorrectly and could not be read.`);
 	this._requirements = {};
 	this._requirements["items"] = [];
 	this._requirements["switches"] = [];
@@ -2148,9 +3295,10 @@ CGMZ_Achievement.prototype.initialize = function(achievementData, id) {
 // Initialize Achievement items (requirement or reward)
 //-----------------------------------------------------------------------------
 CGMZ_Achievement.prototype.initializeItems = function(itemArray, JSONtext, idText, amtText, type) {
-	let parsedItems = JSON.parse(JSONtext);
-	for(let i = 0; i < parsedItems.length; i++) {
-		const obj = JSON.parse(parsedItems[i]);
+	const parsedItems = CGMZ_Utils.parseJSON(JSONtext, [], "CGMZ Achievements", "The plugin could not read an item array for achievement: " + this._id);
+	for(const parsedItem of parsedItems) {
+		const obj = CGMZ_Utils.parseJSON(parsedItem, null, "CGMZ Achievements", "The plugin could not read an item from array for achievement: " + this._id);
+		if(!obj) continue;
 		const id = Number(obj[idText]);
 		const amt = Number(obj[amtText]);
 		itemArray.push({"type": type, "id": id, "amt": amt});
@@ -2160,9 +3308,10 @@ CGMZ_Achievement.prototype.initializeItems = function(itemArray, JSONtext, idTex
 // Initialize Achievement switches (requirement or reward)
 //-----------------------------------------------------------------------------
 CGMZ_Achievement.prototype.initializeSwitches = function(switchArray, JSONtext, idText, valueText, descText) {
-	let parsedItems = JSON.parse(JSONtext);
-	for(let i = 0; i < parsedItems.length; i++) {
-		const obj = JSON.parse(parsedItems[i]);
+	const parsedItems = CGMZ_Utils.parseJSON(JSONtext, [], "CGMZ Achievements", "The plugin could not read a switch array for achievement: " + this._id);
+	for(const parsedItem of parsedItems) {
+		const obj = CGMZ_Utils.parseJSON(parsedItem, null, "CGMZ Achievements", "The plugin could not read a switch from array for achievement: " + this._id);
+		if(!obj) continue;
 		const id = Number(obj[idText]);
 		const value = (obj[valueText] === "true");
 		const description = obj[descText];
@@ -2173,9 +3322,10 @@ CGMZ_Achievement.prototype.initializeSwitches = function(switchArray, JSONtext, 
 // Initialize Achievement switches (requirement or reward)
 //-----------------------------------------------------------------------------
 CGMZ_Achievement.prototype.initializeVariables = function(variableArray, JSONtext, idText, valueText, descText, opText) {
-	let parsedItems = JSON.parse(JSONtext);
-	for(let i = 0; i < parsedItems.length; i++) {
-		const obj = JSON.parse(parsedItems[i]);
+	const parsedItems = CGMZ_Utils.parseJSON(JSONtext, [], "CGMZ Achievements", "The plugin could not read a switch array for achievement: " + this._id);
+	for(const parsedItem of parsedItems) {
+		const obj = CGMZ_Utils.parseJSON(parsedItem, null, "CGMZ Achievements", "The plugin could not read a switch from array for achievement: " + this._id);
+		if(!obj) continue;
 		const id = Number(obj[idText]);
 		const value = Number(obj[valueText]);
 		const operator = obj[opText];
@@ -2188,10 +3338,11 @@ CGMZ_Achievement.prototype.initializeVariables = function(variableArray, JSONtex
 //-----------------------------------------------------------------------------
 CGMZ_Achievement.prototype.initializeProfessionRequirements = function(reqs) {
 	if(!Imported.CGMZ_Professions) return [];
-	let required = [];
-	reqs = JSON.parse(reqs);
-	for(let i = 0; i < reqs.length; i++) {
-		const reqTemp = JSON.parse(reqs[i]);
+	const required = [];
+	const reqsA = CGMZ_Utils.parseJSON(reqs, [], "CGMZ Achievements", "The plugin could not read a profession requirement array for achievement: " + this._id);
+	for(const reqJSON of reqsA) {
+		const reqTemp = CGMZ_Utils.parseJSON(reqJSON, null, "CGMZ Achievements", "The plugin could not read a profession requirement for achievement: " + this._id);
+		if(!reqTemp) continue;
 		const req = {"name": reqTemp.Name, "level": Number(reqTemp["Level Requirement"])};
 		required.push(req);
 	}
@@ -2292,8 +3443,10 @@ CGMZ_Core.prototype.initializeAchievements = function(reinitialize) {
 		this.setupAchievementVariables();
 	}
 	let id = this._achievements.length + 1;
-	for(let i = 0; i < CGMZ.Achievements.Achievements.length; i++) {
-		const achievement = new CGMZ_Achievement(CGMZ.Achievements.Achievements[i], id);
+	for(const achievementJSON of CGMZ.Achievements.Achievements) {
+		const parsedAchievement = CGMZ_Utils.parseJSON(achievementJSON, null, "CGMZ Achievements", "Your Achievements parameter was set up incorrectly and could not be read.");
+		if(!parsedAchievement) continue;
+		const achievement = new CGMZ_Achievement(parsedAchievement, id);
 		const existingAchievement = this.getAchievementByName(achievement.getName());
 		if(!existingAchievement) {
 			this.commitAchievement(achievement);
@@ -2423,7 +3576,7 @@ CGMZ_Core.prototype.earnAchievement = function(id) {
 	const day = date.getDate();
 	const month = date.getMonth();
 	const year = date.getFullYear();
-	achievement._earndate = $cgmzTemp.createDateText(day, month, year, CGMZ.Achievements.DateFormat, "/");
+	achievement._earndate = CGMZ_Utils.createDateText(CGMZ.Achievements.DateFormat);
 	if(achievement.hasRewards()) {
 		this.giveAchievementRewards(achievement._rewards);
 	}
@@ -2444,7 +3597,7 @@ CGMZ_Core.prototype.giveAchievementRewards = function(reward) {
 		$gameTemp.reserveCommonEvent(reward.commonEvent);
 	}
 	for(const itemObj of reward.items) {
-		const item = $cgmzTemp.lookupItem(itemObj.type, itemObj.id)
+		const item = CGMZ_Utils.lookupItem(itemObj.type, itemObj.id)
 		$gameParty.gainItem(item, itemObj.amt);
 	}
 	for(const switchObj of reward.switches) {
@@ -2516,7 +3669,7 @@ CGMZ_Core.prototype.checkAchievementForEarn = function(achievement) {
 		if(profession._level < criteria.professions[i].level) return;
 	}
 	for(const itemObj of criteria.items) {
-		const item = $cgmzTemp.lookupItem(itemObj.type, itemObj.id);
+		const item = CGMZ_Utils.lookupItem(itemObj.type, itemObj.id);
 		if($gameParty.numItems(item) < itemObj.amt) return;
 	}
 	for(const switchObj of criteria.switches) {
@@ -2676,7 +3829,7 @@ CGMZ_Core.prototype.checkAchievementItemsCriteria = function() {
 		const achievement = this.getAchievementByID(id);
 		const criteria = achievement._requirements;
 		for(const itemObj of criteria.items) {
-			const item = $cgmzTemp.lookupItem(itemObj.type, itemObj.id);
+			const item = CGMZ_Utils.lookupItem(itemObj.type, itemObj.id);
 			if($gameParty.numItems(item) >= itemObj.amt) {
 				this.checkAchievementForEarn(achievement);
 				return;
@@ -2828,7 +3981,8 @@ CGMZ_Temp.prototype.createPluginData = function() {
 CGMZ_Temp.prototype.initializeAchievementData = function() {
 	this._achievementCategories = {};
 	for(const catJSON of CGMZ.Achievements.Categories) {
-		const category = JSON.parse(catJSON);
+		const category = CGMZ_Utils.parseJSON(catJSON, null, "CGMZ Achievements", "One of your achievement categories was set up incorrectly and could not be read.");
+		if(!category) continue;
 		this._achievementCategories[category.id] = category.Name;
 	}
 };
@@ -2894,8 +4048,8 @@ CGMZ_Temp.prototype.pluginCommandAchievementsCallScene = function() {
 CGMZ_Temp.prototype.pluginCommandAchievementsChangeDescription = function(args) {
 	const achievement = (args.name) ? $cgmz.getAchievementByName(args.name) : $cgmz.getAchievementByID(Number(args.id));
 	if(achievement) {
-		const pre = JSON.parse(args["Pre Description"]);
-		const post = JSON.parse(args["Post Description"]);
+		const pre = CGMZ_Utils.parseJSON(args["Pre Description"], "", "CGMZ Achievements", "Your Pre Description in plugin command was set up incorrectly and could not be read.");
+		const post = CGMZ_Utils.parseJSON(args["Post Description"], "", "CGMZ Achievements", "Your Post Description in plugin command was set up incorrectly and could not be read.");
 		achievement.setDescriptions(pre, post);
 	}
 };
@@ -2920,7 +4074,7 @@ CGMZ_Temp.prototype.pluginCommandAchievementsFailAchievement = function(args) {
 // Call with SceneManager.push(CGMZ_Scene_Achievements);
 //=============================================================================
 function CGMZ_Scene_Achievements() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 CGMZ_Scene_Achievements.prototype = Object.create(Scene_MenuBase.prototype);
 CGMZ_Scene_Achievements.prototype.constructor = CGMZ_Scene_Achievements;
@@ -2928,14 +4082,14 @@ CGMZ_Scene_Achievements.prototype.constructor = CGMZ_Scene_Achievements;
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Achievements.prototype.initialize = function() {
-    Scene_MenuBase.prototype.initialize.call(this);
+	Scene_MenuBase.prototype.initialize.call(this);
 	this._categories = $cgmzTemp.getAchievementCategories();
 };
 //-----------------------------------------------------------------------------
 // Create achievement windows
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Achievements.prototype.create = function() {
-    Scene_MenuBase.prototype.create.call(this);
+	Scene_MenuBase.prototype.create.call(this);
 	this.createCategoryWindow();
 	this.createListWindow();
 	this.createTotalsWindow();
@@ -2965,10 +4119,10 @@ CGMZ_Scene_Achievements.prototype.hasTouchUI = function() {
 CGMZ_Scene_Achievements.prototype.createCategoryWindow = function() {
 	const rect = this.categoryWindowRect();
 	const activate = this.hasCategories();
-    this._categoryWindow = new CGMZ_Achievement_Window_Category(rect, activate, this._categories);
+	this._categoryWindow = new CGMZ_Achievement_Window_Category(rect, activate, this._categories);
 	this._categoryWindow.setHandler('cancel', this.popScene.bind(this));
 	this._categoryWindow.setHandler('ok', this.onCategoryOk.bind(this));
-    this.addWindow(this._categoryWindow);
+	this.addWindow(this._categoryWindow);
 };
 //-----------------------------------------------------------------------------
 // Achievement category window rect
@@ -2986,11 +4140,11 @@ CGMZ_Scene_Achievements.prototype.categoryWindowRect = function() {
 CGMZ_Scene_Achievements.prototype.createListWindow = function() {
 	const rect = this.listWindowRect();
 	const activate = !this.hasCategories();
-    this._listWindow = new CGMZ_Achievement_Window_List(rect, activate);
+	this._listWindow = new CGMZ_Achievement_Window_List(rect, activate);
 	this._listWindow.setHandler('cancel', this.onListCancel.bind(this));
 	this._listWindow.setHandler('ok', this.onListOk.bind(this));
 	this._categoryWindow.setListWindow(this._listWindow);
-    this.addWindow(this._listWindow);
+	this.addWindow(this._listWindow);
 };
 //-----------------------------------------------------------------------------
 // Get list window rect
@@ -3008,8 +4162,8 @@ CGMZ_Scene_Achievements.prototype.listWindowRect = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Achievements.prototype.createTotalsWindow = function() {
 	const rect = this.totalsWindowRect();
-    this._totalsWindow = new CGMZ_Achievement_Window_Totals(rect);
-    this.addWindow(this._totalsWindow);
+	this._totalsWindow = new CGMZ_Achievement_Window_Totals(rect);
+	this.addWindow(this._totalsWindow);
 };
 //-----------------------------------------------------------------------------
 // Get totals window rect
@@ -3026,11 +4180,11 @@ CGMZ_Scene_Achievements.prototype.totalsWindowRect = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Achievements.prototype.createAchievementWindow = function() {
 	const rect = this.achievementWindowRect();
-    this._achievementWindow = new CGMZ_Achievement_Window_Display(rect);
+	this._achievementWindow = new CGMZ_Achievement_Window_Display(rect);
 	this._listWindow.setHelpWindow(this._achievementWindow);
 	this._achievementWindow.setHandler('cancel', this.onDisplayCancel.bind(this));
 	this._achievementWindow.deactivate();
-    this.addWindow(this._achievementWindow);
+	this.addWindow(this._achievementWindow);
 };
 //-----------------------------------------------------------------------------
 // Get achievement window rect
@@ -3076,7 +4230,7 @@ CGMZ_Scene_Achievements.prototype.onListOk = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Scene_Achievements.prototype.onDisplayCancel = function() {
 	this._listWindow.activate();
-    this._achievementWindow.deactivate();
+	this._achievementWindow.deactivate();
 };
 //-----------------------------------------------------------------------------
 // Add background image
@@ -3095,7 +4249,7 @@ CGMZ_Scene_Achievements.prototype.createBackground = function() {
 // Command window for choosing a category in the achievement scene
 //=============================================================================
 function CGMZ_Achievement_Window_Category(rect) {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 CGMZ_Achievement_Window_Category.prototype = Object.create(Window_HorzCommand.prototype);
 CGMZ_Achievement_Window_Category.prototype.constructor = CGMZ_Achievement_Window_Category;
@@ -3104,7 +4258,7 @@ CGMZ_Achievement_Window_Category.prototype.constructor = CGMZ_Achievement_Window
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Category.prototype.initialize = function(rect, activate, categories) {
 	this._categories = categories;
-    Window_HorzCommand.prototype.initialize.call(this, rect);
+	Window_HorzCommand.prototype.initialize.call(this, rect);
 	this.setBackgroundType(2 * (CGMZ.Achievements.TransparentWindows));
 	this.deactivate();
 	if(activate) this.activate();
@@ -3113,13 +4267,13 @@ CGMZ_Achievement_Window_Category.prototype.initialize = function(rect, activate,
 // Max columns to display
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Category.prototype.maxCols = function() {
-    return CGMZ.Achievements.CategoryColumns;
+	return CGMZ.Achievements.CategoryColumns;
 };
 //-----------------------------------------------------------------------------
 // Text alignment of categories
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Category.prototype.itemTextAlign = function() {
-    return CGMZ.Achievements.CategoryWindowAlignment;
+	return CGMZ.Achievements.CategoryWindowAlignment;
 };
 //-----------------------------------------------------------------------------
 // Make list of commands to display
@@ -3165,7 +4319,7 @@ CGMZ_Achievement_Window_Category.prototype.updateHelperWindows = function() {
 // Will not show hidden achievements.
 //=============================================================================
 function CGMZ_Achievement_Window_List() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 CGMZ_Achievement_Window_List.prototype = Object.create(Window_Selectable.prototype);
 CGMZ_Achievement_Window_List.prototype.constructor = CGMZ_Achievement_Window_List;
@@ -3173,11 +4327,11 @@ CGMZ_Achievement_Window_List.prototype.constructor = CGMZ_Achievement_Window_Lis
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.initialize = function(rect, activate) {
-    Window_Selectable.prototype.initialize.call(this, rect);
+	Window_Selectable.prototype.initialize.call(this, rect);
 	this.setBackgroundType(2 * (CGMZ.Achievements.TransparentWindows));
 	this._category = null;
 	this._usingCategories = !activate;
-    this.refresh();
+	this.refresh();
 	if(activate) {
 		this.activate();
 		this.select(0);
@@ -3187,32 +4341,32 @@ CGMZ_Achievement_Window_List.prototype.initialize = function(rect, activate) {
 // Max achievements to be shown
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.maxItems = function() {
-    return this._data ? this._data.length : 1;
+	return this._data ? this._data.length : 1;
 };
 //-----------------------------------------------------------------------------
 // Currently selected achievement
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.item = function() {
-    return this._data[this.index()];
+	return this._data[this.index()];
 };
 //-----------------------------------------------------------------------------
 // Determine if achievement is enabled
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.isEnabled = function(achievement) {
-    return (achievement && achievement.isEarned());
+	return (achievement && achievement.isEarned());
 };
 //-----------------------------------------------------------------------------
 // Refresh window
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.refresh = function() {
-    this.makeItemList();
-    Window_Selectable.prototype.refresh.call(this);
+	this.makeItemList();
+	Window_Selectable.prototype.refresh.call(this);
 };
 //-----------------------------------------------------------------------------
 // Make list of achievements
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.makeItemList = function() {
-    this._data = [];
+	this._data = [];
 	for(const achievement of $cgmz.getAchievements()) {
 		if((!achievement.isSecret() || achievement.isEarned() || CGMZ.Achievements.ShowSecretAchievements) &&
 			(!this._usingCategories || this._category === achievement._category)) {
@@ -3224,17 +4378,17 @@ CGMZ_Achievement_Window_List.prototype.makeItemList = function() {
 // Draw achievement names
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.drawItem = function(index) {
-    const achievement = this._data[index];
-    const rect = this.itemRectWithPadding(index);
+	const achievement = this._data[index];
+	const rect = this.itemRectWithPadding(index);
 	const name = (achievement.isSecret() && !achievement.isEarned()) ? CGMZ.Achievements.SecretText : achievement.getName();
-    this.changePaintOpacity(this.isEnabled(achievement));
-	this.drawText(name, rect.x, rect.y, rect.width, CGMZ.Achievements.ListWindowAlignment);
+	this.changePaintOpacity(this.isEnabled(achievement));
+	this.CGMZ_drawTextLine(name, rect.x, rect.y, rect.width, CGMZ.Achievements.ListWindowAlignment);
 };
 //-----------------------------------------------------------------------------
 // Update helper window
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_List.prototype.updateHelp = function() {
-    this.setHelpWindowItem(this.item());
+	this.setHelpWindowItem(this.item());
 };
 //-----------------------------------------------------------------------------
 // Update helper window
@@ -3251,7 +4405,7 @@ CGMZ_Achievement_Window_List.prototype.setItem = function(category) {
 // Window displaying total achievements earned and points (if applicable)
 //=============================================================================
 function CGMZ_Achievement_Window_Totals() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 CGMZ_Achievement_Window_Totals.prototype = Object.create(Window_Base.prototype);
 CGMZ_Achievement_Window_Totals.prototype.constructor = CGMZ_Achievement_Window_Totals;
@@ -3259,7 +4413,7 @@ CGMZ_Achievement_Window_Totals.prototype.constructor = CGMZ_Achievement_Window_T
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Totals.prototype.initialize = function(rect) {
-    Window_Base.prototype.initialize.call(this, rect);
+	Window_Base.prototype.initialize.call(this, rect);
 	this.setBackgroundType(2 * (CGMZ.Achievements.TransparentWindows));
 	this.refresh();
 };
@@ -3267,16 +4421,16 @@ CGMZ_Achievement_Window_Totals.prototype.initialize = function(rect) {
 // Refresh
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Totals.prototype.refresh = function() {
-    this.contents.clear();
+	this.contents.clear();
 	const earned = $cgmz.countEarnedAchievements();
 	let text = CGMZ.Achievements.EarnedCountText + earned;
 	if(CGMZ.Achievements.ShowTotalAchievements) text += " / " + $cgmz.countTotalAchievements();
-    this.drawText(text, 0, 0, this.contents.width, CGMZ.Achievements.TotalWindowAlignment);
+	this.CGMZ_drawTextLine(text, 0, 0, this.contents.width, CGMZ.Achievements.TotalWindowAlignment);
 	if($cgmz.usingAchievementPoints()) {
 		const points = $cgmz.countEarnedAchievementPoints();
 		text = CGMZ.Achievements.PointsWindowText + points;
 		if(CGMZ.Achievements.ShowTotalPoints) text += " / " + $cgmz.countTotalAchievementPoints();
-		this.drawText(text, 0, this.lineHeight(), this.contents.width, CGMZ.Achievements.TotalWindowAlignment);
+		this.CGMZ_drawTextLine(text, 0, this.lineHeight(), this.contents.width, CGMZ.Achievements.TotalWindowAlignment);
 	}
 };
 //=============================================================================
@@ -3285,7 +4439,7 @@ CGMZ_Achievement_Window_Totals.prototype.refresh = function() {
 // Window displaying total achievements earned and points (if applicable)
 //=============================================================================
 function CGMZ_Achievement_Window_Display() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 CGMZ_Achievement_Window_Display.prototype = Object.create(CGMZ_Window_Scrollable.prototype);
 CGMZ_Achievement_Window_Display.prototype.constructor = CGMZ_Achievement_Window_Display;
@@ -3294,7 +4448,7 @@ CGMZ_Achievement_Window_Display.prototype.constructor = CGMZ_Achievement_Window_
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Display.prototype.initialize = function(rect) {
 	const heightMultiplier = 5; // maximum of 5 windows tall of data to scroll
-    CGMZ_Window_Scrollable.prototype.initialize.call(this, rect, heightMultiplier, CGMZ.Achievements.ScrollWait, CGMZ.Achievements.ScrollSpeed, CGMZ.Achievements.AutoScroll, CGMZ.Achievements.ScrollDeceleration);
+	CGMZ_Window_Scrollable.prototype.initialize.call(this, rect, heightMultiplier, CGMZ.Achievements.ScrollWait, CGMZ.Achievements.ScrollSpeed, CGMZ.Achievements.AutoScroll, CGMZ.Achievements.ScrollDeceleration);
 	this._achievement = null;
 	this.setBackgroundType(2 * (CGMZ.Achievements.TransparentWindows));
 };
@@ -3325,7 +4479,7 @@ CGMZ_Achievement_Window_Display.prototype.refresh = function() {
 	for(const display of CGMZ.Achievements.AchievementDisplayInfo) {
 		switch(display) {
 			case "Name":
-				this.drawText(achieveName, 0, this._neededHeight, this.contents.width, 'center');
+				this.CGMZ_drawTextLine(achieveName, 0, this._neededHeight, this.contents.width, 'center');
 				this._neededHeight += this.lineHeight();
 				break;
 			case "Earn Date":
@@ -3334,7 +4488,7 @@ CGMZ_Achievement_Window_Display.prototype.refresh = function() {
 				} else if(achievement._failed) {
 					this.CGMZ_drawTextLine(CGMZ.Achievements.FailedText, 0, this._neededHeight, this.contents.width, 'left');
 				} else {
-					this.drawText(CGMZ.Achievements.UnearnedText, 0, this._neededHeight, this.contents.width, 'left');
+					this.CGMZ_drawTextLine(CGMZ.Achievements.UnearnedText, 0, this._neededHeight, this.contents.width, 'left');
 				}
 				this._neededHeight += this.lineHeight();
 				break;
@@ -3427,7 +4581,7 @@ CGMZ_Achievement_Window_Display.prototype.refresh = function() {
 					}
 					if(rewards.currency) {
 						const space = CGMZ.Achievements.CurrencyUnitSpace ? " " : "";
-						this.drawText(rewards.currency + space + TextManager.currencyUnit, 0, this._neededHeight, this.contents.width, 'left');
+						this.CGMZ_drawTextLine(rewards.currency + space + TextManager.currencyUnit, 0, this._neededHeight, this.contents.width, 'left');
 						this._neededHeight += this.lineHeight();
 					}
 					this._neededHeight += this.drawRewardsItems(rewards.items, 0);
@@ -3449,17 +4603,15 @@ CGMZ_Achievement_Window_Display.prototype.refresh = function() {
 // Draw a standard line of 1 label + 1 piece of text
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Display.prototype.drawStandardLine = function(label, text, x) {
-	this.drawLabel(label, x);
-	x = this.textWidth(label);
-	this.drawText(text, x, this._neededHeight, this.contents.width - x, "left");
+	const string = `\\c[${CGMZ.Achievements.LabelColor}]${label}\\c[0]${text}`;
+	this.CGMZ_drawTextLine(string, x, this._neededHeight, this.contents.width - x, "left");
 };
 //-----------------------------------------------------------------------------
 // Draw label / header text
 //-----------------------------------------------------------------------------
 CGMZ_Achievement_Window_Display.prototype.drawLabel = function(label, x, alignment = "left") {
-	this.changeTextColor(ColorManager.textColor(CGMZ.Achievements.LabelColor));
-	this.drawText(label, x, this._neededHeight, this.contents.width - x, alignment);
-	this.changeTextColor(ColorManager.normalColor());
+	const string = `\\c[${CGMZ.Achievements.LabelColor}]${label}\\c[0]`;
+	this.CGMZ_drawTextLine(string, x, this._neededHeight, this.contents.width - x, alignment);
 };
 //-----------------------------------------------------------------------------
 // Draw criteria progress with gauge
@@ -3482,7 +4634,7 @@ CGMZ_Achievement_Window_Display.prototype.drawCriteriaProgress = function(x, num
 CGMZ_Achievement_Window_Display.prototype.drawCriteriaItems = function(earned, itemArray, x, color1, color2) {
 	let outputHeight = 0;
 	for(const criteriaObj of itemArray) {
-		const item = $cgmzTemp.lookupItem(criteriaObj.type, criteriaObj.id);
+		const item = CGMZ_Utils.lookupItem(criteriaObj.type, criteriaObj.id);
 		const denominator = criteriaObj.amt;
 		let max = $gameParty.numItems(item);
 		if(earned || max > denominator) max = denominator;
@@ -3548,11 +4700,9 @@ CGMZ_Achievement_Window_Display.prototype.drawCriteriaVariables = function(earne
 CGMZ_Achievement_Window_Display.prototype.drawRewardsItems = function(itemArray, x, width) {
 	let outputHeight = 0;
 	for(const rewardObj of itemArray) {
-		const item = $cgmzTemp.lookupItem(rewardObj.type, rewardObj.id)
-		const descriptor = rewardObj.amt + "x ";
-		this.drawText(descriptor, x, this._neededHeight + outputHeight, this.contents.width, 'left');
-		const amtWidth = this.textWidth(descriptor);
-		this.drawItemName(item, amtWidth, this._neededHeight + outputHeight, this.contents.width - amtWidth);
+		const item = CGMZ_Utils.lookupItem(rewardObj.type, rewardObj.id)
+		const string = `${rewardObj.amt}x \\i[${item.iconIndex}]${item.name}`;
+		this.CGMZ_drawTextLine(string, x, this._neededHeight + outputHeight, this.contents.width, 'left');
 		outputHeight += this.lineHeight();
 	}
 	return outputHeight;
@@ -3564,7 +4714,7 @@ CGMZ_Achievement_Window_Display.prototype.drawRewardsItems = function(itemArray,
 CGMZ_Achievement_Window_Display.prototype.drawRewardsSwitchesAndVariables = function(objArray, x) {
 	let outputHeight = 0;
 	for(const obj of objArray) {
-		this.drawText(obj.description, x, this._neededHeight + outputHeight, this.contents.width, 'left');
+		this.CGMZ_drawTextLine(obj.description, x, this._neededHeight + outputHeight, this.contents.width, 'left');
 		outputHeight += this.lineHeight();
 	}
 	return outputHeight;
@@ -3604,12 +4754,8 @@ CGMZ_Achievement_Window_Display.prototype.drawGauge = function(x, y, width, colo
 	const gaugeRect = new Rectangle(x, y + this.lineHeight() - gaugeHeight, width, gaugeHeight);
 	const rate = (denominator !== 0) ? numerator/denominator : 0;
 	this.CGMZ_drawGauge(gaugeRect, rate, color1, color2);
-	const padding = 10;
-	this.drawText(descriptor, x + padding, y, width);
-	if(item) {
-		const itemX = x + padding + this.textWidth(descriptor + " ");
-		this.drawItemName(item, itemX, y, width-x);
-	}
+	const string = (item) ? `${descriptor} \\i[${item.iconIndex}]${item.name}` : `${descriptor}`;
+	this.CGMZ_drawTextLine(string, x + 10, y, width-x-20);
 };
 //=============================================================================
 // Game_Party
@@ -3621,7 +4767,7 @@ CGMZ_Achievement_Window_Display.prototype.drawGauge = function(x, y, width, colo
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameParty_gainGold = Game_Party.prototype.gainGold;
 Game_Party.prototype.gainGold = function(amount) {
-    alias_CGMZ_Achievements_GameParty_gainGold.call(this, amount);
+	alias_CGMZ_Achievements_GameParty_gainGold.call(this, amount);
 	if(amount > 0) $cgmz.checkAchievementCurrencyCriteria();
 };
 //-----------------------------------------------------------------------------
@@ -3637,7 +4783,7 @@ Game_Party.prototype.increaseSteps = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameParty_gainItem = Game_Party.prototype.gainItem;
 Game_Party.prototype.gainItem = function(item, amount, includeEquip) {
-    alias_CGMZ_Achievements_GameParty_gainItem.call(this, item, amount, includeEquip);
+	alias_CGMZ_Achievements_GameParty_gainItem.call(this, item, amount, includeEquip);
 	if(amount > 0) $cgmz.checkAchievementItemsCriteria();
 };
 //=============================================================================
@@ -3650,7 +4796,7 @@ Game_Party.prototype.gainItem = function(item, amount, includeEquip) {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameSystem_onBattleStart = Game_System.prototype.onBattleStart;
 Game_System.prototype.onBattleStart = function() {
-    alias_CGMZ_Achievements_GameSystem_onBattleStart.call(this);
+	alias_CGMZ_Achievements_GameSystem_onBattleStart.call(this);
 	$cgmz.checkAchievementBattlesCriteria();
 };
 //-----------------------------------------------------------------------------
@@ -3658,7 +4804,7 @@ Game_System.prototype.onBattleStart = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameSystem_onBattleWin = Game_System.prototype.onBattleWin;
 Game_System.prototype.onBattleWin = function() {
-    alias_CGMZ_Achievements_GameSystem_onBattleWin.call(this);
+	alias_CGMZ_Achievements_GameSystem_onBattleWin.call(this);
 	$cgmz.checkAchievementWinsCriteria();
 };
 //-----------------------------------------------------------------------------
@@ -3667,7 +4813,7 @@ Game_System.prototype.onBattleWin = function() {
 const alias_CGMZ_Achievements_GameSystem_onBattleEscape = Game_System.prototype.onBattleEscape;
 Game_System.prototype.onBattleEscape = function() {
 	alias_CGMZ_Achievements_GameSystem_onBattleEscape.call(this);
-    $cgmz.checkAchievementEscapesCriteria();
+	$cgmz.checkAchievementEscapesCriteria();
 };
 //-----------------------------------------------------------------------------
 // Alias: Check achievements that have saves criteria
@@ -3675,7 +4821,7 @@ Game_System.prototype.onBattleEscape = function() {
 const alias_CGMZ_Achievements_GameSystem_onBeforeSave = Game_System.prototype.onBeforeSave;
 Game_System.prototype.onBeforeSave = function() {
 	alias_CGMZ_Achievements_GameSystem_onBeforeSave.call(this);
-    $cgmz.checkAchievementSavesCriteria();
+	$cgmz.checkAchievementSavesCriteria();
 };
 //=============================================================================
 // Scene_Map
@@ -3701,7 +4847,7 @@ Scene_Map.prototype.update = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameSwitches_onChange = Game_Switches.prototype.onChange;
 Game_Switches.prototype.onChange = function() {
-    alias_CGMZ_Achievements_GameSwitches_onChange.call(this);
+	alias_CGMZ_Achievements_GameSwitches_onChange.call(this);
 	$cgmz.checkAchievementSwitchesCriteria();
 };
 //=============================================================================
@@ -3714,6 +4860,6 @@ Game_Switches.prototype.onChange = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Achievements_GameVariables_onChange = Game_Variables.prototype.onChange;
 Game_Variables.prototype.onChange = function() {
-    alias_CGMZ_Achievements_GameVariables_onChange.call(this);
+	alias_CGMZ_Achievements_GameVariables_onChange.call(this);
 	$cgmz.checkAchievementVariablesCriteria();
 };

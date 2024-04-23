@@ -13,10 +13,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.2.1
+ * Version: 1.3.0
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.7.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: Use this plugin to easily manage the command window in the
  * menu scene. It allows you to re-arrange commands or use JavaScript to 
@@ -60,28 +60,44 @@
  * hide/show the option.
  *
  * Item command:
- * {"Command Name":"Item","Command Symbol":"item","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Item","Icon":"0","Command Symbol":"item","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Skill command:
- * {"Command Name":"Skill","Command Symbol":"skill","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Skill","Icon":"0","Command Symbol":"skill","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Equip command:
- * {"Command Name":"Equip","Command Symbol":"equip","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Equip","Icon":"0","Command Symbol":"equip","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Status command:
- * {"Command Name":"Status","Command Symbol":"status","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Status","Icon":"0","Command Symbol":"status","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Formation command:
- * {"Command Name":"Formation","Command Symbol":"formation","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Formation","Icon":"0","Command Symbol":"formation","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Options command:
- * {"Command Name":"Options","Command Symbol":"options","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Options","Icon":"0","Command Symbol":"options","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Save command:
- * {"Command Name":"Save","Command Symbol":"save","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Save","Icon":"0","Command Symbol":"save","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Game End command:
- * {"Command Name":"Game End","Command Symbol":"gameEnd","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Game End","Icon":"0","Command Symbol":"gameEnd","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
+ * --------------------------Subcategories-------------------------------------
+ * Subcategories work by assigning a subcategory to a command. You can have
+ * as many commands in one subcategory as you want. These commands will only
+ * display when that subcategory is active, assuming they meet other display
+ * criteria such as the Show Switch.
+ *
+ * To have a command that activates that subcategory, use the following code
+ * in the JS Command parameter:
+ * this.CGMZ_pushCategory("mySubcategory");
+ *
+ * For example, if you had a subcategory named Collectibles, to show the
+ * commands associated with that subcategory you would make a command with a
+ * JS Command parameter set to:
+ * this.CGMZ_pushCategory("Collectibles");
+ *
+ * By default, commands with no subcategory will display in the menu.
  * -------------------------Plugin Commands------------------------------------
  * This plugin does not have any plugin commands.
  * ---------------------------Saved Games--------------------------------------
@@ -93,25 +109,37 @@
  * behaving incorrectly and your game will probably crash. Please do not
  * rename the js file.
  * -------------------------Version History------------------------------------
- * 1.0.0 - Initial release
- *
- * 1.0.1:
+ * Version 1.0.1
  * - Added ability to choose alignment of command text
  *
- * 1.1.0:
+ * Version 1.1.0
  * - Added option to use text codes in commands
  *
- * 1.2.0:
+ * Version 1.2.0
  * - Added option to disable commands if party doesn't have item
  *
- * 1.2.1:
+ * Version 1.2.1
  * - Added Spanish language help documentation
  * - This plugin now warns instead of crashes when detecting invalid JSON
+ *
+ * Version 1.3.0
+ * - Added option to have subcategories with their own list of commands
+ * - Added commands that can require actor selection first
+ * - Added separate Icon property to commands which can be aligned separately
+ * - Added background image option to commands
+ * - Removed option to disable text codes
+ * - This plugin will now attempt to make a command symbol for you if blank
  *
  * @param Commands
  * @type struct<Handler>[]
  * @desc Command Name and associated js commands
  * @default []
+ *
+ * @param Command Padding
+ * @type number
+ * @default 8
+ * @min 0
+ * @desc The amount of padding inside the command rect
  *
  * @param Alignment
  * @type select
@@ -121,23 +149,33 @@
  * @default center
  * @desc The alignment of the command text in the window
  *
+ * @param Icon Alignment
+ * @type select
+ * @option left
+ * @option right
+ * @default left
+ * @desc The alignment of the icons for commands in the window
+ *
  * @param Keep Original Commands
  * @type boolean
  * @default true
  * @desc Determine whether to show the original commands in their original order.
  *
- * @param Enable Text Codes
+ * @param Report Command Size
  * @type boolean
- * @default true
- * @desc Allow the use of text codes (such as colors) ?
+ * @default false
+ * @desc In playtest, print command rect dimensions to console to get background image dimensions?
 */
 /*~struct~Handler:
  * @param Command Name
- * @type text
  * @desc Name of the command to display in the command window.
  *
+ * @param Icon
+ * @type icon
+ * @default 0
+ * @desc An icon to show for the command, if 0 will not show any icon
+ *
  * @param Command Symbol
- * @type text
  * @desc This symbol is used internally to recognize the command.
  * Special meaning for original commands (see documentation).
  *
@@ -156,10 +194,35 @@
  * @default 0
  * @desc Turning this switch on will show the command.
  *
+ * @param Subcategory
+ * @desc The subcategory that needs to be active to show the command
+ *
  * @param Required Item
  * @type item
  * @default 0
  * @desc Item that must be in the inventory
+ *
+ * @param Actor Select
+ * @type boolean
+ * @default false
+ * @desc Set true if the command first requires the player to select an actor
+ *
+ * @param Background Image
+ * @type file
+ * @dir img
+ * @desc A background image to use for the command. Blank = default black rectangle
+ *
+ * @param Background Image X
+ * @type number
+ * @default 0
+ * @min 0
+ * @desc The x coordinate to start the background image from the source image (upper left corner)
+ *
+ * @param Background Image Y
+ * @type number
+ * @default 0
+ * @min 0
+ * @desc The y coordinate to start the background image from the source image (upper left corner)
 */
 /*:es
  * @author Casper Gaming
@@ -178,10 +241,10 @@
  * alfa, ademas de otras cosas geniales!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Versión: 1.2.1
+ * Versión: 1.3.0
  * ----------------------------------------------------------------------------
  * Compatibilidad: Sólo probado con mis CGMZ plugins.
- * Hecho para RPG Maker MZ 1.7.0
+ * Hecho para RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Descripción: Usa este complemento para administrar fácilmente la ventana de 
  * comandos en la escena del menú. Le permite reorganizar los comandos o usar 
@@ -227,28 +290,44 @@
  * interruptores para habilitar/deshabilitar y ocultar/mostrar la opción.
  *
  * Comando de artículo:
- * {"Command Name":"Item","Command Symbol":"item","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Item","Icon":"0","Command Symbol":"item","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando de habilidad:
- * {"Command Name":"Skill","Command Symbol":"skill","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Skill","Icon":"0","Command Symbol":"skill","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando Equipar:
- * {"Command Name":"Equip","Command Symbol":"equip","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Equip","Icon":"0","Command Symbol":"equip","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando de Estado:
- * {"Command Name":"Status","Command Symbol":"status","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Status","Icon":"0","Command Symbol":"status","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando de formación:
- * {"Command Name":"Formation","Command Symbol":"formation","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Formation","Icon":"0","Command Symbol":"formation","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando de opciones:
- * {"Command Name":"Options","Command Symbol":"options","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Options","Icon":"0","Command Symbol":"options","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Guardar comando:
- * {"Command Name":"Save","Command Symbol":"save","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Save","Icon":"0","Command Symbol":"save","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
  *
  * Comando Fin del juego:
- * {"Command Name":"Game End","Command Symbol":"gameEnd","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Required Item":"0"}
+ * {"Command Name":"Game End","Icon":"0","Command Symbol":"gameEnd","JS Command":"\"\"","Enable Switch":"0","Show Switch":"0","Subcategory":"","Required Item":"0","Actor Select":"false","Background Image":"","Background Image X":"0","Background Image Y":"0"}
+ * --------------------------Subcategories-------------------------------------
+ * Subcategories work by assigning a subcategory to a command. You can have
+ * as many commands in one subcategory as you want. These commands will only
+ * display when that subcategory is active, assuming they meet other display
+ * criteria such as the Show Switch.
+ *
+ * To have a command that activates that subcategory, use the following code
+ * in the JS Command parameter:
+ * this.CGMZ_pushCategory("mySubcategory");
+ *
+ * For example, if you had a subcategory named Collectibles, to show the
+ * commands associated with that subcategory you would make a command with a
+ * JS Command parameter set to:
+ * this.CGMZ_pushCategory("Collectibles");
+ *
+ * By default, commands with no subcategory will display in the menu.
  * ----------------------- Comandos de Plugin----------------------------------
  * Este plugin no tiene ningún comando de plugin.
  * --------------------------Juegos guardados----------------------------------
@@ -261,26 +340,38 @@
  * incorrectamente y tu juego probablemente fallará. No cambies el nombre del
  * archivo js.
  * -------------------------Historial de Versiones-----------------------------
- * 1.0.0 - Versión Inicial
- *
- * 1.0.1:
+ * Versión 1.0.1:
  * - Se agregó la capacidad de elegir la alineación del texto del comando.
  *
- * 1.1.0:
+ * Versión 1.1.0
  * - Opción agregada para usar códigos de texto en los comandos.
  *
- * 1.2.0:
+ * Versión 1.2.0
  * - Opción agregada para deshabilitar comandos si el grupo no tiene un elemento
  *
- * 1.2.1:
+ * Versión 1.2.1
  * - Added Spanish language help documentation
  * - This plugin now warns instead of crashes when detecting invalid JSON
+ *
+ * Versión 1.3.0
+ * - Added option to have subcategories with their own list of commands
+ * - Added commands that can require actor selection first
+ * - Added separate Icon property to commands which can be aligned separately
+ * - Added background image option to commands
+ * - Removed option to disable text codes
+ * - This plugin will now attempt to make a command symbol for you if blank
  *
  * @param Commands
  * @text Comandos
  * @type struct<Handler>[]
  * @desc Nombre del comando y comandos js asociados.
  * @default []
+ *
+ * @param Command Padding
+ * @type number
+ * @default 8
+ * @min 0
+ * @desc The amount of padding inside the command rect
  *
  * @param Alignment
  * @text Alineación
@@ -291,27 +382,37 @@
  * @default center
  * @desc La alineación del texto del comando en la ventana.
  *
+ * @param Icon Alignment
+ * @text Alineación de icono
+ * @type select
+ * @option left
+ * @option right
+ * @default left
+ * @desc La alineación del icono del comando en la ventana.
+ *
  * @param Keep Original Commands
  * @text Mantener los comandos originales
  * @type boolean
  * @default true
  * @desc Determina si desea mostrar los comandos originales en su orden original.
  *
- * @param Enable Text Codes
- * @text Habilitar códigos de texto
+ * @param Report Command Size
  * @type boolean
- * @default true
- * @desc ¿Permitir el uso de códigos de texto (como colores)?
+ * @default false
+ * @desc In playtest, print command rect dimensions to console to get background image dimensions?
 */
 /*~struct~Handler:es
  * @param Command Name
  * @text Nombre de Comando
- * @type text
  * @desc Nombre del comando que se mostrará en la ventana de comandos.
+ *
+ * @param Icon
+ * @type icon
+ * @default 0
+ * @desc An icon to show for the command, if 0 will not show any icon
  *
  * @param Command Symbol
  * @text Símbolo de Comando
- * @type text
  * @desc Este símbolo se usa internamente para reconocer el comando.
  * Special meaning for original commands (see documentation).
  *
@@ -320,6 +421,9 @@
  * @type note
  * @desc JavaScript para ejecutar cuando se selecciona el comando.
  * @default ""
+ *
+ * @param Subcategory
+ * @desc The subcategory that needs to be active to show the command
  *
  * @param Enable Switch
  * @text Habilitar interruptor
@@ -338,22 +442,57 @@
  * @type item
  * @default 0
  * @desc Artículo que debe estar en el inventario.
+ *
+ * @param Actor Select
+ * @type boolean
+ * @default false
+ * @desc Set true if the command first requires the player to select an actor
+ *
+ * @param Background Image
+ * @type file
+ * @dir img
+ * @desc A background image to use for the command. Blank = default black rectangle
+ *
+ * @param Background Image X
+ * @type number
+ * @default 0
+ * @min 0
+ * @desc The x coordinate to start the background image from the source image (upper left corner)
+ *
+ * @param Background Image Y
+ * @type number
+ * @default 0
+ * @min 0
+ * @desc The y coordinate to start the background image from the source image (upper left corner)
 */
 Imported.CGMZ_Menu_CommandWindow = true;
-CGMZ.Versions["Menu Command Window"] = "1.2.1";
+CGMZ.Versions["Menu Command Window"] = "1.3.0";
 CGMZ.Menu_CommandWindow = {};
 CGMZ.Menu_CommandWindow.parameters = PluginManager.parameters('CGMZ_MenuCommandWindow');
 CGMZ.Menu_CommandWindow.Alignment = CGMZ.Menu_CommandWindow.parameters["Alignment"];
+CGMZ.Menu_CommandWindow.IconAlignment = CGMZ.Menu_CommandWindow.parameters["Icon Alignment"];
+CGMZ.Menu_CommandWindow.CommandPadding = Number(CGMZ.Menu_CommandWindow.parameters["Command Padding"]);
 CGMZ.Menu_CommandWindow.KeepOriginals = (CGMZ.Menu_CommandWindow.parameters["Keep Original Commands"] === "true");
-CGMZ.Menu_CommandWindow.EnableTextCodes = (CGMZ.Menu_CommandWindow.parameters["Enable Text Codes"] === "true");
+CGMZ.Menu_CommandWindow.ReportCommandSize = (CGMZ.Menu_CommandWindow.parameters["Report Command Size"] === "true");
 CGMZ.Menu_CommandWindow.CommandsArray = CGMZ_Utils.parseJSON(CGMZ.Menu_CommandWindow.parameters["Commands"], [], "CGMZ Menu Command Window", "Your Commands parameter had invalid JSON and could not be read");
 CGMZ.Menu_CommandWindow.Commands = [];
 for(const commandJSON of CGMZ.Menu_CommandWindow.CommandsArray) {
 	const command = CGMZ_Utils.parseJSON(commandJSON, null, "CGMZ Menu Command Window", "One of your commands had invalid JSON and could not be parsed");
 	if(!command) continue;
-	command["Enable Switch"] = Number(command["Enable Switch"]);
-	command["Show Switch"] = Number(command["Show Switch"]);
-	CGMZ.Menu_CommandWindow.Commands.push(command);
+	const cmd = {};
+	cmd.enableSwitch = Number(command["Enable Switch"]);
+	cmd.showSwitch = Number(command["Show Switch"]);
+	cmd.reqItem = Number(command["Required Item"]);
+	cmd.icon = Number(command.Icon);
+	cmd.backImgX = command["Background Image X"];
+	cmd.backImgY = command["Background Image Y"];
+	cmd.actorSelect = (command["Actor Select"] === 'true');
+	cmd.symbol = command["Command Symbol"] || Math.random().toString(36);
+	cmd.name = command["Command Name"];
+	cmd.subcategory = command.Subcategory;
+	cmd.js = command["JS Command"];
+	cmd.backgroundImage = command["Background Image"];
+	CGMZ.Menu_CommandWindow.Commands.push(cmd);
 }
 //=============================================================================
 // Scene Menu
@@ -364,30 +503,58 @@ for(const commandJSON of CGMZ.Menu_CommandWindow.CommandsArray) {
 // Handling for custom Commands added through the plugin
 //-----------------------------------------------------------------------------
 Scene_Menu.prototype.CGMZ_MenuCommand_commandCustom = function() {
-	for(let i = 0; i < CGMZ.Menu_CommandWindow.Commands.length; i++) {
-		if(this._commandWindow.currentSymbol() === CGMZ.Menu_CommandWindow.Commands[i]["Command Symbol"]) {
+	for(const cmd of CGMZ.Menu_CommandWindow.Commands) {
+		if(this._commandWindow.currentSymbol() === cmd.symbol) {
 			try {
-				eval(JSON.parse(CGMZ.Menu_CommandWindow.Commands[i]["JS Command"]));
+				eval(JSON.parse(cmd.js));
 			}
 			catch (e) {
 				const origin = "CGMZ Menu Command Window";
 				const suggestion = "Check your JavaScript command";
 				$cgmzTemp.reportError(e.message, origin, suggestion);
 			}
+			break;
 		}
 	}
 };
 //-----------------------------------------------------------------------------
-// Alias. Add additional commands.
+// Add additional commands.
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_createCommandWindow = Scene_Menu.prototype.createCommandWindow;
 Scene_Menu.prototype.createCommandWindow = function() {
 	alias_CGMZ_MenuCommandWindow_createCommandWindow.call(this);
-	for(let i = 0; i < CGMZ.Menu_CommandWindow.Commands.length; i++) {
-		if(this.CGMZ_MenuCommandWindow_isCustomCommand(CGMZ.Menu_CommandWindow.Commands[i]["Command Symbol"])) {
-			this._commandWindow.setHandler(CGMZ.Menu_CommandWindow.Commands[i]["Command Symbol"], this.CGMZ_MenuCommand_commandCustom.bind(this));
+	this._commandWindow.setHandler('cancel', this.CGMZ_popCommandCategory.bind(this));
+	for(const cmd of CGMZ.Menu_CommandWindow.Commands) {
+		if(this.CGMZ_MenuCommandWindow_isCustomCommand(cmd.symbol)) {
+			if(cmd.actorSelect) {
+				this._commandWindow.setHandler(cmd.symbol, this.commandPersonal.bind(this));
+			} else {
+				this._commandWindow.setHandler(cmd.symbol, this.CGMZ_MenuCommand_commandCustom.bind(this));
+			}
 		}
 	}
+};
+//-----------------------------------------------------------------------------
+// Handling for cancel - first try to pop command window category
+//-----------------------------------------------------------------------------
+Scene_Menu.prototype.CGMZ_popCommandCategory = function() {
+	if(!this._commandWindow.CGMZ_popCategory()) this.popScene();
+};
+//-----------------------------------------------------------------------------
+// Method to push a new category to the menu command window
+//-----------------------------------------------------------------------------
+Scene_Menu.prototype.CGMZ_pushCategory = function(category) {
+	this._commandWindow.CGMZ_pushCategory(category);
+};
+//-----------------------------------------------------------------------------
+// Handling for custom commands after actor select
+//-----------------------------------------------------------------------------
+const alias_CGMZ_MenuCommandWindow_onPersonalOk = Scene_Menu.prototype.onPersonalOk;
+Scene_Menu.prototype.onPersonalOk = function() {
+	alias_CGMZ_MenuCommandWindow_onPersonalOk.call(this);
+	const defaultPersonalCommands = ['skill','equip','status'];
+	if(defaultPersonalCommands.includes(this._commandWindow.currentSymbol())) return;
+    this.CGMZ_MenuCommand_commandCustom();
 };
 //-----------------------------------------------------------------------------
 // Determine if command is a custom command in need of custom handler
@@ -404,8 +571,53 @@ Scene_Menu.prototype.CGMZ_MenuCommandWindow_isCustomCommand = function(symbol) {
 //-----------------------------------------------------------------------------
 // Change amount of commands displayed at once and add new original commands
 //=============================================================================
+Window_MenuCommand.CGMZ_lastSubcategory = [""];
+Window_MenuCommand.CGMZ_lastSubcategorySymbol = [];
 //-----------------------------------------------------------------------------
-// Alias. Add original commands.
+// Initialize window
+//-----------------------------------------------------------------------------
+const alias_CGMZ_MenuCommandWindow_initialize = Window_MenuCommand.prototype.initialize;
+Window_MenuCommand.prototype.initialize = function(rect) {
+    alias_CGMZ_MenuCommandWindow_initialize.call(this, rect);
+	this._CGMZ_category = Window_MenuCommand.CGMZ_lastSubcategory[Window_MenuCommand.CGMZ_lastSubcategory.length - 1];
+	if($gameTemp.isPlaytest() && CGMZ.Menu_CommandWindow.ReportCommandSize) {
+		const rect = this.itemRect(0);
+		console.group("Menu Command Rect Dimensions");
+		console.info(`Width: ${rect.width}`);
+		console.info(`Height: ${rect.height}`);
+		console.groupEnd("Menu Command Rect Dimensions");
+	}
+};
+//-----------------------------------------------------------------------------
+// Push a new category
+//-----------------------------------------------------------------------------
+Window_MenuCommand.prototype.CGMZ_pushCategory = function(newCategory) {
+    if(typeof newCategory !== "string") {
+		CGMZ_Utils.reportError("Category not of type string", "CGMZ Menu Command Window", "Your JS command for a new category must include quotes around the subcategory name");
+		this.activate();
+		return;
+	}
+	Window_MenuCommand.CGMZ_lastSubcategorySymbol.push(this.currentSymbol());
+	Window_MenuCommand.CGMZ_lastSubcategory.push(newCategory);
+	this.refresh();
+	this.smoothSelect(0);
+	this.activate();
+};
+//-----------------------------------------------------------------------------
+// Pop a category. Returns true if could pop, false if could not pop
+//-----------------------------------------------------------------------------
+Window_MenuCommand.prototype.CGMZ_popCategory = function() {
+    if(Window_MenuCommand.CGMZ_lastSubcategory.length <= 1) return false;
+	Window_MenuCommand.CGMZ_lastSubcategory.pop();
+	this.refresh();
+	const lastSymbol = (Window_MenuCommand.CGMZ_lastSubcategorySymbol.length > 0) ? Window_MenuCommand.CGMZ_lastSubcategorySymbol.pop() : "";
+	const symbolIndex = this.findSymbol(lastSymbol);
+	this.smoothSelect((symbolIndex >= 0) ? symbolIndex : 0);
+	this.activate();
+	return true;
+};
+//-----------------------------------------------------------------------------
+// Add original commands.
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_addOriginalCommands = Window_MenuCommand.prototype.addOriginalCommands;
 Window_MenuCommand.prototype.addOriginalCommands = function() {
@@ -413,7 +625,7 @@ Window_MenuCommand.prototype.addOriginalCommands = function() {
 	for(const cmd of CGMZ.Menu_CommandWindow.Commands) {
 		if(this.CGMZ_MenuCommandWindow_needsCommand(cmd)) {
 			const enabled = this.CGMZ_MenuCommandWindow_getEnabledStatus(cmd);
-			this.addCommand(cmd["Command Name"], cmd["Command Symbol"], enabled);
+			this.addCommand(cmd.name, cmd.symbol, enabled, {icon: cmd.icon, img: cmd.backgroundImage, imgX: cmd.backImgX, imgY: cmd.backImgY});
 		}
 	}
 };
@@ -421,20 +633,19 @@ Window_MenuCommand.prototype.addOriginalCommands = function() {
 // Determine if Command should show
 //-----------------------------------------------------------------------------
 Window_MenuCommand.prototype.CGMZ_MenuCommandWindow_needsCommand = function(cmd) {
-	if(cmd["Show Switch"] > 0 && !$gameSwitches.value(cmd["Show Switch"])) {
-		return false;
-	}
-	return this.needsCommand(cmd["Command Symbol"]);
+	if(cmd.showSwitch > 0 && !$gameSwitches.value(cmd.showSwitch)) return false;
+	if(cmd.subcategory !== Window_MenuCommand.CGMZ_lastSubcategory[Window_MenuCommand.CGMZ_lastSubcategory.length - 1]) return false;
+	return this.needsCommand(cmd.symbol);
 };
 //-----------------------------------------------------------------------------
 // Determine if Command should show
 //-----------------------------------------------------------------------------
 Window_MenuCommand.prototype.CGMZ_MenuCommandWindow_getEnabledStatus = function(cmd) {
-	const switchId = Number(cmd["Enable Switch"]);
+	const switchId = cmd.enableSwitch;
 	if(switchId > 0 && !$gameSwitches.value(switchId)) return false;
-	const itemId = Number(cmd["Required Item"]);
+	const itemId = cmd.reqItem;
 	if(itemId > 0 && !$gameParty.hasItem($dataItems[itemId], false)) return false;
-	switch(cmd["Command Symbol"]) {
+	switch(cmd.symbol) {
 		case 'item':
 		case 'skill':
 		case 'equip':
@@ -456,7 +667,7 @@ Window_MenuCommand.prototype.CGMZ_MenuCommandWindow_getEnabledStatus = function(
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_addMainCommands = Window_MenuCommand.prototype.addMainCommands;
 Window_MenuCommand.prototype.addMainCommands = function() {
-    if(CGMZ.Menu_CommandWindow.KeepOriginals) {
+	if(CGMZ.Menu_CommandWindow.KeepOriginals) {
 		alias_CGMZ_MenuCommandWindow_addMainCommands.call(this);
 	}
 };
@@ -465,7 +676,7 @@ Window_MenuCommand.prototype.addMainCommands = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_addFormationCommand = Window_MenuCommand.prototype.addFormationCommand;
 Window_MenuCommand.prototype.addFormationCommand = function() {
-    if(CGMZ.Menu_CommandWindow.KeepOriginals) {
+	if(CGMZ.Menu_CommandWindow.KeepOriginals) {
 		alias_CGMZ_MenuCommandWindow_addFormationCommand.call(this);
 	}
 };
@@ -474,7 +685,7 @@ Window_MenuCommand.prototype.addFormationCommand = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_addOptionsCommand = Window_MenuCommand.prototype.addOptionsCommand;
 Window_MenuCommand.prototype.addOptionsCommand = function() {
-    if(CGMZ.Menu_CommandWindow.KeepOriginals) {
+	if(CGMZ.Menu_CommandWindow.KeepOriginals) {
 		alias_CGMZ_MenuCommandWindow_addOptionsCommand.call(this);
 	}
 };
@@ -483,7 +694,7 @@ Window_MenuCommand.prototype.addOptionsCommand = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_MenuCommandWindow_addSaveCommand = Window_MenuCommand.prototype.addSaveCommand;
 Window_MenuCommand.prototype.addSaveCommand = function() {
-    if(CGMZ.Menu_CommandWindow.KeepOriginals) {
+	if(CGMZ.Menu_CommandWindow.KeepOriginals) {
 		alias_CGMZ_MenuCommandWindow_addSaveCommand.call(this);
 	}
 };
@@ -500,19 +711,64 @@ Window_MenuCommand.prototype.addGameEndCommand = function() {
 // Change alignment of command text
 //-----------------------------------------------------------------------------
 Window_MenuCommand.prototype.itemTextAlign = function() {
-    return CGMZ.Menu_CommandWindow.Alignment;
+	return CGMZ.Menu_CommandWindow.Alignment;
+};
+//-----------------------------------------------------------------------------
+// Change padding of the command rect
+//-----------------------------------------------------------------------------
+Window_MenuCommand.prototype.itemPadding = function() {
+    return CGMZ.Menu_CommandWindow.CommandPadding;
+};
+//-----------------------------------------------------------------------------
+// Get the command icon
+//-----------------------------------------------------------------------------
+Window_MenuCommand.prototype.CGMZ_icon = function(index) {
+	return this._list[index].ext?.icon;
 };
 //-----------------------------------------------------------------------------
 // Allow use of text codes in command
 //-----------------------------------------------------------------------------
 Window_MenuCommand.prototype.drawItem = function(index) {
-	if(CGMZ.Menu_CommandWindow.EnableTextCodes) {
-		const rect = this.itemLineRect(index);
-		const align = this.itemTextAlign();
-		this.resetTextColor();
-		this.changePaintOpacity(this.isCommandEnabled(index));
-		this.CGMZ_drawTextLine(this.commandName(index), rect.x, rect.y, rect.width, align);
-	} else {
-		Window_Command.prototype.drawItem.call(this, index);
+	const rect = this.itemLineRect(index);
+	const align = this.itemTextAlign();
+	const icon = this.CGMZ_icon(index);
+	this.resetTextColor();
+	this.changePaintOpacity(this.isCommandEnabled(index));
+	if(icon) {
+		const iconX = (CGMZ.Menu_CommandWindow.IconAlignment === 'left') ? rect.x : rect.x + rect.width - ImageManager.iconWidth;
+		this.drawIcon(this.CGMZ_icon(index), iconX, rect.y + 2);
+		rect.x += ImageManager.iconWidth * (CGMZ.Menu_CommandWindow.IconAlignment === 'left');
+		rect.width -= ImageManager.iconWidth;
 	}
+	this.CGMZ_drawTextLine(this.commandName(index), rect.x, rect.y, rect.width, align);
+};
+//-----------------------------------------------------------------------------
+// Check if command has a background image to show
+//-----------------------------------------------------------------------------
+const alias_CGMZ_MenuCommandWindow_drawItemBackground = Window_MenuCommand.prototype.drawItemBackground;
+Window_MenuCommand.prototype.drawItemBackground = function(index) {
+	const path = this._list[index].ext?.img;
+	if(path) {
+		const opts = {x: this._list[index].ext?.imgX || 0, y: this._list[index].ext?.imgY || 0};
+		const rect = this.itemRect(index);
+		const imgData = CGMZ_Utils.getImageData(path, "img");
+		const bitmap = ImageManager.loadBitmap(imgData.folder, imgData.filename);
+		bitmap.addLoadListener(this.CGMZ_bltCommandBackground.bind(this, bitmap, rect, opts));
+	} else {
+		alias_CGMZ_MenuCommandWindow_drawItemBackground.call(this, index);
+	}
+};
+//-----------------------------------------------------------------------------
+// Draw command background image
+//-----------------------------------------------------------------------------
+Window_MenuCommand.prototype.CGMZ_bltCommandBackground = function(bitmap, rect, opts) {
+	const sw = rect.width;
+    const sh = rect.height;
+    const sx = opts.x;
+	const sy = opts.y;
+	const dw = rect.width;
+	const dh = rect.height;
+	const dx = rect.x;
+	const dy = rect.y;
+    this.contentsBack.blt(bitmap, sx, sy, sw, sh, dx, dy, dw, dh);
 };

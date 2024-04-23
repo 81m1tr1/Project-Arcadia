@@ -13,69 +13,121 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.2.0
+ * Version: 1.3.0
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.2.1
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: Adds some plugin commands that are meant to make some things
  * with the default editor easier, such as turning a switch on/off if an event
  * is within certain xy coordinates or controlling self switches for any event
  * ----------------------------------------------------------------------------
  * Documentation:
- * This plugin supports the following plugin commands:
- * Control Switch Random: This command will set the provided switch to either
- *                        ON or OFF randomly.
- * Control Switch Region ID: This command will set the provided switch to ON
- *                           or OFF if the given event is in the given region
- * Control Switch Terrain Tag: This command will set the provided switch to ON
- *                             or OFF if the given event is in the given
- *                             terrain tag
- * Control Switch Coordinates: This command will set the provided switch to ON
- *                             or OFF if the given event is in the given x, y
- *                             coordinates
- * Control Switch Save Access: This command will set the provided switch to ON
- *                             or OFF if the player has save access
- * Control Switch Menu Access: This command will set the provided switch to ON
- *                             or OFF if the player has menu access
- * Control Switch Formation Access: This command will set the provided switch
- *                                  to ON or OFF if the player has formation
- *                                  access
- * Control Switch Encounters: This command will set the provided switch to ON
- *                            or OFF if encounters are enabled
- * Control Switch Self Switch: This command will set the provided switch to ON
- *                             or OFF if the given self switch is ON or OFF
- * Control Self Switch: This command will set the provided self switch to ON
- *                      or OFF
- * Control Timer Add: This command will add the given amount of seconds to the 
- *                    timer
- * Control Timer Subtract: This command will subtract the given amount of
- *                         seconds to the timer
- * Call Scene: This command will call the provided scene
- * Request Autosave: This command will request an autosave (does not guarantee
- *                   the save succeeds)
- * Control Variable String: This command will set the provided variable to the
- *                          provided text
- * Control Variable Float: This command will set the provided variable to the
- *                         provided float number
- * Conditional Branch Variable: This command will check a variable against a
- *                              provided constant
- * Select Weapon: Like the select item event command, but for weapons.
- * Select Armor: Like the select item event command, but for armors.
- * Select Skill: Like the select item event command, but for skills.
+ * -------------------------Plugin Commands------------------------------------
+ * • Control Switch Random
+ * This command will set the provided switch to either ON or OFF randomly.
  *
- * Version History:
- * 1.0.0 - Initial release
+ * • Control Switch Region ID
+ * This command will set the provided switch to ON or OFF if the given event
+ * is in the given region
+ * 
+ * • Control Switch Terrain Tag
+ * This command will set the provided switch to ON or OFF if the given event
+ * is in the given terrain tag
+ * 
+ * • Control Switch Coordinates
+ * This command will set the provided switch to ON or OFF if the given event
+ * is in the given x, y coordinates
+ * 
+ * • Control Switch Save Access
+ * This command will set the provided switch to ON or OFF if the player has
+ * save access
+ * 
+ * • Control Switch Menu Access
+ * This command will set the provided switch to ON or OFF if the player has
+ * menu access
+ * 
+ * • Control Switch Formation Access
+ * This command will set the provided switch to ON or OFF if the player has
+ * formation access
+ * 
+ * • Control Switch Encounters
+ * This command will set the provided switch to ON or OFF if encounters are
+ * enabled
+ * 
+ * • Control Switch Self Switch
+ * This command will set the provided switch to ON or OFF if the given self
+ * switch is ON or OFF
+ * 
+ * • Control Self Switch
+ * This command will set the provided self switch to ON or OFF
+ * 
+ * • Control Timer Add
+ * This command will add the given amount of seconds to the timer
+ * 
+ * • Control Timer Subtract
+ * This command will subtract the given amount of seconds to the timer
+ * 
+ * • Call Scene
+ * This command will call the provided scene
+ * 
+ * • Request Autosave
+ * This command will request an autosave (does not guarantee the save succeeds)
+ * 
+ * • Control Variable String
+ * This command will set the provided variable to the provided text
+ * 
+ * • Control Variable Float
+ * This command will set the provided variable to the provided float number
+ * 
+ * • Conditional Branch Variable
+ * This command will check a variable against a provided constant
+ * 
+ * • Select Weapon
+ * Like the select item event command, but for weapons.
+ * 
+ * • Select Armor
+ * Like the select item event command, but for armors.
+ * 
+ * • Select Skill
+ * Like the select item event command, but for skills.
+ * 
+ * • Stop All Sound
+ * Stops all currently playing BGM/BGS/SE/ME.
+ * 
+ * • Erase All Pictures
+ * Erases all currently shown pictures.
+ * 
+ * • Change Battle Lose
+ * Enable or disable gameover when random battle is lost
+ * ------------------------------Saved Games-----------------------------------
+ * This plugin is fully compatible with saved games. This means you can:
  *
- * 1.1.0:
+ * ✓ Add this plugin to a saved game and it will work as expected
+ * ✓ Change any plugin params and changes will be reflected in saved games
+ * ✓ Remove the plugin with no issue to save data
+ * -----------------------------Filename---------------------------------------
+ * The filename for this plugin MUST remain CGMZ_PluginCommands.js
+ * This is what it comes as when downloaded. The filename is used to load
+ * parameters and execute plugin commands. If you change it, things will begin
+ * behaving incorrectly and your game will probably crash. Please do not
+ * rename the js file.
+ * -------------------------Version History------------------------------------
+ * Version 1.1.0
  * - Added plugin command to set variable to text
  * - Added plugin command to set variable to float (decimal) number
  * - Added plugin command to check variable against text/decimals constants
  *
- * 1.2.0:
+ * Version 1.2.0
  * - Added plugin command to select weapons
  * - Added plugin command to select armors
  * - Added plugin command to select skills
+ *
+ * Version 1.3.0
+ * - Added plugin command to allow the player to lose battle without gameover
+ * - Added plugin command to stop all sound (BGM/BGS/ME/SE)
+ * - Added plugin command to erase all pictures
+ * - Added Spanish Language help documentation
  *
  * @command controlSwitchRandom
  * @text Control Switch: Random
@@ -395,12 +447,514 @@
  * @text Variable ID
  * @desc The variable ID to store the armor ID in
  * @default 1
+ *
+ * @command Stop All Sound
+ * @desc Stops all bgm/bgs/me/se in one command.
+ *
+ * @command Erase All Pictures
+ * @desc Erases all pictures being shown
+ *
+ * @command Change Battle Lose
+ * @desc Change if the player game overs if they lose in random battle
+ *
+ * @arg Allow Lose
+ * @type boolean
+ * @desc If true, the player will no longer game over if they lose a random battle
+ * @default true
 */
-var Imported = Imported || {};
+/*:es
+ * @author Casper Gaming
+ * @url https://www.caspergaming.com/plugins/cgmz/plugincommands/
+ * @target MZ
+ * @base CGMZ_Core
+ * @orderAfter CGMZ_Core
+ * @plugindesc Agrega comandos de plugin destinados a complementar los comandos de eventos
+ * @help
+ * ============================================================================
+ * Para términos y condiciones de uso de este pluging en tu juego, por favor
+ * visita:
+ * https://www.caspergaming.com/terms-of-use/
+ * ============================================================================
+ * ¡Conviértete en un Patrocinador para obtener acceso a los plugings beta y
+ * alfa, ademas de otras cosas geniales!
+ * https://www.patreon.com/CasperGamingRPGM
+ * ============================================================================
+ * Versión: 1.3.0
+ * ----------------------------------------------------------------------------
+ * Compatibilidad: Sólo probado con mis CGMZ plugins.
+ * Hecho para RPG Maker MZ 1.8.0
+ * ----------------------------------------------------------------------------
+ * Descripción: Agrega algunos comandos de complemento que están destinados a 
+ * facilitar algunas cosas con el editor predeterminado, como encender/apagar 
+ * un interruptor si un evento está dentro de ciertas coordenadas xy o
+ * controlar los interruptores automáticos para cualquier evento.
+ * ----------------------------------------------------------------------------
+ * Documentación:
+ * -----------------------Comandos de Plugin-----------------------------------
+ * • Interruptor de control aleatorio
+ * Este comando activará o desactivará aleatoriamente el interruptor
+ * proporcionado.
+ * 
+ * • ID de región del interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si el evento
+ * dado está en la región dada.
+ * 
+ * • Etiqueta de terreno del interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si el evento
+ * dado está en la etiqueta de terreno dada.
+ * 
+ * • Coordenadas del interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si el evento
+ * dado está en las coordenadas x, y dadas
+ * 
+ * • Botón de control para guardar acceso
+ * Este comando activará o desactivará el interruptor proporcionado si el
+ * jugador tiene acceso para guardar.
+ * 
+ * • Acceso al menú del interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si el jugador
+ * tiene acceso al menú.
+ * 
+ * • Acceso a la formación del interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si el jugador
+ * tiene acceso a la formación.
+ * 
+ * • Encuentros de interruptor de control
+ * Este comando activará o desactivará el interruptor provisto si los
+ * encuentros están habilitados.
+ * 
+ * • Interruptor automático del interruptor de control
+ * Este comando activará o desactivará el interruptor proporcionado si el
+ * interruptor automático dado está activado o desactivado.
+ * 
+ * • Interruptor automático de control
+ * Este comando configurará el interruptor automático proporcionado en ON
+ * o OFF.
+ * 
+ * • Agregar temporizador de control
+ * Este comando agregará la cantidad dada de segundos al temporizador.
+ * 
+ * • Restar temporizador de control
+ * Este comando restará la cantidad dada de segundos al temporizador.
+ * 
+ * • Escena de llamada
+ * Este comando llamará a la escena proporcionada.
+ * 
+ * • Solicitar guardado automático
+ * Este comando solicitará un guardado automático (no garantiza que el
+ * guardado sea exitoso).
+ * 
+ * • Cadena de variable de control
+ * Este comando establecerá la variable proporcionada el texto proporcionado.
+ * 
+ * • Variable de control flotante
+ * Este comando establecerá la variable proporcionada en el número flotante
+ * proporcionado.
+ * 
+ * • Variable de rama condicional
+ * Este comando comparará una variable con una constante proporcionada.
+ * 
+ * • Seleccionar arma
+ * Como el comando de evento de selección de elemento, pero para armas.
+ * 
+ * • Seleccionar armadura
+ * Como el comando de evento de elemento seleccionado, pero para armaduras.
+ * 
+ * • Seleccionar habilidad
+ * Como el comando de evento de elemento seleccionado, pero para habilidades.
+ * 
+ * • Stop All Sound
+ * Stops all currently playing BGM/BGS/SE/ME.
+ * 
+ * • Erase All Pictures
+ * Erases all currently shown pictures.
+ * 
+ * • Change Battle Lose
+ * Enable or disable gameover when random battle is lost
+ * -------------------------Historial de versiones-----------------------------
+ * Versión 1.1.0:
+ * - Comando de complemento agregado para establecer variable en texto
+ * - Comando de complemento agregado para establecer la variable en número flotante (decimal)
+ * - Se agregó un comando de complemento para verificar la variable contra las constantes de texto/decimales
+ *
+ * Versión 1.2.0:
+ * - Comando de complemento agregado para seleccionar armas
+ * - Comando de complemento agregado para seleccionar armaduras
+ * - Comando de complemento agregado para seleccionar habilidades
+ *
+ * Versión 1.3.0
+ * - Added plugin command to allow the player to lose battle without gameover
+ * - Added plugin command to stop all sound (BGM/BGS/ME/SE)
+ * - Added plugin command to erase all pictures
+ * - Added Spanish Language help documentation
+ *
+ * @command controlSwitchRandom
+ * @text Interruptor de control: Aleatorio
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF aleatoriamente.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor se activará/desactivará aleatoriamente.
+ * @default 1
+ *
+ * @command controlSwitchRegion
+ * @text Interruptor de control: ID de región
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF en función de si el evento está en la región.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará.
+ * @default 1
+ *
+ * @arg regionId
+ * @type number
+ * @text ID de la región
+ * @desc El Id de region para verificar.
+ * @default 1
+ * @min 0
+ *
+ * @arg eventId
+ * @type number
+ * @text Id de evento
+ * @desc El evento a verificar. Valores especiales: -1 = jugador, 0 = este evento.
+ * @default -1
+ * @min -1
+ *
+ * @command controlSwitchTerrain
+ * @text Interruptor de control: etiqueta de terreno
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF en función de si el evento está en la etiqueta de terreno.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará.
+ * @default 1
+ *
+ * @arg tagId
+ * @type number
+ * @text ID de etiqueta de terreno
+ * @desc La etiqueta de terreno para verificar.
+ * @default 1
+ * @min 0
+ *
+ * @arg eventId
+ * @type number
+ * @text ID de Evento
+ * @desc El evento a verificar. Valores especiales: -1 = jugador, 0 = este evento.
+ * @default -1
+ * @min -1
+ *
+ * @command controlSwitchXy
+ * @text Interruptor de control: coordenadas
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF en función de si el evento está en las coordenadas x, y.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará.
+ * @default 1
+ *
+ * @arg x
+ * @type number
+ * @text Coordenada X
+ * @desc La coordenada X a verificar.
+ * @default 0
+ * @min 0
+ *
+ * @arg y
+ * @type number
+ * @text Coordenada Y
+ * @desc La coordenada Y para verificar.
+ * @default 0
+ * @min 0
+ *
+ * @arg eventId
+ * @type number
+ * @text ID de Evento
+ * @desc El evento a verificar. Valores especiales: -1 = jugador, 0 = este evento.
+ * @default -1
+ * @min -1
+ *
+ * @command controlSwitchMenu
+ * @text Interruptor de control: acceso al menú
+ * @desc Establece la ID del interruptor proporcionado en ON/OFF en función de si el jugador tiene acceso al menú.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará en función de si el jugador tiene acceso al menú.
+ * @default 1
+ *
+ * @command controlSwitchSave
+ * @text Interruptor de control: guardar acceso
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF en función de si el jugador tiene acceso a guardar.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará en función de si el jugador tiene acceso para guardar.
+ * @default 1
+ *
+ * @command controlSwitchFormation
+ * @text Interruptor de control: Acceso a la formación
+ * @desc Establece el ID de interruptor proporcionado en ON/OFF en función de si el jugador puede cambiar de formación.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará en función de si el jugador puede cambiar de formación.
+ * @default 1
+ *
+ * @command controlSwitchEncounters
+ * @text Interruptor de control: Encuentros
+ * @descEstablece el ID de interruptor proporcionado en ON/OFF en función de si los encuentros están habilitados/deshabilitados.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará en función de si los encuentros están activados/desactivados.
+ * @default 1
+ *
+ * @command controlSwitchSelfSwitch
+ * @text Interruptor de control: interruptor automático
+ * @desc Establece el interruptor proporcionado ON/OFF en función del valor de Self Switch (interruptor automatico) proporcionado.
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El ID del interruptor que se activará/desactivará en función del interruptor automático proporcionado.
+ * @default 1
+ *
+ * @arg switchName
+ * @type select
+ * @option A
+ * @option B
+ * @option C
+ * @option D
+ * @text Interruptor automático
+ * @desc El interruptor automático que se debe configurar en ON/OFF.
+ * @default A
+ *
+ * @arg mapId
+ * @type number
+ * @text ID de Map
+ * @desc El ID del mapa del evento.
+ * @default 1
+ * @min 1
+ *
+ * @arg eventId
+ * @type number
+ * @text ID de Evento
+ * @desc El evento con el interruptor automático.
+ * @default 1
+ * @min 1
+ *
+ * @command controlSelfSwitch
+ * @text Interruptor automático de control
+ * @desc Establece el interruptor automático provisto ON/OFF
+ *
+ * @arg switchName
+ * @type select
+ * @option A
+ * @option B
+ * @option C
+ * @option D
+ * @text Interruptor automático
+ * @desc El interruptor automático que se debe configurar en ON/OFF.
+ * @default A
+ *
+ * @arg value
+ * @type boolean
+ * @text Valor
+ * @desc Ya sea para activar o desactivar el interruptor automático.
+ * @default true
+ *
+ * @arg mapId
+ * @type number
+ * @text ID de Mapa
+ * @desc El ID del mapa del evento.
+ * @default 1
+ * @min 1
+ *
+ * @arg eventId
+ * @type number
+ * @text ID de Evento
+ * @desc El evento a verificar.
+ * @default 1
+ * @min 1
+ *
+ * @command controlTimerAdd
+ * @text Temporizador de control: agregar segundos
+ * @desc Agregar segundos al temporizador.
+ *
+ * @arg seconds
+ * @type number
+ * @text Segundos
+ * @desc Cantidad de segundos para agregar al temporizador.
+ * @default 1
+ * @min 0
+ *
+ * @command controlTimerSubtract
+ * @text Temporizador de control: restar segundos
+ * @desc Restar segundos del temporizador.
+ *
+ * @arg seconds
+ * @type number
+ * @text Segundos
+ * @desc Cantidad de segundos a restar del temporizador.
+ * @default 1
+ * @min 0
+ *
+ * @command callScene
+ * @text LLamar escena
+ * @desc Ir a una escena de juego específica.
+ *
+ * @arg scene
+ * @type text
+ * @text Escena
+ * @desc La escena a llamar.
+ * @default Scene_Item
+ *
+ * @command autosave
+ * @text Guardado automático
+ * @desc Solicita un guardado automático (todavía puede fallar).
+ *
+ * @command controlVariableString
+ * @text Variable de control: Cadena
+ * @desc Establece el ID de variable proporcionado en la cadena proporcionada.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc El ID de la variable que se establecerá.
+ * @default 1
+ *
+ * @arg paramText
+ * @text Cadena
+ * @desc La cadena en la cual establecer la variable.
+ *
+ * @command controlVariableFloat
+ * @text Variable de control: Flotante
+ * @desc Establece el ID de variable proporcionado en el número flotante (decimal) proporcionado.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc El ID de la variable que se establecerá.
+ * @default 1
+ *
+ * @arg paramFloat
+ * @type number
+ * @decimals 3
+ * @text Flotante
+ * @desc El flotante (número decimal) en el cual establecer la variable.
+ * @default 0.000
+ *
+ * @command conditionalBranchVariable
+ * @text Rama Condicional: Variable
+ * @desc Comprueba si la variable proporcionada es igual a algún valor.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc El ID de la variable a comprobar.
+ * @default 1
+ *
+ * @arg switchId
+ * @type switch
+ * @text ID de interruptor
+ * @desc El interruptor para configurar ON/OFF basado en el resultado de la verificación.
+ * @default 1
+ *
+ * @arg paramValue
+ * @text Valor de parámetro
+ * @desc El valor con el que comparar la variable.
+ *
+ * @arg paramType
+ * @type select
+ * @option String
+ * @option Float
+ * @text Tipo de parámetro
+ * @desc El tipo del valor del parámetro que se espera.
+ * @default String
+ *
+ * @command Select Weapon
+ * @text Seleccionar arma
+ * @desc Le permite al jugador seleccionar un arma de la posesión y almacena la identificación en una variable.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc La identificación de la variable en la cual almacenar la identificación del arma.
+ * @default 1
+ *
+ * @command Select Armor
+ * @text Seleccionar armadura
+ * @desc Le permite al jugador seleccionar una armadura de posesión y almacena la identificación en una variable.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc El ID de la variable en la cual almacenar el ID de la armadura.
+ * @default 1
+ *
+ * @command Select Skill
+ * @text Seleccionar habilidad
+ * @desc Le ermite al jugador seleccionar una habilidad y almacena la identificación en una variable.
+ *
+ * @arg variableId
+ * @type variable
+ * @text ID de Variable
+ * @desc El ID de la variable en la cual almacenar el ID de la armadura.
+ * @default 1
+ *
+ * @command Stop All Sound
+ * @desc Stops all bgm/bgs/me/se in one command.
+ *
+ * @command Erase All Pictures
+ * @desc Erases all pictures being shown
+ *
+ * @command Change Battle Lose
+ * @desc Change if the player game overs if they lose in random battle
+ *
+ * @arg Allow Lose
+ * @type boolean
+ * @desc If true, the player will no longer game over if they lose a random battle
+ * @default true
+*/
 Imported.CGMZ_PluginCommands = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Plugin Commands"] = "1.2.0";
+CGMZ.Versions["Plugin Commands"] = "1.3.0";
+//=============================================================================
+// CGMZ
+//-----------------------------------------------------------------------------
+// Handle saved data
+//=============================================================================
+//-----------------------------------------------------------------------------
+// Alias. Also initialize plugin command data
+//-----------------------------------------------------------------------------
+const alias_CGMZ_PluginCommands_CGMZCore_createPluginData = CGMZ_Core.prototype.createPluginData;
+CGMZ_Core.prototype.createPluginData = function() {
+	alias_CGMZ_PluginCommands_CGMZCore_createPluginData.call(this);
+	this.initializePluginCommandData();
+};
+//-----------------------------------------------------------------------------
+// Initialize Plugin Command data
+//-----------------------------------------------------------------------------
+CGMZ_Core.prototype.initializePluginCommandData = function() {
+	if(typeof this.pluginCommandAllowBattleLose === 'undefined') {
+		this.pluginCommandAllowBattleLose = false;
+	}
+};
+//-----------------------------------------------------------------------------
+// Load new plugin command data after load
+//-----------------------------------------------------------------------------
+const alias_CGMZ_PluginCommands_CGMZCore_createAfterLoad = CGMZ_Core.prototype.createAfterLoad;
+CGMZ_Core.prototype.createAfterLoad = function() {
+	alias_CGMZ_PluginCommands_CGMZCore_createAfterLoad.call(this);
+	this.initializePluginCommandData();
+};
 //=============================================================================
 // CGMZ_Temp
 //-----------------------------------------------------------------------------
@@ -432,6 +986,9 @@ CGMZ_Temp.prototype.registerPluginCommands = function() {
 	PluginManager.registerCommand("CGMZ_PluginCommands", "Select Weapon", this.pluginCommandPluginCommandsSelectWeapon);
 	PluginManager.registerCommand("CGMZ_PluginCommands", "Select Armor", this.pluginCommandPluginCommandsSelectArmor);
 	PluginManager.registerCommand("CGMZ_PluginCommands", "Select Skill", this.pluginCommandPluginCommandsSelectSkill);
+	PluginManager.registerCommand("CGMZ_PluginCommands", "Stop All Sound", this.pluginCommandPluginCommandsStopAllSound);
+	PluginManager.registerCommand("CGMZ_PluginCommands", "Erase All Pictures", this.pluginCommandPluginCommandsEraseAllPictures);
+	PluginManager.registerCommand("CGMZ_PluginCommands", "Change Battle Lose", this.pluginCommandPluginCommandsChangeBattleLose);
 };
 //-----------------------------------------------------------------------------
 // Sets the provided switch to either be ON or OFF at random
@@ -632,6 +1189,27 @@ CGMZ_Temp.prototype.pluginCommandPluginCommandsSelectSkill = function(args) {
     this.setupItemChoice(params);
     this.setWaitMode("message");
 };
+//-----------------------------------------------------------------------------
+// Stop all bgm/bgs/me/se
+//-----------------------------------------------------------------------------
+CGMZ_Temp.prototype.pluginCommandPluginCommandsStopAllSound = function() {
+	AudioManager.stopBgm();
+	AudioManager.stopBgs();
+	AudioManager.stopMe();
+	AudioManager.stopSe();
+};
+//-----------------------------------------------------------------------------
+// Erase all pictures currently being shown
+//-----------------------------------------------------------------------------
+CGMZ_Temp.prototype.pluginCommandPluginCommandsEraseAllPictures = function() {
+	$gameScreen.clearPictures();
+};
+//-----------------------------------------------------------------------------
+// Change battle lose status
+//-----------------------------------------------------------------------------
+CGMZ_Temp.prototype.pluginCommandPluginCommandsChangeBattleLose = function(args) {
+	$cgmz.pluginCommandAllowBattleLose = (args["Allow Lose"] === 'true');
+};
 //=============================================================================
 // Window_EventItem
 //-----------------------------------------------------------------------------
@@ -675,4 +1253,19 @@ Window_EventItem.prototype.needsNumber = function() {
 		return false;
 	}
 	return alias_CGMZ_PluginCommands_WindowEventItem_needsNumber.call(this);
+};
+//=============================================================================
+// Battle Manager
+//-----------------------------------------------------------------------------
+// Change can lose for random encounters if set via plugin command
+//=============================================================================
+//-----------------------------------------------------------------------------
+// Allow Can Lose if plugin command enabled it
+// This function does not seem to be called on battle processing event command,
+// which is how we differentiate between random and pre-determined encounter.
+//-----------------------------------------------------------------------------
+const alias_CGMZ_PluginCommands_BattleManager_onEncounter = BattleManager.onEncounter;
+BattleManager.onEncounter = function() {
+	alias_CGMZ_PluginCommands_BattleManager_onEncounter.call(this);
+    if($cgmz.pluginCommandAllowBattleLose) this._canLose = true;
 };

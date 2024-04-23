@@ -14,10 +14,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.7.0
+ * Version: 1.7.2
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.7.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: Adds a crafting system to your game that works well with CGMZ
  * Professions. It can handle item requirements (consumed on craft), tool
@@ -204,6 +204,14 @@
  * - Added a parameter to hide learn toasts for specific recipes
  * - Added an option to hide recipes if they cannot be crafted
  * - Added text to show when the player has no recipes in the scene
+ *
+ * Version 1.7.1
+ * - This plugin no longer crashes if you have a category window but no
+ *   categories
+ *
+ * Version 1.7.2
+ * - Added option to change the x text after an amount required
+ * - Fixed a bug with generic item requirements not showing amount needed
  *
  * @command discover
  * @text Discover
@@ -508,6 +516,11 @@
  * @parent Text Options
  * @desc Text to abbreviate level requirement to (Requires CGMZ Professions)
  * @default Lv.
+ *
+ * @param Amount X Text
+ * @parent Text Options
+ * @desc Text to show to describe the amount x
+ * @default x
  *
  * @param Craft Confirm Text
  * @parent Text Options
@@ -888,10 +901,10 @@
  * 然后获得作者和其插件的最新资讯，以及测试版插件的试用。
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * 【插件版本】V 1.6.0
+ * 【插件版本】V 1.7.2
  * ----------------------------------------------------------------------------
  * 【兼容性】仅测试作者所制作的插件
- * 【RM版本】RPG Maker MZ 1.7.0
+ * 【RM版本】RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * 【插件描述】
  * 功能全面的传统物品合成插件。
@@ -1057,6 +1070,12 @@
  * - Added a parameter to hide learn toasts for specific recipes
  * - Added an option to hide recipes if they cannot be crafted
  * - Added text to show when the player has no recipes in the scene
+ * Version 1.7.1
+ * - This plugin no longer crashes if you have a category window but no
+ *   categories
+ * Version 1.7.2
+ * - Added option to change the x text after an amount required
+ * - Fixed a bug with generic item requirements not showing amount needed
  *
  * @command discover
  * @text 获得配方
@@ -1385,6 +1404,11 @@
  * @parent Text Options
  * @desc 关于等级的缩写文本描述(需要CGMZ Professions插件)
  * @default Lv.
+ *
+ * @param Amount X Text
+ * @parent Text Options
+ * @desc Text to show to describe the amount x
+ * @default x
  *
  * @param Craft Confirm Text
  * @text 确认合成的描述
@@ -1817,10 +1841,10 @@
  * alfa, ademas de otras cosas geniales!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Versión: 1.6.0
+ * Versión: 1.7.2
  * ----------------------------------------------------------------------------
  * Compatibilidad: Sólo probado con mis CGMZ plugins.
- * Hecho para RPG Maker MZ 1.7.0
+ * Hecho para RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Descripción: Agrega un sistema de creación a tu juego que funciona bien con 
  * CGMZ Professions. Puede manejar los requisitos de artículos (consumidos en 
@@ -2031,6 +2055,14 @@
  * - Added a parameter to hide learn toasts for specific recipes
  * - Added an option to hide recipes if they cannot be crafted
  * - Added text to show when the player has no recipes in the scene
+ *
+ * Versión 1.7.1
+ * - This plugin no longer crashes if you have a category window but no
+ *   categories
+ *
+ * Versión 1.7.2
+ * - Added option to change the x text after an amount required
+ * - Fixed a bug with generic item requirements not showing amount needed
  *
  * @command discover
  * @text Descubrir
@@ -2359,6 +2391,11 @@
  * @parent Text Options
  * @desc Texto al cual abreviar el requisito de nivel (Requiere profesiones CGMZ).
  * @default Lv.
+ *
+ * @param Amount X Text
+ * @parent Text Options
+ * @desc Text to show to describe the amount x
+ * @default x
  *
  * @param Craft Confirm Text
  * @text Crear texto de confirmación
@@ -2772,11 +2809,8 @@
  * @param Command Text
  * @desc The text to show for this category in the category window
 */
-var Imported = Imported || {};
 Imported.CGMZ_Crafting = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["Crafting"] = "1.7.0";
+CGMZ.Versions["Crafting"] = "1.7.2";
 CGMZ.Crafting = {};
 CGMZ.Crafting.parameters = PluginManager.parameters('CGMZ_Crafting');
 CGMZ.Crafting.Recipes = CGMZ_Utils.parseJSON(CGMZ.Crafting.parameters["Recipes"], [], "CGMZ Crafting", "Your Recipes parameter had invalid JSON and could not be read.");
@@ -2813,6 +2847,7 @@ CGMZ.Crafting.CategoryWindowskin = CGMZ.Crafting.parameters["Category Windowskin
 CGMZ.Crafting.ToastText = CGMZ.Crafting.parameters["Toast Text"];
 CGMZ.Crafting.UniqueText = CGMZ.Crafting.parameters["Unique Text"];
 CGMZ.Crafting.NoRecipeText = CGMZ.Crafting.parameters["No Recipe Text"];
+CGMZ.Crafting.AmountXText = CGMZ.Crafting.parameters["Amount X Text"];
 CGMZ.Crafting.ScrollDeceleration = parseFloat(CGMZ.Crafting.parameters["Scroll Deceleration"]);
 CGMZ.Crafting.LabelColor = Number(CGMZ.Crafting.parameters["Label Text Color"]);
 CGMZ.Crafting.ScrollSpeed = Number(CGMZ.Crafting.parameters["ScrollSpeed"]);
@@ -3816,7 +3851,7 @@ CGMZ_Window_RecipeCategory.prototype.includeRecipeInList = function(recipe) {
 //-----------------------------------------------------------------------------
 CGMZ_Window_RecipeCategory.prototype.drawItem = function(index) {
     const item = this._data[index];
-	const category = $cgmzTemp.getCraftingCategoryData(item);
+	const category = $cgmzTemp.getCraftingCategoryData(item) || {commandText: item};
     const rect = this.itemRectWithPadding(index);
     this.CGMZ_drawTextLine(category.commandText, rect.x, rect.y, rect.width, 'center');
 };
@@ -4379,12 +4414,14 @@ CGMZ_Window_RecipeDisplay.prototype.drawRecipeItems = function(itemArray, produc
 		} else if(itemObj.Type === 'generic') {
 			const currentSupply = this._recipe.calculateTotalNumItemsOfGenericType(itemObj.GenericCategory);
 			this.changePaintOpacity(itemObj.Amount <= currentSupply);
+			const amount = itemObj.Amount + CGMZ.Crafting.AmountXText;
 			let currentAmount = "";
 			if(showAmount) {
 				currentAmount = " (" + currentSupply + ")";
 			}
 			const itemData = $cgmzTemp.getGenericCraftingItem(itemObj.GenericCategory);
-			let string = (itemData._iconIndex) ? '\\i[' + itemData._iconIndex + '] ' : "";
+			let string = amount;
+			string += (itemData._iconIndex) ? '\\i[' + itemData._iconIndex + '] ' : "";
 			string += (itemData._name + currentAmount);
 			this.CGMZ_drawText(string, 0, 0, this._neededHeight, this.contents.width, 'center');
 			this._neededHeight += this.lineHeight();
@@ -4392,7 +4429,7 @@ CGMZ_Window_RecipeDisplay.prototype.drawRecipeItems = function(itemArray, produc
 			const item = $cgmzTemp.lookupItem(itemObj.Type, itemObj.ID);
 			if(item) {
 				const currentSupply = $gameParty.numItems(item);
-				const amount = itemObj.Amount + "x ";
+				const amount = itemObj.Amount + CGMZ.Crafting.AmountXText;
 				const name = item.name;
 				const iconIndex = item.iconIndex;
 				this.changePaintOpacity(product || itemObj.Amount <= currentSupply);

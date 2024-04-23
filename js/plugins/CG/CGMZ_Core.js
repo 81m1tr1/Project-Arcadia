@@ -11,10 +11,10 @@
  * Become a Patron to get access to beta/alpha plugins plus other goodies!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Version: 1.14.0
+ * Version: 1.15.0
  * ----------------------------------------------------------------------------
  * Compatibility: Only tested with my CGMZ plugins.
- * Made for RPG Maker MZ 1.7.0
+ * Made for RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Description: This is the core CGMZ plugin which is used extensively
  * by other CGMZ plugins and is likely to be required.
@@ -46,9 +46,7 @@
  * behaving incorrectly and your game will probably crash. Please do not
  * rename the js file.
  * -------------------------Version History------------------------------------
- * 1.0 - Initial release
- * 
- * 1.1:
+ * 1.1
  * - Added function to automatically check if any CGMZ plugin is out of date
  * - Added function to split a string into multiple lines if the string is too
  * long for a window to handle without reducing font size (text wrap).
@@ -57,63 +55,63 @@
  * Window_Scrollable, and Window_Selectable
  * - Added CGMZ map name meta access
  *
- * 1.2:
+ * 1.2
  * - Removed unused code for a title window as this no longer fits with MZ
  * touch buttons.
  * - Added draw gauge functionality to windows that do not need sprite gauges
  *
- * 1.2.1:
+ * 1.2.1
  * - Updated api call for version check to use semantic versioning
  * - Added link to update directly from console
  * - Cut down on outdated CGMZ plugin warnings in console
  *
- * 1.3.0:
+ * 1.3.0
  * - Added basic input processing for all keys on keyboard
  * - Added option to open dev tools on game start
  *
- * 1.4.0:
+ * 1.4.0
  * - Added option to show fps on game start
  * - Added option to go fullscreen on game start
  * - Bugfix to add cap to scrollable window size
  *
- * 1.5.0:
+ * 1.5.0
  * - Added new draw text function for text codes with automatic line breaks
  * - Added update behavior
  * - Added behavior after load in CGMZ classes
  * - Added new timer class
  * - Optimized existing code
  *
- * 1.5.1:
+ * 1.5.1
  * - Added parameter to simulate deployed environment during playtest
  * - Added new draw text function for drawing for a single line of text
  *   with text codes
  *
- * 1.5.2:
+ * 1.5.2
  * - More concise error reporting
  * - Bugfix for font size changes throwing off line wrap when drawing text
  *   with text codes
  *
- * 1.5.3:
+ * 1.5.3
  * - Added function for getting file info
  * - Removed deprecated code (if getting crash after update, update crashing
  *   plugin)
  *
- * 1.6.0:
+ * 1.6.0
  * - Added support for subfolders for images
  * - Added more customizable selectable window with categories
  * - Added function to draw a divider on windows
  * - Added support for spritesheet animations on map
  * - Various bug fixes for text code drawing in unusual cases
  *
- * 1.7.0:
+ * 1.7.0
  * - Added horizontally scrolling windows
  * - Added filesystem functions
  *
- * 1.7.1:
+ * 1.7.1
  * - Changed some CGMZ draw text functions to adjust width of text if too wide
  * - Documentation should no longer horizontally scroll
  *
- * 1.8.0:
+ * 1.8.0
  * - Added gamepad meta info detection
  * - Added idle detection
  * - Added CGMZ_Utils to replace some CGMZ_Temp utility functions
@@ -123,12 +121,12 @@
  * - Out of date plugin checker should now only check once at boot
  * - Documentation updated
  *
- * 1.8.1:
+ * 1.8.1
  * - Add gamepad release function
  * - Add Spanish language support
  * - Bug fix for scaled left-align text drawing
  *
- * 1.9.0:
+ * 1.9.0
  * - Added utility function for easier compare of numbers
  * - Added utility function to draw background rectangle
  * - Added utility function to draw input styles for checkbox, radio, and toggle switch
@@ -136,29 +134,41 @@
  * - Added utility function for opening URLs
  * - Fix outdated plugin message for alpha/beta plugins
  *
- * 1.10.0:
+ * 1.10.0
  * - Expanded function for getting item data objects to include skill/states
  * - Added locale options
  * - Moved date functions to CGMZ_Utils from CGMZ_Temp
  *
- * 1.11.0:
+ * 1.11.0
  * - Added function to draw step animation on windows
  * - Added sprite layer above/below windows in menus
  * - Fix crash when using Event Test
  *
- * 1.12.0:
+ * 1.12.0
  * - Added tracking for last input type
  * - Added function to parse JSON SE parameters
  *
- * 1.13.0:
+ * 1.13.0
  * - Added function to draw a gradient filled rect
  * - Added function to parse JSON Tone parameters
  * - Added function to setup common toast parameters
  *
- * 1.14.0:
+ * 1.14.0
  * - Added selectable window that can show a tilemap
  * - Added lerp functions
  * - Fix gradient rect function to clear with contents
+ *
+ * 1.14.1
+ * - Fix issue with idle timer when many keys pressed at same time
+ * - Removed deprecated $cgmzTemp.timeSplit
+ *
+ * 1.15.0
+ * - Add common CGMZ window options to window classes
+ * - Add report dimensions utility function
+ * - Bug fix for some numbers not taking locale into account
+ * - Bug fix for toast parser crash when toast object was undefined
+ * - Bug fix for some rare cases where gamepad input could crash game
+ * - Bug fix for CGMZ Selectable Window not tracking top row properly
  *
  * @command Initialize
  * @desc Re-initializes some CGMZ Classes. Only call this if you know what you
@@ -211,10 +221,10 @@
  * alfa, ademas de otras cosas geniales!
  * https://www.patreon.com/CasperGamingRPGM
  * ============================================================================
- * Versión: 1.14.0
+ * Versión: 1.15.0
  * ----------------------------------------------------------------------------
  * Compatibilidad: Sólo probado con mis CGMZ plugins.
- * Hecho para RPG Maker MZ 1.7.0
+ * Hecho para RPG Maker MZ 1.8.0
  * ----------------------------------------------------------------------------
  * Descripción: Este es el plugin principal de CGMZ que otros plugin de CGMZ 
  * utilizan ampliamente y es probable que sea necesario.
@@ -242,9 +252,7 @@
  * behaving incorrectly and your game will probably crash. Please do not
  * rename the js file.
  * -------------------------Historial de versiones-----------------------------
- * 1.0 - Versión inicial
- *
- * 1.1:
+ * 1.1
  * - Función agregada para verificar automáticamente si algún complemento CGMZ 
  *   está desactualizado
  * - Función agregada para dividir una cadena en varias líneas si la cadena es 
@@ -255,29 +263,29 @@
  *   Window_Scrollable y Window_Selectable
  * - Se agregó el metaacceso al nombre del mapa CGMZ
  *
- * 1.2:
+ * 1.2
  * - Se eliminó el código no utilizado para una ventana de título, ya que ya 
  *   no se ajusta a los botones táctiles MZ.
  * - Se agregó la funcionalidad de indicador de dibujo a las ventanas que no 
  *   necesitan indicadores de sprites.
  *
- * 1.2.1:
+ * 1.2.1
  * - Llamada api actualizada para verificación de versión para usar control de 
  *   versiones semántico
  * - Enlace agregado para actualizar directamente desde la consola
  * - Reduzca las advertencias obsoletas del complemento CGMZ en la consola
  *
- * 1.3.0:
+ * 1.3.0
  * - Procesamiento de entrada básico agregado para todas las teclas del teclado
  * - Opción agregada para abrir herramientas de desarrollo al inicio del juego
  *
- * 1.4.0:
+ * 1.4.0
  * - Opción agregada para mostrar fps al inicio del juego
  * - Opción agregada para ir a pantalla completa al inicio del juego
  * - Corrección de errores para agregar un límite al tamaño de la ventana
  *   desplazable
  *
- * 1.5.0:
+ * 1.5.0
  * - Se agregó una nueva función de dibujar texto para códigos de texto con 
  *   saltos de línea automáticos
  * - Comportamiento de actualización agregado
@@ -285,23 +293,23 @@
  * - Se agregó una nueva clase de temporizador
  * - Código existente optimizado
  *
- * 1.5.1:
+ * 1.5.1
  * - Parámetro agregado para simular el entorno desplegado durante la prueba de
  *   juego
  * - Se agregó una nueva función de dibujo de texto para dibujar una sola línea 
  *   de texto con códigos de texto
  *
- * 1.5.2:
+ * 1.5.2
  * - Informe de errores más conciso
  * - Corrección de errores para los cambios de tamaño de fuente que arrojan el 
  *   ajuste de línea al dibujar texto con códigos de texto
  *
- * 1.5.3:
+ * 1.5.3
  * - Función agregada para obtener información del archivo
  * - Se eliminó el código obsoleto (si se bloquea después de la actualización, 
  *   actualice el complemento de bloqueo)
  *
- * 1.6.0:
+ * 1.6.0
  * - Se agregó soporte para subcarpetas para imágenes.
  * - Se agregó una ventana seleccionable más personalizable con categorías
  * - Función agregada para dibujar un divisor en las ventanas
@@ -309,16 +317,16 @@
  * - Varias correcciones de errores para el dibujo de código de texto en casos 
  *   inusuales
  *
- * 1.7.0:
+ * 1.7.0
  * - Se agregaron ventanas de desplazamiento horizontal
  * - Funciones de sistema de archivos añadidas
  *
- * 1.7.1:
+ * 1.7.1
  * - Se cambiaron algunas funciones de dibujo de texto CGMZ para ajustar el ancho 
  *   del texto si es demasiado ancho
  * - La documentación ya no debería desplazarse horizontalmente
  *
- * 1.8.0:
+ * 1.8.0
  * - Added gamepad meta info detection
  * - Added idle detection
  * - Added CGMZ_Utils to replace some CGMZ_Temp utility functions
@@ -328,12 +336,12 @@
  * - Out of date plugin checker should now only check once at boot
  * - Documentation updated
  *
- * 1.8.1:
+ * 1.8.1
  * - Add gamepad release function
  * - Add Spanish language support
  * - Bug fix for scaled left-align text drawing
  *
- * 1.9.0:
+ * 1.9.0
  * - Added utility function for easier compare of numbers
  * - Added utility function to draw background rectangle
  * - Added utility function to draw input styles for checkbox, radio, and toggle switch
@@ -341,29 +349,41 @@
  * - Added utility function for opening URLs
  * - Fix outdated plugin message for alpha/beta plugins
  *
- * 1.10.0:
+ * 1.10.0
  * - Expanded function for getting item data objects to include skill/states
  * - Added locale options
  * - Moved date functions to CGMZ_Utils from CGMZ_Temp
  *
- * 1.11.0:
+ * 1.11.0
  * - Added function to draw step animation on windows
  * - Added sprite layer above/below windows in menus
  * - Fix crash when using Event Test
  *
- * 1.12.0:
+ * 1.12.0
  * - Added tracking for last input type
  * - Added function to parse JSON SE parameters
  *
- * 1.13.0:
+ * 1.13.0
  * - Added function to draw a gradient filled rect
  * - Added function to parse JSON Tone parameters
  * - Added function to setup common toast parameters
  *
- * 1.14.0:
+ * 1.14.0
  * - Added selectable window that can show a tilemap
  * - Added lerp functions
  * - Fix gradient rect function to clear with contents
+ *
+ * 1.14.1
+ * - Fix issue with idle timer when many keys pressed at same time
+ * - Removed deprecated $cgmzTemp.timeSplit
+ *
+ * 1.15.0
+ * - Add common CGMZ window options to window classes
+ * - Add report dimensions utility function
+ * - Bug fix for some numbers not taking locale into account
+ * - Bug fix for toast parser crash when toast object was undefined
+ * - Bug fix for some rare cases where gamepad input could crash game
+ * - Bug fix for CGMZ Selectable Window not tracking top row properly
  *
  * @command Initialize
  * @text Inicializar 
@@ -409,9 +429,9 @@
 */
 var Imported = Imported || {};
 Imported.CGMZ_Core = true;
-var CGMZ = CGMZ || {};
-CGMZ.Versions = CGMZ.Versions || {};
-CGMZ.Versions["CGMZ Core"] = "1.14.0";
+var CGMZ = {};
+CGMZ.Versions = {};
+CGMZ.Versions["CGMZ Core"] = "1.15.0";
 CGMZ.Core = {};
 CGMZ.Core.parameters = PluginManager.parameters('CGMZ_Core');
 CGMZ.Core.CheckForUpdates = (CGMZ.Core.parameters["Check for Updates"] === "true");
@@ -427,7 +447,7 @@ CGMZ.Core.FallbackLanguage = CGMZ.Core.parameters["Fallback Locale"];
 // Utility functions used by the plugin
 //=============================================================================
 function CGMZ_Utils() {
-    throw new Error("This is a static class");
+	throw new Error("This is a static class");
 }
 //-----------------------------------------------------------------------------
 // Calculate the average party level
@@ -449,6 +469,15 @@ CGMZ_Utils.getImageData = function(fullPath, root) {
 	const file = splitPath.pop();
 	const path = splitPath.join("/");
 	return {folder: root + "/" + path + "/", filename: file};
+};
+//-----------------------------------------------------------------------------
+// Takes a filepath of folder+filename and returns object with separate folder+filename
+//-----------------------------------------------------------------------------
+CGMZ_Utils.reportDimensions = function(width, height, groupName) {
+	console.group(groupName);
+	console.info(`Width: ${width}`);
+	console.info(`Height: ${height}`);
+	console.groupEnd(groupName);
 };
 //-----------------------------------------------------------------------------
 // Take a JSON string and optional object to return when null. It also takes
@@ -508,6 +537,7 @@ CGMZ_Utils.parseToneJSON = function(toneJSON, callingPlugin = "CGMZ Core") {
 // Any extra parameters will not be touched.
 //-----------------------------------------------------------------------------
 CGMZ_Utils.setupToast = function(parseToast, callingPlugin = "CGMZ Core") {
+	if(!parseToast) return null;
 	if(parseToast.Display === "false") return null; // If the toast object is not going to be used anyways, no need to continue parsing object
 	const toast = {};
 	if(parseToast.hasOwnProperty("Sound Effect")) toast.SE = this.parseSoundEffectJSON(parseToast["Sound Effect"], callingPlugin);
@@ -587,17 +617,18 @@ CGMZ_Utils.makeDateOptions = function(format) {
 // Takes a number and returns it's toLocaleString value
 //-----------------------------------------------------------------------------
 CGMZ_Utils.numberSplit = function(num) {
-	return num.toLocaleString();
+	const locale = this.userLocale();
+	return num.toLocaleString(locale);
 };
 //-----------------------------------------------------------------------------
 // Takes an amount of frames and gives back the time in hours:minutes:seconds
 //-----------------------------------------------------------------------------
 CGMZ_Utils.timeSplit = function(frameCount) {
-	let temp = frameCount/60;
-	let seconds = temp%60;
-	let minutes = Math.floor(temp/60) % 60;
-	let hours = Math.floor(temp/60/60) % 60;
-    return hours.padZero(2) + ':' + minutes.padZero(2) + ':' + seconds.padZero(2);
+	const temp = frameCount/60;
+	const seconds = temp%60;
+	const minutes = Math.floor(temp/60) % 60;
+	const hours = Math.floor(temp/60/60) % 60;
+	return hours.padZero(2) + ':' + minutes.padZero(2) + ':' + seconds.padZero(2);
 };
 //-----------------------------------------------------------------------------
 // Look up data item given type and id
@@ -639,88 +670,88 @@ CGMZ_Utils.reportError = function(error, origin, suggestion = "Update Plugins") 
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.saveToLocalFile = function(folder, filename, ext, data, encoding = 'base64') {
-    const dirPath = this.fileDirectoryPath(folder);
-    const filePath = this.filePath(folder, filename, ext);
-    const backupFilePath = filePath + "_";
-    return new Promise((resolve, reject) => {
-        this.fsMkdir(dirPath);
-        this.fsUnlink(backupFilePath);
-        this.fsRename(filePath, backupFilePath);
-        try {
-            this.fsWriteFile(filePath, data, encoding);
-            this.fsUnlink(backupFilePath);
-            resolve();
-        } catch (e) {
-            try {
-                this.fsUnlink(filePath);
-                this.fsRename(backupFilePath, filePath);
-            } catch (e2) {
-                //
-            }
-            reject(e);
-        }
-    });
+	const dirPath = this.fileDirectoryPath(folder);
+	const filePath = this.filePath(folder, filename, ext);
+	const backupFilePath = filePath + "_";
+	return new Promise((resolve, reject) => {
+		this.fsMkdir(dirPath);
+		this.fsUnlink(backupFilePath);
+		this.fsRename(filePath, backupFilePath);
+		try {
+			this.fsWriteFile(filePath, data, encoding);
+			this.fsUnlink(backupFilePath);
+			resolve();
+		} catch (e) {
+			try {
+				this.fsUnlink(filePath);
+				this.fsRename(backupFilePath, filePath);
+			} catch (e2) {
+				//
+			}
+			reject(e);
+		}
+	});
 };
 //-----------------------------------------------------------------------------
 // Get directory path
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.fileDirectoryPath = function(folder) {
-    const path = require("path");
-    const base = path.dirname(process.mainModule.filename);
-    return path.join(base, folder);
+	const path = require("path");
+	const base = path.dirname(process.mainModule.filename);
+	return path.join(base, folder);
 };
 //-----------------------------------------------------------------------------
 // Get file path
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.filePath = function(folder, filename, ext) {
-    const dir = this.fileDirectoryPath(folder);
-    return dir + filename + ext;
+	const dir = this.fileDirectoryPath(folder);
+	return dir + filename + ext;
 };
 //-----------------------------------------------------------------------------
 // Make directory (if no exists)
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.fsMkdir = function(path) {
-    const fs = require("fs");
-    if (!fs.existsSync(path)) {
-        fs.mkdirSync(path);
-    }
+	const fs = require("fs");
+	if (!fs.existsSync(path)) {
+		fs.mkdirSync(path);
+	}
 };
 //-----------------------------------------------------------------------------
 // Rename file if exists
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.fsRename = function(oldPath, newPath) {
-    const fs = require("fs");
-    if (fs.existsSync(oldPath)) {
-        fs.renameSync(oldPath, newPath);
-    }
+	const fs = require("fs");
+	if (fs.existsSync(oldPath)) {
+		fs.renameSync(oldPath, newPath);
+	}
 };
 //-----------------------------------------------------------------------------
 // Unlink file
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.fsUnlink = function(path) {
-    const fs = require("fs");
-    if (fs.existsSync(path)) {
-        fs.unlinkSync(path);
-    }
+	const fs = require("fs");
+	if (fs.existsSync(path)) {
+		fs.unlinkSync(path);
+	}
 };
 //-----------------------------------------------------------------------------
 // Write file
 // This will cause web hosted games to crash
 //-----------------------------------------------------------------------------
 CGMZ_Utils.fsWriteFile = function(path, data, encoding) {
-    const fs = require("fs");
-    fs.writeFileSync(path, data, encoding);
+	const fs = require("fs");
+	fs.writeFileSync(path, data, encoding);
 };
 //-----------------------------------------------------------------------------
 // Linear Interpolation between 2 values
 //-----------------------------------------------------------------------------
 CGMZ_Utils.lerp = function(start, end, percent) {
-    return (start + (end - start) * percent);
+	return (start + (end - start) * percent);
 };
 //-----------------------------------------------------------------------------
 // Function to have an "ease in" effect for a lerp
@@ -753,7 +784,7 @@ CGMZ_Utils.lerpEaseInOut = function(percent) {
 // This class stores data not saved for CGMZ plugins
 //=============================================================================
 function CGMZ_Temp() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 //-----------------------------------------------------------------------------
 // Initialize
@@ -791,6 +822,7 @@ CGMZ_Temp.prototype.getMaxCanvasSize = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.initCoreVariables = function() {
 	this._idleCounter = 0;
+	this._anyKeyPressed = false;
 	this._lastGamePadId = null;
 	this._lastInputType = null;
 };
@@ -812,7 +844,7 @@ CGMZ_Temp.prototype.checkCGMZPluginVersions = function(jsonData) {
 			}
 			const isPublic = !(version.version[0] === "A" || version.version[0] === "B");
 			const urlMessage = isPublic ? "You can download an update from https://www.caspergaming.com/plugins/cgmz/" + version.url + "/" : "You can download an update from Patreon or Itch.io. Plugin Info available at: https://www.caspergaming.com/plugins/cgmz/" + version.url + "/";
-			console.warn("CGMZ " + pluginName + " had a local version of " + CGMZ.Versions[version.name] + " but a server version of " + version.version + "\n" + urlMessage);
+			console.warn("[CGMZ] " + pluginName + " had a local version of " + CGMZ.Versions[version.name] + " but a server version of " + version.version + "\n" + urlMessage);
 		}
 	});
 };
@@ -842,7 +874,7 @@ CGMZ_Temp.prototype.updateTimers = function() {
 // Update Idle Timer
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.updateIdleTimer = function() {
-	this._idleCounter++;
+	if(!this._anyKeyPressed) this._idleCounter++;
 };
 //-----------------------------------------------------------------------------
 // Reset Idle Timer to 0
@@ -886,17 +918,6 @@ CGMZ_Temp.prototype.getImageData = function(imageLoc) {
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.numberSplit = function(num) {
 	return num.toLocaleString();
-};
-//-----------------------------------------------------------------------------
-// Takes an amount of frames and gives back the time in hours:minutes:seconds
-// Deprecated. Use CGMZ_Utils.timeSplit instead.
-//-----------------------------------------------------------------------------
-CGMZ_Temp.prototype.timeSplit = function(frameCount) {
-	let temp = frameCount/60;
-	let seconds = temp%60;
-	let minutes = Math.floor(temp/60) % 60;
-	let hours = Math.floor(temp/60/60) % 60;
-    return hours.padZero(2) + ':' + minutes.padZero(2) + ':' + seconds.padZero(2);
 };
 //-----------------------------------------------------------------------------
 // Takes an amount of seconds and tries to approximate it to Hours, Minutes, or Seconds
@@ -946,7 +967,7 @@ CGMZ_Temp.prototype.approximateTimeValueToUnit = function(seconds, unitString) {
 	}
 	const script = "CGMZ Core";
 	const error = "Unrecognized unitString in approximateTimeValueToUnit()";
-	this.reportError(error, script);
+	CGMZ_Utils.reportError(error, script);
 	return 0;
 };
 //-----------------------------------------------------------------------------
@@ -976,7 +997,7 @@ CGMZ_Temp.prototype.createDateText = function(day, month, year, format, delim) {
 		case 7: return (month+1).toString() + delim + day.toString();
 		case 8: return day.toString() + delim + (month+1).toString();
 	}
-	this.reportError("createDateText: Out of range", "CGMZ Core");
+	CGMZ_Utils.reportError("createDateText: Out of range", "CGMZ Core");
 	return "Unknown Date";
 };
 //-----------------------------------------------------------------------------
@@ -998,7 +1019,7 @@ CGMZ_Temp.prototype.getFullMonthName = function(month) {
 		case 10: return "November";
 		case 11: return "December";
 	}
-	this.reportError("getFullMonthName: Out of range", "CGMZ Core");
+	CGMZ_Utils.reportError("getFullMonthName: Out of range", "CGMZ Core");
 	return "Unknown";
 };
 //-----------------------------------------------------------------------------
@@ -1020,7 +1041,7 @@ CGMZ_Temp.prototype.getShortMonthName = function(month) {
 		case 10: return "Nov";
 		case 11: return "Dec";
 	}
-	this.reportError("getShortMonthName: Out of range", "CGMZ Core", "Update CGMZ Plugins");
+	CGMZ_Utils.reportError("getShortMonthName: Out of range", "CGMZ Core", "Update CGMZ Plugins");
 	return "Unknown";
 };
 //-----------------------------------------------------------------------------
@@ -1033,7 +1054,7 @@ CGMZ_Temp.prototype.lookupItem = function(type, id) {
 		case 'weapon': return $dataWeapons[id];
 		case 'armor': return $dataArmors[id];
 	}
-	this.reportError("Item type setup incorrectly", "CGMZ Core", "Check item parameters set up through CGMZ plugins");
+	CGMZ_Utils.reportError("Item type setup incorrectly", "CGMZ Core", "Check item parameters set up through CGMZ plugins");
 	return null;
 };
 //-----------------------------------------------------------------------------
@@ -1056,16 +1077,16 @@ CGMZ_Temp.prototype.requestResponse = function(url, func) {
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.addWindowEventListeners = function() {
 	const pf = { passive: false };
-    document.addEventListener("mousedown", this.onAnyInput.bind(this));
-    document.addEventListener("mousemove", this.onAnyInput.bind(this));
-    document.addEventListener("mouseup", this.onAnyInput.bind(this));
-    document.addEventListener("wheel", this.onAnyInput.bind(this), pf);
-    document.addEventListener("touchstart", this.onAnyInput.bind(this), pf);
-    document.addEventListener("touchmove", this.onAnyInput.bind(this), pf);
-    document.addEventListener("touchend", this.onAnyInput.bind(this));
-    document.addEventListener("touchcancel", this.onAnyInput.bind(this));
+	document.addEventListener("mousedown", this.onAnyInput.bind(this));
+	document.addEventListener("mousemove", this.onAnyInput.bind(this));
+	document.addEventListener("mouseup", this.onAnyInput.bind(this));
+	document.addEventListener("wheel", this.onAnyInput.bind(this), pf);
+	document.addEventListener("touchstart", this.onAnyInput.bind(this), pf);
+	document.addEventListener("touchmove", this.onAnyInput.bind(this), pf);
+	document.addEventListener("touchend", this.onAnyInput.bind(this));
+	document.addEventListener("touchcancel", this.onAnyInput.bind(this));
 	document.addEventListener("keydown", this.onAnyInput.bind(this));
-    document.addEventListener("keyup", this.onAnyInput.bind(this));
+	document.addEventListener("keyup", this.onAnyInput.bind(this));
 };
 //-----------------------------------------------------------------------------
 // Handler for any input detected
@@ -1076,6 +1097,23 @@ CGMZ_Temp.prototype.onAnyInput = function(event) {
 };
 //-----------------------------------------------------------------------------
 // Update the last used gamepad - called when gamepad input detected
+// Game pad button numbers to xbox controller buttons:
+// 0 = A
+// 1 = B
+// 2 = X
+// 3 = Y
+// 4 = LB
+// 5 = RB
+// 6 = LT
+// 7 = RT
+// 8 = Back / Select
+// 9 = Start
+// 10 = Left Stick
+// 11 = Right Stick
+// 12 = DPAD Up
+// 13 = DPAD Down
+// 14 = DPAD Left
+// 15 = DPAD Right
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.updateLastGamepad = function(gamepad) {
 	this._lastGamePadId = gamepad.id;
@@ -1121,13 +1159,13 @@ CGMZ_Temp.prototype.onKeyUp = function(event) {
 // Refresh plugins on key down
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.refreshForKeysDown = function() {
-	//Used by other plugins
+	this._anyKeyPressed = true;
 };
 //-----------------------------------------------------------------------------
 // Refresh plugins on key up
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.refreshForKeysUp = function() {
-	//Used by other plugins
+	this._anyKeyPressed = !Object.values(this._inputCurrentState).every(state => state !== true);
 };
 //-----------------------------------------------------------------------------
 // is Key Pressed?
@@ -1176,27 +1214,27 @@ CGMZ_Temp.prototype.retrieveMapAnimationRequest = function() {
 // Deprecated. Use CGMZ_Utils.saveToLocalFile instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.saveToLocalFile = function(folder, filename, ext, data, encoding = 'base64') {
-    const dirPath = this.fileDirectoryPath(folder);
-    const filePath = this.filePath(folder, filename, ext);
-    const backupFilePath = filePath + "_";
-    return new Promise((resolve, reject) => {
-        this.fsMkdir(dirPath);
-        this.fsUnlink(backupFilePath);
-        this.fsRename(filePath, backupFilePath);
-        try {
-            this.fsWriteFile(filePath, data, encoding);
-            this.fsUnlink(backupFilePath);
-            resolve();
-        } catch (e) {
-            try {
-                this.fsUnlink(filePath);
-                this.fsRename(backupFilePath, filePath);
-            } catch (e2) {
-                //
-            }
-            reject(e);
-        }
-    });
+	const dirPath = this.fileDirectoryPath(folder);
+	const filePath = this.filePath(folder, filename, ext);
+	const backupFilePath = filePath + "_";
+	return new Promise((resolve, reject) => {
+		this.fsMkdir(dirPath);
+		this.fsUnlink(backupFilePath);
+		this.fsRename(filePath, backupFilePath);
+		try {
+			this.fsWriteFile(filePath, data, encoding);
+			this.fsUnlink(backupFilePath);
+			resolve();
+		} catch (e) {
+			try {
+				this.fsUnlink(filePath);
+				this.fsRename(backupFilePath, filePath);
+			} catch (e2) {
+				//
+			}
+			reject(e);
+		}
+	});
 };
 //-----------------------------------------------------------------------------
 // Get directory path
@@ -1204,9 +1242,9 @@ CGMZ_Temp.prototype.saveToLocalFile = function(folder, filename, ext, data, enco
 // Deprecated. Use CGMZ_Utils.fileDirectoryPath instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.fileDirectoryPath = function(folder) {
-    const path = require("path");
-    const base = path.dirname(process.mainModule.filename);
-    return path.join(base, folder);
+	const path = require("path");
+	const base = path.dirname(process.mainModule.filename);
+	return path.join(base, folder);
 };
 //-----------------------------------------------------------------------------
 // Get file path
@@ -1214,8 +1252,8 @@ CGMZ_Temp.prototype.fileDirectoryPath = function(folder) {
 // Deprecated. Use CGMZ_Utils.filePath instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.filePath = function(folder, filename, ext) {
-    const dir = this.fileDirectoryPath(folder);
-    return dir + filename + ext;
+	const dir = this.fileDirectoryPath(folder);
+	return dir + filename + ext;
 };
 //-----------------------------------------------------------------------------
 // Make directory (if no exists)
@@ -1223,10 +1261,10 @@ CGMZ_Temp.prototype.filePath = function(folder, filename, ext) {
 // Deprecated. Use CGMZ_Utils.fsMkdir instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.fsMkdir = function(path) {
-    const fs = require("fs");
-    if (!fs.existsSync(path)) {
-        fs.mkdirSync(path);
-    }
+	const fs = require("fs");
+	if (!fs.existsSync(path)) {
+		fs.mkdirSync(path);
+	}
 };
 //-----------------------------------------------------------------------------
 // Rename file if exists
@@ -1234,10 +1272,10 @@ CGMZ_Temp.prototype.fsMkdir = function(path) {
 // Deprecated. Use CGMZ_Utils.fsRename instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.fsRename = function(oldPath, newPath) {
-    const fs = require("fs");
-    if (fs.existsSync(oldPath)) {
-        fs.renameSync(oldPath, newPath);
-    }
+	const fs = require("fs");
+	if (fs.existsSync(oldPath)) {
+		fs.renameSync(oldPath, newPath);
+	}
 };
 //-----------------------------------------------------------------------------
 // Unlink file
@@ -1245,10 +1283,10 @@ CGMZ_Temp.prototype.fsRename = function(oldPath, newPath) {
 // Deprecated. Use CGMZ_Utils.fsUnlink instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.fsUnlink = function(path) {
-    const fs = require("fs");
-    if (fs.existsSync(path)) {
-        fs.unlinkSync(path);
-    }
+	const fs = require("fs");
+	if (fs.existsSync(path)) {
+		fs.unlinkSync(path);
+	}
 };
 //-----------------------------------------------------------------------------
 // Write file
@@ -1256,8 +1294,8 @@ CGMZ_Temp.prototype.fsUnlink = function(path) {
 // Deprecated. Use CGMZ_Utils.fsWriteFile instead.
 //-----------------------------------------------------------------------------
 CGMZ_Temp.prototype.fsWriteFile = function(path, data, encoding) {
-    const fs = require("fs");
-    fs.writeFileSync(path, data, encoding);
+	const fs = require("fs");
+	fs.writeFileSync(path, data, encoding);
 };
 //=============================================================================
 // CGMZ_Core
@@ -1265,7 +1303,7 @@ CGMZ_Temp.prototype.fsWriteFile = function(path, data, encoding) {
 // This class contains some common methods for other CGMZ plugins.
 //=============================================================================
 function CGMZ_Core() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 //-----------------------------------------------------------------------------
 // Initialize CGMZ_Core
@@ -1368,7 +1406,7 @@ CGMZ_Core.prototype.executeTimerById = function(id) {
 // Handles a timer (by frame count)
 //=============================================================================
 function CGMZ_Timer() {
-    this.initialize.apply(this, arguments);
+	this.initialize.apply(this, arguments);
 }
 //-----------------------------------------------------------------------------
 // Initialize Reputation
@@ -1388,7 +1426,7 @@ CGMZ_Timer.prototype.initialize = function(frameCount, id, funcName, args = {}) 
 // Get CGMZ map name
 //-----------------------------------------------------------------------------
 Game_Map.prototype.CGMZ_getMapName = function() {
-    let name = "Unknown";
+	let name = "Unknown";
 	if($dataMap && $dataMap.meta && $dataMap.meta.cgmzname) {
 		name = $dataMap.meta.cgmzname;
 	}
@@ -1404,7 +1442,7 @@ Game_Map.prototype.CGMZ_getMapName = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Core_GameSystem_onAfterLoad = Game_System.prototype.onAfterLoad;
 Game_System.prototype.onAfterLoad = function() {
-    alias_CGMZ_Core_GameSystem_onAfterLoad.call(this);
+	alias_CGMZ_Core_GameSystem_onAfterLoad.call(this);
 	$cgmz.onAfterLoad();
 };
 //=============================================================================
@@ -1421,7 +1459,7 @@ $cgmzTemp = null;
 //-----------------------------------------------------------------------------
 const CGMZ_Core_createGameObjects = DataManager.createGameObjects;
 DataManager.createGameObjects = function() {
-    CGMZ_Core_createGameObjects.call(this);
+	CGMZ_Core_createGameObjects.call(this);
 	$cgmz = new CGMZ_Core();
 	$cgmzTemp = new CGMZ_Temp();
 };
@@ -1430,16 +1468,16 @@ DataManager.createGameObjects = function() {
 //-----------------------------------------------------------------------------
 const CGMZ_Core_makeSaveContents = DataManager.makeSaveContents;
 DataManager.makeSaveContents = function() {
-    const contents = CGMZ_Core_makeSaveContents.call(this);
-    contents.cgmz = $cgmz;
-    return contents;
+	const contents = CGMZ_Core_makeSaveContents.call(this);
+	contents.cgmz = $cgmz;
+	return contents;
 };
 //-----------------------------------------------------------------------------
 // Load CGMZ data
 //-----------------------------------------------------------------------------
 const CGMZ_Core_extractSaveContents = DataManager.extractSaveContents;
 DataManager.extractSaveContents = function(contents) {
-    CGMZ_Core_extractSaveContents.call(this, contents);
+	CGMZ_Core_extractSaveContents.call(this, contents);
 	contents.cgmz ? $cgmz = contents.cgmz : console.warn("Could not load CGMZ data!");
 };
 //=============================================================================
@@ -1466,7 +1504,7 @@ SceneManager.updateMain = function() {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Core_Scene_Boot_start = Scene_Boot.prototype.start;
 Scene_Boot.prototype.start = function() {
-    alias_CGMZ_Core_Scene_Boot_start.apply(this, arguments);
+	alias_CGMZ_Core_Scene_Boot_start.apply(this, arguments);
 	if($gameTemp.isPlaytest() && CGMZ.Core.ShowDevTools) {
 		SceneManager.showDevTools();
 	}
@@ -1490,7 +1528,7 @@ Scene_Boot.prototype.start = function() {
 // functionality of: handlers (selectable), vertical scrolling (scrollable).
 //=============================================================================
 function CGMZ_Window_Scrollable() {
-    this.initialize(...arguments);
+	this.initialize(...arguments);
 }
 CGMZ_Window_Scrollable.prototype = Object.create(Window_Base.prototype);
 CGMZ_Window_Scrollable.prototype.constructor = CGMZ_Window_Scrollable;
@@ -1499,19 +1537,19 @@ CGMZ_Window_Scrollable.prototype.constructor = CGMZ_Window_Scrollable;
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.initialize = function(rect, heightMultiplier, scrollWait = 300, scrollSpeed = 1,
 													   autoscroll = true, deceleration = 0.92) {
-    Window_Base.prototype.initialize.call(this, rect);
+	Window_Base.prototype.initialize.call(this, rect);
 	this._handlers = {};
 	this._scroll = false;
 	this._autoScroll = autoscroll;
 	this._scrollTouching = false;
-    this._scrollLastTouchY = 0;
-    this._scrollAccelY = 0;
+	this._scrollLastTouchY = 0;
+	this._scrollAccelY = 0;
 	this._scrollMode = 0; // 0 = down, 1 = up
 	this._scrollTimer = 0;
 	this._scrollWait = scrollWait;
 	this._scrollSpeed = scrollSpeed;
 	this._decelerationRate = deceleration;
-    this._neededHeight = 0;
+	this._neededHeight = 0;
 	this._windowHeight = rect.height;
 	this._heightMultiplier = heightMultiplier;
 	this.createContents();
@@ -1530,7 +1568,7 @@ CGMZ_Window_Scrollable.prototype.contentsHeight = function() {
 // If refresh is requested
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.requestRefresh = function() {
-    this.refresh();
+	this.refresh();
 	this._neededHeight += $gameSystem.windowPadding()*2;
 	this.checkForScroll();
 };
@@ -1538,33 +1576,33 @@ CGMZ_Window_Scrollable.prototype.requestRefresh = function() {
 // Process Handling
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.processHandling = function() {
-    if (this.isActive()) {
-        if (this.isCancelEnabled() && (Input.isRepeated('cancel') || TouchInput.isCancelled())) {
-            this.processCancel();
+	if (this.isActive()) {
+		if (this.isCancelEnabled() && (Input.isRepeated('cancel') || TouchInput.isCancelled())) {
+			this.processCancel();
 		}
-    }
+	}
 };
 //-----------------------------------------------------------------------------
 // Process Cancel
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.processCancel = function() {
-    SoundManager.playCancel();
-    this.updateInputData();
-    this.deactivate();
-    this.callCancelHandler();
+	SoundManager.playCancel();
+	this.updateInputData();
+	this.deactivate();
+	this.callCancelHandler();
 };
 //-----------------------------------------------------------------------------
 // Update Input Data
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.updateInputData = function() {
-    Input.update();
-    TouchInput.update();
+	Input.update();
+	TouchInput.update();
 };
 //-----------------------------------------------------------------------------
 // Call Cancel Handler
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.callCancelHandler = function() {
-    this.callHandler('cancel');
+	this.callHandler('cancel');
 };
 //-----------------------------------------------------------------------------
 // Updates for scroll (if needed)
@@ -1584,14 +1622,14 @@ CGMZ_Window_Scrollable.prototype.update = function() {
 			}
 			this._scrollTimer += 1;
 		}
-    }
+	}
 };
 //-----------------------------------------------------------------------------
 // Update the automatic scroll effect
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.updateArrows = function() {
 	this.downArrowVisible = (this.origin.y + this._windowHeight < this._neededHeight && this._scroll);
-    this.upArrowVisible = this.origin.y > 0;
+	this.upArrowVisible = this.origin.y > 0;
 };
 //-----------------------------------------------------------------------------
 // Update the automatic scroll effect
@@ -1614,102 +1652,102 @@ CGMZ_Window_Scrollable.prototype.updateScroll = function() {
 // Process Arrow Key Input
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.processArrowKeys = function() {
-    if(this.isActive()) {
-        if(Input.isPressed('down')) {
-            this.processScroll(this._scrollSpeed*5);
+	if(this.isActive()) {
+		if(Input.isPressed('down')) {
+			this.processScroll(this._scrollSpeed*5);
 			this._scrollTimer = 0;
-        }
-        if(Input.isPressed('up')) {
-            this.processScroll(-this._scrollSpeed*5);
+		}
+		if(Input.isPressed('up')) {
+			this.processScroll(-this._scrollSpeed*5);
 			this._scrollTimer = 0;
-        }
-    }
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Process Wheel Input
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.processWheel = function() {
-    if (this.isActive()) {
-        const threshold = 20;
-        if (TouchInput.wheelY >= threshold) {
-            this.processScroll(this._scrollSpeed*20);
+	if (this.isActive()) {
+		const threshold = 20;
+		if (TouchInput.wheelY >= threshold) {
+			this.processScroll(this._scrollSpeed*20);
 			this._scrollTimer = 0;
-        }
-        if (TouchInput.wheelY <= -threshold) {
-            this.processScroll(-this._scrollSpeed*20);
+		}
+		if (TouchInput.wheelY <= -threshold) {
+			this.processScroll(-this._scrollSpeed*20);
 			this._scrollTimer = 0;
-        }
-    }
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Process Touch Scrolling
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.processTouch = function() {
-    if (TouchInput.isTriggered() && this.isTouchedInsideFrame()) {
-        this.onTouchScrollStart();
-    }
-    if (this._scrollTouching) {
+	if (TouchInput.isTriggered() && this.isTouchedInsideFrame()) {
+		this.onTouchScrollStart();
+	}
+	if (this._scrollTouching) {
 		this._scrollTimer = 0;
-        if (TouchInput.isReleased()) {
-            this.onTouchScrollEnd();
-        } else if (TouchInput.isMoved()) {
-            this.onTouchScroll();
-        }
-    }
+		if (TouchInput.isReleased()) {
+			this.onTouchScrollEnd();
+		} else if (TouchInput.isMoved()) {
+			this.onTouchScroll();
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Determine if window has been touched inside the window frame
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.isTouchedInsideFrame = function() {
-    const touchPos = new Point(TouchInput.x, TouchInput.y);
-    const localPos = this.worldTransform.applyInverse(touchPos);
-    return this.innerRect.contains(localPos.x, localPos.y);
+	const touchPos = new Point(TouchInput.x, TouchInput.y);
+	const localPos = this.worldTransform.applyInverse(touchPos);
+	return this.innerRect.contains(localPos.x, localPos.y);
 };
 //-----------------------------------------------------------------------------
 // Processing for when window is touched
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.onTouchScrollStart = function() {
-    this._scrollTouching = true;
-    this._scrollLastTouchY = TouchInput.y;
-    this.setScrollAccel(0, 0);
+	this._scrollTouching = true;
+	this._scrollLastTouchY = TouchInput.y;
+	this.setScrollAccel(0, 0);
 };
 //-----------------------------------------------------------------------------
 // Handling for current scroll via touch
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.onTouchScroll = function() {
-    const accelY = this._scrollLastTouchY - TouchInput.y;
-    this.setScrollAccel(accelY);
-    this._scrollLastTouchY = TouchInput.y;
+	const accelY = this._scrollLastTouchY - TouchInput.y;
+	this.setScrollAccel(accelY);
+	this._scrollLastTouchY = TouchInput.y;
 };
 //-----------------------------------------------------------------------------
 // Processing for letting go of touch scroll
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.onTouchScrollEnd = function() {
-    this._scrollTouching = false;
+	this._scrollTouching = false;
 };
 //-----------------------------------------------------------------------------
 // Update Scroll Acceleration
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.updateScrollAccel = function() {
-    if(this._scrollAccelY !== 0) {
-        this.processScroll(this._scrollAccelY);
-        this._scrollAccelY *= this.getDecelerationRate();
-        if(Math.abs(this._scrollAccelY) < 1) {
-            this._scrollAccelY = 0;
-        }
-    }
+	if(this._scrollAccelY !== 0) {
+		this.processScroll(this._scrollAccelY);
+		this._scrollAccelY *= this.getDecelerationRate();
+		if(Math.abs(this._scrollAccelY) < 1) {
+			this._scrollAccelY = 0;
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Get deceleration rate
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.getDecelerationRate = function() {
-    return this._decelerationRate;
+	return this._decelerationRate;
 };
 //-----------------------------------------------------------------------------
 // Set x and y acceleration for scrolling
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.setScrollAccel = function(y) {
-    this._scrollAccelY = y;
+	this._scrollAccelY = y;
 };
 //-----------------------------------------------------------------------------
 // Process scrolling
@@ -1742,8 +1780,8 @@ CGMZ_Window_Scrollable.prototype.setupWindowForNewEntry = function() {
 	this._scrollTimer = 0;
 	this._scrollMode = 0;
 	this._neededHeight = 0;
-    this._scrollLastTouchY = 0;
-    this._scrollAccelY = 0;
+	this._scrollLastTouchY = 0;
+	this._scrollAccelY = 0;
 	this._scroll = false;
 	this._scrollTouching = false;
 	this.contents.clear();
@@ -1758,27 +1796,27 @@ CGMZ_Window_Scrollable.prototype.isActive = function() {
 // Set Handler same as Window_Selectable
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.setHandler = function(symbol, method) {
-    this._handlers[symbol] = method;
+	this._handlers[symbol] = method;
 };
 //-----------------------------------------------------------------------------
 // check if is handled same as Window_Selectable
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.isHandled = function(symbol) {
-    return !!this._handlers[symbol];
+	return !!this._handlers[symbol];
 };
 //-----------------------------------------------------------------------------
 // Call Handler same as Window_Selectable
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.callHandler = function(symbol) {
-    if (this.isHandled(symbol)) {
-        this._handlers[symbol]();
-    }
+	if (this.isHandled(symbol)) {
+		this._handlers[symbol]();
+	}
 };
 //-----------------------------------------------------------------------------
 // Check if cancel handling exists
 //-----------------------------------------------------------------------------
 CGMZ_Window_Scrollable.prototype.isCancelEnabled = function() {
-    return this.isHandled('cancel');
+	return this.isHandled('cancel');
 };
 //=============================================================================
 // CGMZ_Window_HorzScrollable
@@ -1787,7 +1825,7 @@ CGMZ_Window_Scrollable.prototype.isCancelEnabled = function() {
 // allows horizontal scrolling instead of vertical scrolling.
 //=============================================================================
 function CGMZ_Window_HorzScrollable() {
-    this.initialize(...arguments);
+	this.initialize(...arguments);
 }
 CGMZ_Window_HorzScrollable.prototype = Object.create(CGMZ_Window_Scrollable.prototype);
 CGMZ_Window_HorzScrollable.prototype.constructor = CGMZ_Window_HorzScrollable;
@@ -1796,10 +1834,10 @@ CGMZ_Window_HorzScrollable.prototype.constructor = CGMZ_Window_HorzScrollable;
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.initialize = function(rect, widthMultiplier, scrollWait = 300, scrollSpeed = 1,
 													   autoscroll = true, deceleration = 0.92) {
-    CGMZ_Window_Scrollable.prototype.initialize.call(this, rect, 1, scrollWait, scrollSpeed, autoscroll, deceleration);
-    this._scrollLastTouchX = 0;
-    this._scrollAccelX = 0;
-    this._neededWidth = 0;
+	CGMZ_Window_Scrollable.prototype.initialize.call(this, rect, 1, scrollWait, scrollSpeed, autoscroll, deceleration);
+	this._scrollLastTouchX = 0;
+	this._scrollAccelX = 0;
+	this._neededWidth = 0;
 	this._windowWidth = rect.width;
 	this._widthMultiplier = widthMultiplier;
 	this.createContents();
@@ -1818,7 +1856,7 @@ CGMZ_Window_HorzScrollable.prototype.contentsWidth = function() {
 // If refresh is requested
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.requestRefresh = function() {
-    this.refresh();
+	this.refresh();
 	this._neededWidth += $gameSystem.windowPadding()*2;
 	this.checkForScroll();
 };
@@ -1827,7 +1865,7 @@ CGMZ_Window_HorzScrollable.prototype.requestRefresh = function() {
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.updateArrows = function() {
 	this.downArrowVisible = (this.origin.x + this._windowWidth < this._neededWidth && this._scroll);
-    this.upArrowVisible = this.origin.x > 0;
+	this.upArrowVisible = this.origin.x > 0;
 };
 //-----------------------------------------------------------------------------
 // Update the automatic scroll effect
@@ -1850,50 +1888,50 @@ CGMZ_Window_HorzScrollable.prototype.updateScroll = function() {
 // Process Arrow Key Input
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.processArrowKeys = function() {
-    if(this.isActive()) {
-        if(Input.isPressed('right')) {
-            this.processScroll(this._scrollSpeed*5);
+	if(this.isActive()) {
+		if(Input.isPressed('right')) {
+			this.processScroll(this._scrollSpeed*5);
 			this._scrollTimer = 0;
-        }
-        if(Input.isPressed('left')) {
-            this.processScroll(-this._scrollSpeed*5);
+		}
+		if(Input.isPressed('left')) {
+			this.processScroll(-this._scrollSpeed*5);
 			this._scrollTimer = 0;
-        }
-    }
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Processing for when window is touched
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.onTouchScrollStart = function() {
-    this._scrollTouching = true;
-    this._scrollLastTouchX = TouchInput.x;
-    this.setScrollAccel(0);
+	this._scrollTouching = true;
+	this._scrollLastTouchX = TouchInput.x;
+	this.setScrollAccel(0);
 };
 //-----------------------------------------------------------------------------
 // Handling for current scroll via touch
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.onTouchScroll = function() {
-    const accelX = this._scrollLastTouchX - TouchInput.x;
-    this.setScrollAccel(accelX);
-    this._scrollLastTouchX = TouchInput.x;
+	const accelX = this._scrollLastTouchX - TouchInput.x;
+	this.setScrollAccel(accelX);
+	this._scrollLastTouchX = TouchInput.x;
 };
 //-----------------------------------------------------------------------------
 // Update Scroll Acceleration
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.updateScrollAccel = function() {
-    if(this._scrollAccelX !== 0) {
-        this.processScroll(this._scrollAccelX);
-        this._scrollAccelX *= this.getDecelerationRate();
-        if(Math.abs(this._scrollAccelX) < 1) {
-            this._scrollAccelX = 0;
-        }
-    }
+	if(this._scrollAccelX !== 0) {
+		this.processScroll(this._scrollAccelX);
+		this._scrollAccelX *= this.getDecelerationRate();
+		if(Math.abs(this._scrollAccelX) < 1) {
+			this._scrollAccelX = 0;
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Set x acceleration for scrolling
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype.setScrollAccel = function(x) {
-    this._scrollAccelX = x;
+	this._scrollAccelX = x;
 };
 //-----------------------------------------------------------------------------
 // Process scrolling
@@ -1926,8 +1964,8 @@ CGMZ_Window_HorzScrollable.prototype.setupWindowForNewEntry = function() {
 	this._scrollTimer = 0;
 	this._scrollMode = 0;
 	this._neededWidth = 0;
-    this._scrollLastTouchX = 0;
-    this._scrollAccelX = 0;
+	this._scrollLastTouchX = 0;
+	this._scrollAccelX = 0;
 	this._scroll = false;
 	this._scrollTouching = false;
 	this.contents.clear();
@@ -1937,22 +1975,22 @@ CGMZ_Window_HorzScrollable.prototype.setupWindowForNewEntry = function() {
 // Note: variable names not changed to reuse inherited code.
 //-----------------------------------------------------------------------------
 CGMZ_Window_HorzScrollable.prototype._refreshArrows = function() {
-    const w = this._width;
-    const h = this._height;
-    const p = 24;
-    const q = p / 2;
-    const sx = 96 + p;
-    const sy = 0 + p;
-    this._downArrowSprite.bitmap = this._windowskin;
-    this._downArrowSprite.anchor.x = 0.5;
-    this._downArrowSprite.anchor.y = 0.5;
+	const w = this._width;
+	const h = this._height;
+	const p = 24;
+	const q = p / 2;
+	const sx = 96 + p;
+	const sy = 0 + p;
+	this._downArrowSprite.bitmap = this._windowskin;
+	this._downArrowSprite.anchor.x = 0.5;
+	this._downArrowSprite.anchor.y = 0.5;
 	this._downArrowSprite.setFrame(sx + p + q, sy + q, q, p);
-    this._downArrowSprite.move(w - q, h / 2);
-    this._upArrowSprite.bitmap = this._windowskin;
-    this._upArrowSprite.anchor.x = 0.5;
-    this._upArrowSprite.anchor.y = 0.5;
+	this._downArrowSprite.move(w - q, h / 2);
+	this._upArrowSprite.bitmap = this._windowskin;
+	this._upArrowSprite.anchor.x = 0.5;
+	this._upArrowSprite.anchor.y = 0.5;
 	this._upArrowSprite.setFrame(sx, sy + q, q, p);
-    this._upArrowSprite.move(q, h / 2);
+	this._upArrowSprite.move(q, h / 2);
 };
 //=============================================================================
 // CGMZ_Window_Selectable
@@ -1962,7 +2000,7 @@ CGMZ_Window_HorzScrollable.prototype._refreshArrows = function() {
 // define its own width/height, which may vary per item.
 //=============================================================================
 function CGMZ_Window_Selectable() {
-    this.initialize(...arguments);
+	this.initialize(...arguments);
 }
 CGMZ_Window_Selectable.prototype = Object.create(Window_Selectable.prototype);
 CGMZ_Window_Selectable.prototype.constructor = CGMZ_Window_Selectable;
@@ -1970,7 +2008,7 @@ CGMZ_Window_Selectable.prototype.constructor = CGMZ_Window_Selectable;
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.initialize = function(rect) {
-    Window_Selectable.prototype.initialize.call(this, rect);
+	Window_Selectable.prototype.initialize.call(this, rect);
 	this._category = null;
 	this._data = [];
 };
@@ -1997,7 +2035,7 @@ CGMZ_Window_Selectable.prototype.itemWidth = function(index) {
 	if(this._data[index] && this._data[index].hasOwnProperty("level")) {
 		return Window_Selectable.prototype.itemWidth.call(this) - this.levelAdjustment(this._data[index].level);
 	}
-    return Window_Selectable.prototype.itemWidth.call(this);
+	return Window_Selectable.prototype.itemWidth.call(this);
 };
 //-----------------------------------------------------------------------------
 // Change height by index
@@ -2007,9 +2045,9 @@ CGMZ_Window_Selectable.prototype.itemHeight = function(index = -1) {
 		return this._data[index].height;
 	}
 	if(index >= 0 && this._data && this._data[index] && this._data[index].hasOwnProperty("heightMultiplier")) {
-		return Window_Scrollable.prototype.itemHeight.call(this) * this._data[index].heightMultiplier + 8;
+		return Window_Base.prototype.itemHeight.call(this) * this._data[index].heightMultiplier + 8;
 	}
-    return Window_Scrollable.prototype.itemHeight.call(this) + 8;
+	return Window_Selectable.prototype.itemHeight.call(this);
 };
 //-----------------------------------------------------------------------------
 // Get item height of previous entries
@@ -2025,71 +2063,77 @@ CGMZ_Window_Selectable.prototype.itemHeightOfIndex = function(index) {
 // Get contents height
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.contentsHeight = function() {
-    return this.innerHeight + this.itemHeight() * 2;
+	return this.innerHeight + this.itemHeight() * 2;
 };
 //-----------------------------------------------------------------------------
 // Get overall height
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.overallHeight = function() {
-    return this.itemHeightOfIndex(this.maxItems());
+	return this.itemHeightOfIndex(this.maxItems());
 };
 //-----------------------------------------------------------------------------
 // Get top row
-// TODO: Make this better, right now kind of hackish
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.topRow = function() {
-	return Math.max(0, (Math.floor(this.scrollY() / this.itemHeight()) - 5));
+	if(this.scrollY() === 0) return 0;
+	for(let i = 0; i < this.maxItems(); i++) {
+		if(this.itemHeightOfIndex(i+1) > this.scrollY()) {
+			return i;
+		}
+	}
+	// If above fails, fall back to a rough estimate of the top row
+	return this.itemHeightOfIndex(this.index()) - this.innerHeight;
 };
 //-----------------------------------------------------------------------------
 // Get item rect
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.itemRect = function(index) {
 	const level = (this._data && this._data[index] && this._data[index].hasOwnProperty('level')) ? this._data[index].level : 0;
-    const maxCols = this.maxCols();
-    const itemWidth = this.itemWidth(index);
-    const itemHeight = this.itemHeight(index);
-    const colSpacing = this.colSpacing();
-    const rowSpacing = this.rowSpacing();
-    const col = index % maxCols;
-    const row = Math.floor(index / maxCols);
-    const x = (col * itemWidth + colSpacing / 2 - this.scrollBaseX()) + this.levelAdjustment(level);
-    const y = this.itemHeightOfIndex(index) + rowSpacing / 2 - this.scrollBaseY();
-    const width = itemWidth - colSpacing;
-    const height = itemHeight - rowSpacing;
-    return new Rectangle(x, y, width, height);
+	const maxCols = this.maxCols();
+	const itemWidth = this.itemWidth(index);
+	const itemHeight = this.itemHeight(index);
+	const colSpacing = this.colSpacing();
+	const rowSpacing = this.rowSpacing();
+	const col = index % maxCols;
+	const row = Math.floor(index / maxCols);
+	const x = (col * itemWidth + colSpacing / 2 - this.scrollBaseX()) + this.levelAdjustment(level);
+	const y = this.itemHeightOfIndex(index) + rowSpacing / 2 - this.scrollBaseY();
+	const width = itemWidth - colSpacing;
+	const height = itemHeight - rowSpacing;
+	return new Rectangle(x, y, width, height);
 };
 //-----------------------------------------------------------------------------
 // Ensure Cursor is Visible
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.ensureCursorVisible = function(smooth) {
-    if (this._cursorAll) {
-        this.scrollTo(0, 0);
-    } else if (this.innerHeight > 0 && this.row() >= 0) {
-        const scrollY = this.scrollY();
-        const itemTop = this.itemHeightOfIndex(this.index());
-        const itemBottom = itemTop + this.itemHeight(this.index());
-        const scrollMin = itemBottom - this.innerHeight;
-        if (scrollY > itemTop) {
-            if (smooth) {
-                this.smoothScrollTo(0, itemTop);
-            } else {
-                this.scrollTo(0, itemTop);
-            }
-        } else if (scrollY < scrollMin) {
-            if (smooth) {
-                this.smoothScrollTo(0, scrollMin);
-            } else {
-                this.scrollTo(0, scrollMin);
-            }
-        }
-    }
+	if (this._cursorAll) {
+		this.scrollTo(0, 0);
+	} else if (this.innerHeight > 0 && this.row() >= 0) {
+		const scrollY = this.scrollY();
+		const itemTop = this.itemHeightOfIndex(this.index());
+		const itemBottom = itemTop + this.itemHeight(this.index());
+		const scrollMin = itemBottom - this.innerHeight;
+		if (scrollY > itemTop) {
+			if (smooth) {
+				this.smoothScrollTo(0, itemTop);
+			} else {
+				this.scrollTo(0, itemTop);
+			}
+		} else if (scrollY < scrollMin) {
+			if (smooth) {
+				this.smoothScrollTo(0, scrollMin);
+			} else {
+				this.scrollTo(0, scrollMin);
+			}
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Pass index to drawing background rect for color differentiation
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.drawItemBackground = function(index) {
-    const rect = this.itemRect(index);
-    this.drawBackgroundRect(rect, index);
+	const rect = this.itemRect(index);
+	this.drawBackgroundRect(rect, index);
 };
 //-----------------------------------------------------------------------------
 // Look for color property on index
@@ -2101,20 +2145,20 @@ CGMZ_Window_Selectable.prototype.drawBackgroundRect = function(rect, index) {
 		Window_Selectable.prototype.drawBackgroundRect.call(this, rect);
 		return;
 	}
-    const c1 = this._category._color1;
-    const c2 = this._category._color2;
-    const x = rect.x;
-    const y = rect.y;
-    const w = rect.width;
-    const h = rect.height;
-    this.contentsBack.gradientFillRect(x, y, w, h, c1, c2, true);
-    this.contentsBack.strokeRect(x, y, w, h, c1);
+	const c1 = this._category._color1;
+	const c2 = this._category._color2;
+	const x = rect.x;
+	const y = rect.y;
+	const w = rect.width;
+	const h = rect.height;
+	this.contentsBack.gradientFillRect(x, y, w, h, c1, c2, true);
+	this.contentsBack.strokeRect(x, y, w, h, c1);
 };
 //-----------------------------------------------------------------------------
 // Get the closest category with index smaller than current index
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.getPreviousCategoryItem = function(index) {
-    for(let i = index; i >= 0; i--) {
+	for(let i = index; i >= 0; i--) {
 		const item = this._data[i];
 		if(item && item.isCategory) {
 			return item;
@@ -2138,33 +2182,99 @@ CGMZ_Window_Selectable.prototype.processOk = function() {
 // Set new category. Used by individual instances to set category.
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.setNewCategory = function(item) {
-    this._category = item;
+	this._category = item;
 };
 //-----------------------------------------------------------------------------
 // Handling for when category is selected and OK press occurs
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.handleCategorySelection = function(item) {
-    // Used by plugins to minimize / expand category
+	// Used by plugins to minimize / expand category
 };
 //-----------------------------------------------------------------------------
 // Always handle OK
 //-----------------------------------------------------------------------------
 CGMZ_Window_Selectable.prototype.isOkEnabled = function() {
-    return true;
+	return true;
+};
+//=============================================================================
+// Window
+//-----------------------------------------------------------------------------
+// Create the CGMZ Options object
+//=============================================================================
+//-----------------------------------------------------------------------------
+// Also create the cgmz window options object
+//-----------------------------------------------------------------------------
+const alias_CGMZCore_Window_initialize = Window.prototype.initialize;
+Window.prototype.initialize = function() {
+	alias_CGMZCore_Window_initialize.apply(this, arguments);
+	this.CGMZ_createWindowOptions();
+};
+//-----------------------------------------------------------------------------
+// Create cgmz window options object
+//-----------------------------------------------------------------------------
+Window.prototype.CGMZ_createWindowOptions = function() {
+	this.cgmzOpts = {};
 };
 //=============================================================================
 // Window_Base
 //-----------------------------------------------------------------------------
 // Adding functions for CGMZ Windows. Drawing gauges and text processing
+// Change core setting functions to check for CGMZ Options
 //=============================================================================
+//-----------------------------------------------------------------------------
+// Look for cgmz windowskin setting
+//-----------------------------------------------------------------------------
+const alias_CGMZCore_WindowBase_loadWindowskin = Window_Base.prototype.loadWindowskin;
+Window_Base.prototype.loadWindowskin = function() {
+	if(this.cgmzOpts.windowskin) {
+		const skin = CGMZ_Utils.getImageData(this.cgmzOpts.windowskin, "img");
+		this.windowskin = ImageManager.loadBitmap(skin.folder, skin.filename);
+	} else {
+		alias_CGMZCore_WindowBase_loadWindowskin.apply(this, arguments);
+	}
+};
+//-----------------------------------------------------------------------------
+// Look for cgmz padding setting
+//-----------------------------------------------------------------------------
+const alias_CGMZCore_WindowBase_updatePadding = Window_Base.prototype.updatePadding;
+Window_Base.prototype.updatePadding = function() {
+	if(typeof this.cgmzOpts.padding === 'number') {
+		this.padding = this.cgmzOpts.padding;
+	} else {
+		alias_CGMZCore_WindowBase_updatePadding.apply(this, arguments);
+	}
+};
+//-----------------------------------------------------------------------------
+// Look for cgmz back opacity setting
+//-----------------------------------------------------------------------------
+const alias_CGMZCore_WindowBase_updateBackOpacity = Window_Base.prototype.updateBackOpacity;
+Window_Base.prototype.updateBackOpacity = function() {
+	if(typeof this.cgmzOpts.backOpacity === 'number') {
+		this.backOpacity = this.cgmzOpts.backOpacity;
+	} else {
+		alias_CGMZCore_WindowBase_updateBackOpacity.apply(this, arguments);
+	}
+};
+//-----------------------------------------------------------------------------
+// Look for cgmz tone setting
+//-----------------------------------------------------------------------------
+const alias_CGMZCore_WindowBase_updateTone = Window_Base.prototype.updateTone;
+Window_Base.prototype.updateTone = function() {
+	if(this.cgmzOpts.tone) {
+		const tone = this.cgmzOpts.tone;
+		this.setTone(tone[0], tone[1], tone[2]);
+	} else {
+		alias_CGMZCore_WindowBase_updateTone.apply(this, arguments);
+	}
+};
 //-----------------------------------------------------------------------------
 // Use bitmap gauge - don't always need full sprite gauge
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawGauge = function(rect, rate, color1, color2, color0 = ColorManager.gaugeBackColor()) {
 	const fillW = Math.floor((rect.width - 2) * rate);
-    const fillH = rect.height - 2;
+	const fillH = rect.height - 2;
 	this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, color0);
-    this.contents.gradientFillRect(rect.x + 1, rect.y + 1, fillW, fillH, color1, color2);
+	this.contents.gradientFillRect(rect.x + 1, rect.y + 1, fillW, fillH, color1, color2);
 };
 //-----------------------------------------------------------------------------
 // Draw Header
@@ -2182,30 +2292,30 @@ Window_Base.prototype.CGMZ_drawHeader = function(header, y, color1 = 1, color2 =
 // Draw a divider / hr
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawDivider = function(rect, color1 = ColorManager.gaugeBackColor(), color2 = ColorManager.gaugeBackColor()) {
-    this.contents.gradientFillRect(rect.x, rect.y, rect.width, rect.height, color1, color2);
+	this.contents.gradientFillRect(rect.x, rect.y, rect.width, rect.height, color1, color2);
 };
 //-----------------------------------------------------------------------------
 // Draw a semi-transparent background rectangle
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawBackgroundRectangle = function(rect, color = "rgba(32, 32, 32, 0.5)") {
-    this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, color);
+	this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, color);
 };
 //-----------------------------------------------------------------------------
 // Draw a background rectangle with a gradient
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawBackgroundGradientRectangle = function(rect, c1 = ColorManager.itemBackColor1(), c2 = ColorManager.itemBackColor2(), vertical = true) {
-    const x = rect.x;
-    const y = rect.y;
-    const w = rect.width;
-    const h = rect.height;
-    this.contents.gradientFillRect(x, y, w, h, c1, c2, vertical);
-    this.contents.strokeRect(x, y, w, h, c1);
+	const x = rect.x;
+	const y = rect.y;
+	const w = rect.width;
+	const h = rect.height;
+	this.contents.gradientFillRect(x, y, w, h, c1, c2, vertical);
+	this.contents.strokeRect(x, y, w, h, c1);
 };
 //-----------------------------------------------------------------------------
 // Draw a checkbox
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawCheckbox = function(rect, checked, lineWidth = 2, color = "rgba(255, 255, 255, 1)", color2 = "rgba(255, 255, 255, 1)") {
-    this.contents.CGMZ_strokeRect(rect.x, rect.y, rect.width, rect.height, color, lineWidth);
+	this.contents.CGMZ_strokeRect(rect.x, rect.y, rect.width, rect.height, color, lineWidth);
 	if(checked) {
 		const point0 = new Point(rect.x + rect.width * .3, rect.y + (rect.height * .6));
 		const point1 = new Point(rect.x + (rect.width / 2), rect.y + rect.height - (rect.height * .2));
@@ -2217,7 +2327,7 @@ Window_Base.prototype.CGMZ_drawCheckbox = function(rect, checked, lineWidth = 2,
 // Draw a radio input
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawRadio = function(point, radius, checked, lineWidth = 2, color = "rgba(255, 255, 255, 1)", color2 = "rgba(255, 255, 255, 1)") {
-    this.contents.CGMZ_strokeCircle(point.x, point.y, radius, color, lineWidth, true);
+	this.contents.CGMZ_strokeCircle(point.x, point.y, radius, color, lineWidth, true);
 	if(checked) {
 		this.contents.drawCircle(point.x, point.y, radius - (lineWidth / 2) - (radius * .2), color2);
 	}
@@ -2264,9 +2374,9 @@ Window_Base.prototype.CGMZ_drawShape = function(rect, fill, numSides, lineWidth 
 	const shift = (numSides === 5) ? (Math.PI / 180.0) * -18 : (numSides === 7) ? (Math.PI / 180) * 12 : (numSides === 8) ? (Math.PI / 180) * 21 : 0;
 	const points = [];
 	for (let i = 0; i <= numSides; i++) {
-    	const curStep = i * step + shift;
+		const curStep = i * step + shift;
 		points.push(new Point(xCenter + size * Math.cos(curStep), yCenter + size * Math.sin(curStep)));
-    }
+	}
 	if(fill) {
 		this.contents.CGMZ_fillLinePath(points, color, lineWidth);
 	} else {
@@ -2277,16 +2387,16 @@ Window_Base.prototype.CGMZ_drawShape = function(rect, fill, numSides, lineWidth 
 // Draw a character with specific frame in step animation,
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawCharacter = function(
-    characterName, characterIndex, x, y, frameXOffset = 0, frameYOffset = 0
+	characterName, characterIndex, x, y, frameXOffset = 0, frameYOffset = 0
 ) {
-    const bitmap = ImageManager.loadCharacter(characterName);
-    const big = ImageManager.isBigCharacter(characterName);
-    const pw = bitmap.width / (big ? 3 : 12);
-    const ph = bitmap.height / (big ? 4 : 8);
-    const n = big ? 0: characterIndex;
-    const sx = (((n % 4) * 3 + 1) * pw) + (pw * frameXOffset);
-    const sy = (Math.floor(n / 4) * 4 * ph) + (ph * frameYOffset);
-    this.contents.blt(bitmap, sx, sy, pw, ph, x - pw / 2, y - ph);
+	const bitmap = ImageManager.loadCharacter(characterName);
+	const big = ImageManager.isBigCharacter(characterName);
+	const pw = bitmap.width / (big ? 3 : 12);
+	const ph = bitmap.height / (big ? 4 : 8);
+	const n = big ? 0: characterIndex;
+	const sx = (((n % 4) * 3 + 1) * pw) + (pw * frameXOffset);
+	const sy = (Math.floor(n / 4) * 4 * ph) + (ph * frameYOffset);
+	this.contents.blt(bitmap, sx, sy, pw, ph, x - pw / 2, y - ph);
 };
 //-----------------------------------------------------------------------------
 // Draw a string of text with text codes and word wrapping.
@@ -2295,7 +2405,7 @@ Window_Base.prototype.CGMZ_drawCharacter = function(
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_drawText = function(string, x, firstLineX, y, width, alignment = "left") {
 	this.resetFontSettings();
-    const textState = this.createTextState(string, x, y, width);
+	const textState = this.createTextState(string, x, y, width);
 	textState.drawing = false;
 	textState.x = firstLineX;
 	textState.lastSpaceIndex = 0;
@@ -2404,10 +2514,10 @@ Window_Base.prototype.CGMZ_drawTextLineNoResize = function(string, x, y, width, 
 // Get the size of the text without resetting font settings
 //-----------------------------------------------------------------------------
 Window_Base.prototype.CGMZ_textSizeEx = function(text) {
-    const textState = this.createTextState(text, 0, 0, 0);
-    textState.drawing = false;
-    this.processAllText(textState);
-    return { width: textState.outputWidth, height: textState.outputHeight };
+	const textState = this.createTextState(text, 0, 0, 0);
+	textState.drawing = false;
+	this.processAllText(textState);
+	return { width: textState.outputWidth, height: textState.outputHeight };
 };
 //=============================================================================
 // Spriteset_Map
@@ -2419,48 +2529,48 @@ Window_Base.prototype.CGMZ_textSizeEx = function(text) {
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Core_Spriteset_Map_initialize = Spriteset_Map.prototype.initialize;
 Spriteset_Map.prototype.initialize = function() {
-    alias_CGMZ_Core_Spriteset_Map_initialize.call(this);
-    this._cgmzAnimations = [];
+	alias_CGMZ_Core_Spriteset_Map_initialize.call(this);
+	this._cgmzAnimations = [];
 };
 //-----------------------------------------------------------------------------
 // Alias. Also Update cgmz animations
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Core_Spriteset_Map_update = Spriteset_Map.prototype.update;
 Spriteset_Map.prototype.update = function() {
-    alias_CGMZ_Core_Spriteset_Map_update.call(this);
-    this.updateCGMZAnimations();
+	alias_CGMZ_Core_Spriteset_Map_update.call(this);
+	this.updateCGMZAnimations();
 };
 //-----------------------------------------------------------------------------
 // Alias. Also remove all cgmz animations
 //-----------------------------------------------------------------------------
 const alias_CGMZ_Core_Spriteset_Map_destroy = Spriteset_Map.prototype.destroy;
 Spriteset_Map.prototype.destroy = function(options) {
-    this.removeAllCGMZAnimations();
-    alias_CGMZ_Core_Spriteset_Map_destroy.call(this, options);
+	this.removeAllCGMZAnimations();
+	alias_CGMZ_Core_Spriteset_Map_destroy.call(this, options);
 };
 //-----------------------------------------------------------------------------
 // Update cgmz animations
 //-----------------------------------------------------------------------------
 Spriteset_Map.prototype.updateCGMZAnimations = function() {
-    for(const sprite of this._cgmzAnimations) {
-        if (!sprite.isPlaying()) {
-            this.removeCGMZAnimation(sprite);
-        }
-    }
-    this.processCGMZAnimationRequests();
+	for(const sprite of this._cgmzAnimations) {
+		if (!sprite.isPlaying()) {
+			this.removeCGMZAnimation(sprite);
+		}
+	}
+	this.processCGMZAnimationRequests();
 };
 //-----------------------------------------------------------------------------
 // Process new animation requests
 //-----------------------------------------------------------------------------
 Spriteset_Map.prototype.processCGMZAnimationRequests = function() {
-    for(;;) {
-        const request = $cgmzTemp.retrieveMapAnimationRequest();
-        if (request) {
-            this.createCGMZAnimation(request);
-        } else {
-            break;
-        }
-    }
+	for(;;) {
+		const request = $cgmzTemp.retrieveMapAnimationRequest();
+		if (request) {
+			this.createCGMZAnimation(request);
+		} else {
+			break;
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Create a new CGMZ animation
@@ -2474,17 +2584,17 @@ Spriteset_Map.prototype.createCGMZAnimation = function(request) {
 // Remove a CGMZ animation
 //-----------------------------------------------------------------------------
 Spriteset_Map.prototype.removeCGMZAnimation = function(sprite) {
-    this._cgmzAnimations.remove(sprite);
-    this._effectsContainer.removeChild(sprite);
-    sprite.destroy();
+	this._cgmzAnimations.remove(sprite);
+	this._effectsContainer.removeChild(sprite);
+	sprite.destroy();
 };
 //-----------------------------------------------------------------------------
 // Remove all CGMZ animations
 //-----------------------------------------------------------------------------
 Spriteset_Map.prototype.removeAllCGMZAnimations = function() {
-    for(const sprite of this._cgmzAnimations.clone()) {
-        this.removeCGMZAnimation(sprite);
-    }
+	for(const sprite of this._cgmzAnimations.clone()) {
+		this.removeCGMZAnimation(sprite);
+	}
 };
 //=============================================================================
 // Sprite_CGMZ_MapAnimation
@@ -2492,7 +2602,7 @@ Spriteset_Map.prototype.removeAllCGMZAnimations = function() {
 // Sprite class for basic map animations
 //=============================================================================
 function Sprite_CGMZ_MapAnimation() {
-    this.initialize(...arguments);
+	this.initialize(...arguments);
 }
 Sprite_CGMZ_MapAnimation.prototype = Object.create(Sprite.prototype);
 Sprite_CGMZ_MapAnimation.prototype.constructor = Sprite_CGMZ_MapAnimation;
@@ -2508,14 +2618,14 @@ Sprite_CGMZ_MapAnimation.prototype.constructor = Sprite_CGMZ_MapAnimation;
 // options - custom options to alter sprite behavior
 //-----------------------------------------------------------------------------
 Sprite_CGMZ_MapAnimation.prototype.initialize = function(request) {
-    Sprite.prototype.initialize.call(this);
+	Sprite.prototype.initialize.call(this);
 	this._isPlaying = true;
 	this._needsUpdate = false;
 	this._waitCounter = 0;
 	this._currentFrame = 0;
 	this._maxFrames = 0;
 	this.anchor.x = 0.5;
-    this.anchor.y = 0.5;
+	this.anchor.y = 0.5;
 	this._request = request;
 	this.startBitmapLoad(request.bitmap);
 };
@@ -2536,7 +2646,7 @@ Sprite_CGMZ_MapAnimation.prototype.onImageLoaded = function() {
 	const ph = this._request.frameHeight;
 	const sx = 0;
 	const sy = 0;
-    this.setFrame(sx, sy, pw, ph);
+	this.setFrame(sx, sy, pw, ph);
 };
 //-----------------------------------------------------------------------------
 // Calculate max amount of frames
@@ -2554,7 +2664,7 @@ Sprite_CGMZ_MapAnimation.prototype.isPlaying = function() {
 // Update sprite
 //-----------------------------------------------------------------------------
 Sprite_CGMZ_MapAnimation.prototype.update = function() {
-    Sprite.prototype.update.call(this);
+	Sprite.prototype.update.call(this);
 	if(this._needsUpdate) {
 		this.updateFrame();
 		this.updatePosition();
@@ -2576,7 +2686,7 @@ Sprite_CGMZ_MapAnimation.prototype.updateFrame = function() {
 		const ph = this._request.frameHeight;
 		const sx = this._currentFrame * pw;
 		const sy = 0;
-        this.setFrame(sx, sy, pw, ph);
+		this.setFrame(sx, sy, pw, ph);
 	}
 };
 //-----------------------------------------------------------------------------
@@ -2586,7 +2696,7 @@ Sprite_CGMZ_MapAnimation.prototype.updatePosition = function() {
 	const tw = $gameMap.tileWidth();
 	const th = $gameMap.tileHeight();
 	this.x = Math.floor($gameMap.adjustX(this._request.x) * tw + tw / 2);
-    this.y = Math.floor($gameMap.adjustY(this._request.y) * th + th / 2);
+	this.y = Math.floor($gameMap.adjustY(this._request.y) * th + th / 2);
 };
 //=============================================================================
 // Input
@@ -2598,7 +2708,7 @@ Sprite_CGMZ_MapAnimation.prototype.updatePosition = function() {
 //-----------------------------------------------------------------------------
 const CGMZ_Core_Input_onKeyDown = Input._onKeyDown;
 Input._onKeyDown = function(event) {
-    CGMZ_Core_Input_onKeyDown.call(this, event);
+	CGMZ_Core_Input_onKeyDown.call(this, event);
 	if($cgmzTemp) $cgmzTemp.onKeyDown(event);
 };
 //-----------------------------------------------------------------------------
@@ -2606,7 +2716,7 @@ Input._onKeyDown = function(event) {
 //-----------------------------------------------------------------------------
 const CGMZ_Core_Input_onKeyUp = Input._onKeyUp;
 Input._onKeyUp = function(event) {
-    CGMZ_Core_Input_onKeyUp.call(this, event);
+	CGMZ_Core_Input_onKeyUp.call(this, event);
 	if($cgmzTemp) $cgmzTemp.onKeyUp(event);
 };
 //-----------------------------------------------------------------------------
@@ -2614,7 +2724,7 @@ Input._onKeyUp = function(event) {
 //-----------------------------------------------------------------------------
 const CGMZ_Core_Input_onLostFocus = Input._onLostFocus;
 Input._onLostFocus = function() {
-    CGMZ_Core_Input_onLostFocus.call(this);
+	CGMZ_Core_Input_onLostFocus.call(this);
 	if($cgmzTemp) $cgmzTemp.inputClear();
 };
 //-----------------------------------------------------------------------------
@@ -2622,11 +2732,11 @@ Input._onLostFocus = function() {
 //-----------------------------------------------------------------------------
 const CGMZ_Core_Input_updateGamepadState = Input._updateGamepadState;
 Input._updateGamepadState = function(gamepad) {
-    CGMZ_Core_Input_updateGamepadState.call(this, gamepad);
+	CGMZ_Core_Input_updateGamepadState.call(this, gamepad);
 	if(this._gamepadStates[gamepad.index].some((item) => item === true)) {
-		$cgmzTemp.updateLastGamepad(gamepad);
+		$cgmzTemp?.updateLastGamepad(gamepad);
 	} else {
-		$cgmzTemp.updateGamepadRelease(gamepad);
+		$cgmzTemp?.updateGamepadRelease(gamepad);
 	}
 };
 //=============================================================================
@@ -2650,20 +2760,20 @@ Game_Temp.prototype.isPlaytest = function() {
 // Copy of bitmap's stroke rect with added configurable line width
 //-----------------------------------------------------------------------------
 Bitmap.prototype.CGMZ_strokeRect = function(x, y, width, height, color, lineWidth = 1) {
-    const context = this.context;
-    context.save();
-    context.strokeStyle = color;
+	const context = this.context;
+	context.save();
+	context.strokeStyle = color;
 	context.lineWidth = lineWidth;
-    context.strokeRect(x, y, width, height);
-    context.restore();
-    this._baseTexture.update();
+	context.strokeRect(x, y, width, height);
+	context.restore();
+	this._baseTexture.update();
 };
 //-----------------------------------------------------------------------------
 // Draw a line path through an array of points
 //-----------------------------------------------------------------------------
 Bitmap.prototype.CGMZ_strokeLinePath = function(points, color, lineWidth) {
-    const context = this.context;
-    context.save();
+	const context = this.context;
+	context.save();
 	context.strokeStyle = color;
 	context.lineWidth = lineWidth;
 	context.beginPath();
@@ -2671,16 +2781,16 @@ Bitmap.prototype.CGMZ_strokeLinePath = function(points, color, lineWidth) {
 	for(let i = 1; i < points.length; i++) {
 		context.lineTo(points[i].x, points[i].y);
 	}
-    context.stroke();
-    context.restore();
-    this._baseTexture.update();
+	context.stroke();
+	context.restore();
+	this._baseTexture.update();
 };
 //-----------------------------------------------------------------------------
 // Draw and fill a line path through an array of points
 //-----------------------------------------------------------------------------
 Bitmap.prototype.CGMZ_fillLinePath = function(points, color, lineWidth) {
-    const context = this.context;
-    context.save();
+	const context = this.context;
+	context.save();
 	context.fillStyle = color;
 	context.strokeStyle = color;
 	context.lineWidth = lineWidth;
@@ -2690,50 +2800,50 @@ Bitmap.prototype.CGMZ_fillLinePath = function(points, color, lineWidth) {
 		context.lineTo(points[i].x, points[i].y);
 	}
 	context.stroke();
-    context.fill();
-    context.restore();
-    this._baseTexture.update();
+	context.fill();
+	context.restore();
+	this._baseTexture.update();
 };
 //-----------------------------------------------------------------------------
 // Stroke a circle
 //-----------------------------------------------------------------------------
 Bitmap.prototype.CGMZ_strokeCircle = function(x, y, radius, color, lineWidth) {
-    const context = this.context;
-    context.save();
-    context.strokeStyle = color;
+	const context = this.context;
+	context.save();
+	context.strokeStyle = color;
 	context.lineWidth = lineWidth;
-    context.beginPath();
-    context.arc(x, y, radius, 0, Math.PI * 2, false);
-    context.stroke();
-    context.restore();
-    this._baseTexture.update();
+	context.beginPath();
+	context.arc(x, y, radius, 0, Math.PI * 2, false);
+	context.stroke();
+	context.restore();
+	this._baseTexture.update();
 };
 //-----------------------------------------------------------------------------
 // Stroke a curved rectangle
 //-----------------------------------------------------------------------------
 Bitmap.prototype.CGMZ_strokeCurvedRectangle = function(rect, radius, color, lineWidth) {
-    const context = this.context;
+	const context = this.context;
 	const x = rect.x;
 	const y = rect.y;
 	const width = rect.width;
 	const height = rect.height;
-    context.save();
-    context.strokeStyle = color;
+	context.save();
+	context.strokeStyle = color;
 	context.lineWidth = lineWidth;
-    context.beginPath();
+	context.beginPath();
 	context.moveTo(x + radius, y);
-    context.lineTo(x + width - radius, y);
-    context.quadraticCurveTo(x + width, y, x + width, y + radius);
-    context.lineTo(x + width, y + height - radius);
-    context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    context.lineTo(x + radius, y + height);
-    context.quadraticCurveTo(x, y + height, x, y + height - radius);
-    context.lineTo(x, y + radius);
-    context.quadraticCurveTo(x, y, x + radius, y);
+	context.lineTo(x + width - radius, y);
+	context.quadraticCurveTo(x + width, y, x + width, y + radius);
+	context.lineTo(x + width, y + height - radius);
+	context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+	context.lineTo(x + radius, y + height);
+	context.quadraticCurveTo(x, y + height, x, y + height - radius);
+	context.lineTo(x, y + radius);
+	context.quadraticCurveTo(x, y, x + radius, y);
 	context.closePath();
-    context.stroke();
-    context.restore();
-    this._baseTexture.update();
+	context.stroke();
+	context.restore();
+	this._baseTexture.update();
 };
 //=============================================================================
 // Scene_MenuBase
@@ -2745,7 +2855,7 @@ Bitmap.prototype.CGMZ_strokeCurvedRectangle = function(rect, radius, color, line
 //-----------------------------------------------------------------------------
 const CGMZCore_SceneMenuBase_create = Scene_MenuBase.prototype.create;
 Scene_MenuBase.prototype.create = function() {
-    CGMZCore_SceneMenuBase_create.apply(this, arguments);
+	CGMZCore_SceneMenuBase_create.apply(this, arguments);
 	this.CGMZ_createUpperSprites();
 };
 //-----------------------------------------------------------------------------
@@ -2753,20 +2863,20 @@ Scene_MenuBase.prototype.create = function() {
 //-----------------------------------------------------------------------------
 const CGMZCore_SceneMenuBase_createBackground = Scene_MenuBase.prototype.createBackground;
 Scene_MenuBase.prototype.createBackground = function() {
-    CGMZCore_SceneMenuBase_createBackground.apply(this, arguments);
+	CGMZCore_SceneMenuBase_createBackground.apply(this, arguments);
 	this.CGMZ_createLowerSprites();
 };
 //-----------------------------------------------------------------------------
 // Create sprites below everything else
 //-----------------------------------------------------------------------------
 Scene_MenuBase.prototype.CGMZ_createLowerSprites = function() {
-    // Used by CGMZ plugins
+	// Used by CGMZ plugins
 };
 //-----------------------------------------------------------------------------
 // Create sprites above everything else
 //-----------------------------------------------------------------------------
 Scene_MenuBase.prototype.CGMZ_createUpperSprites = function() {
-    // Used by CGMZ plugins
+	// Used by CGMZ plugins
 };
 //=============================================================================
 // CGMZ_Window_Map
@@ -2784,7 +2894,7 @@ Scene_MenuBase.prototype.CGMZ_createUpperSprites = function() {
 // the map window's dimensions.
 //=============================================================================
 function CGMZ_Window_Map() {
-    this.initialize(...arguments);
+	this.initialize(...arguments);
 }
 CGMZ_Window_Map.prototype = Object.create(Window_Selectable.prototype);
 CGMZ_Window_Map.prototype.constructor = CGMZ_Window_Map;
@@ -2793,7 +2903,7 @@ $dataMapCGMZ = null;
 // Initialize
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.initialize = function(rect, mapId) {
-    Window_Selectable.prototype.initialize.call(this, rect);
+	Window_Selectable.prototype.initialize.call(this, rect);
 	this.select(0);
 	this.activate();
 	this.leftArrowVisible = false;
@@ -2816,7 +2926,7 @@ CGMZ_Window_Map.prototype.initialize = function(rect, mapId) {
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.update = function() {
 	Window_Selectable.prototype.update.call(this);
-    if(!$dataMapCGMZ) return;
+	if(!$dataMapCGMZ) return;
 	if(this._loadingMap) {
 		if(DataManager.isMapLoaded()) {
 			this._loadingMap = false;
@@ -2835,65 +2945,65 @@ CGMZ_Window_Map.prototype.update = function() {
 // Create tilemap
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.setupTilemap = function() {
-    this._tilemap.tileWidth = $gameMap.tileWidth();
-    this._tilemap.tileHeight = $gameMap.tileHeight();
-    this._tilemap.setData($dataMapCGMZ.width, $dataMapCGMZ.height, $dataMapCGMZ.data);
-    this._tilemap.horizontalWrap = false;
-    this._tilemap.verticalWrap = false;
-    this.loadTileset();
+	this._tilemap.tileWidth = $gameMap.tileWidth();
+	this._tilemap.tileHeight = $gameMap.tileHeight();
+	this._tilemap.setData($dataMapCGMZ.width, $dataMapCGMZ.height, $dataMapCGMZ.data);
+	this._tilemap.horizontalWrap = false;
+	this._tilemap.verticalWrap = false;
+	this.loadTileset();
 };
 //-----------------------------------------------------------------------------
 // Load Tileset
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.loadTileset = function() {
-    this._tileset = $dataTilesets[$dataMapCGMZ.tilesetId];
-    if (this._tileset) {
-        const bitmaps = [];
-        const tilesetNames = this._tileset.tilesetNames;
-        for (const name of tilesetNames) {
-            bitmaps.push(ImageManager.loadTileset(name));
-        }
-        this._tilemap.setBitmaps(bitmaps);
-        this._tilemap.flags = this._tileset.flags;
-    }
+	this._tileset = $dataTilesets[$dataMapCGMZ.tilesetId];
+	if (this._tileset) {
+		const bitmaps = [];
+		const tilesetNames = this._tileset.tilesetNames;
+		for (const name of tilesetNames) {
+			bitmaps.push(ImageManager.loadTileset(name));
+		}
+		this._tilemap.setBitmaps(bitmaps);
+		this._tilemap.flags = this._tileset.flags;
+	}
 };
 //-----------------------------------------------------------------------------
 // Get max columns
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.maxCols = function() {
 	if(!$dataMapCGMZ) return 0;
-    return $dataMapCGMZ.width;
+	return $dataMapCGMZ.width;
 };
 //-----------------------------------------------------------------------------
 // Get max items
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.maxItems = function() {
 	if(!$dataMapCGMZ) return 0;
-    return $dataMapCGMZ.width * $dataMapCGMZ.height;
+	return $dataMapCGMZ.width * $dataMapCGMZ.height;
 };
 //-----------------------------------------------------------------------------
 // Get column spacing
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.colSpacing = function() {
-    return 0;
+	return 0;
 };
 //-----------------------------------------------------------------------------
 // Get row spacing
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.rowSpacing = function() {
-    return 0;
+	return 0;
 };
 //-----------------------------------------------------------------------------
 // Get item width
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.itemWidth = function() {
-    return $gameMap.tileWidth();
+	return $gameMap.tileWidth();
 };
 //-----------------------------------------------------------------------------
 // Get item height
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.itemHeight = function() {
-    return $gameMap.tileHeight();
+	return $gameMap.tileHeight();
 };
 //-----------------------------------------------------------------------------
 // No item padding
@@ -2910,80 +3020,80 @@ CGMZ_Window_Map.prototype.drawItemBackground = function(index) {
 // Calculate the overall width of the window
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.overallWidth = function() {
-    return this.maxCols() * this.itemWidth();
+	return this.maxCols() * this.itemWidth();
 };
 //-----------------------------------------------------------------------------
 // Get the current column
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.column = function() {
-    return this.index() % this.maxCols();
+	return this.index() % this.maxCols();
 };
 //-----------------------------------------------------------------------------
 // Get the left-most row
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.leftRow = function() {
-    return Math.floor(this.scrollX() / this.itemWidth());
+	return Math.floor(this.scrollX() / this.itemWidth());
 };
 //-----------------------------------------------------------------------------
 // Ensure cursor visible for horizontal movement
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.ensureCursorVisible = function(smooth) {
 	if (this.innerWidth > 0 && this.column() >= 0) {
-        const scrollX = this.scrollX();
-        const itemTopX = this.column() * this.itemWidth();
-        const itemBottomX = itemTopX + this.itemWidth();
-        const scrollMinX = itemBottomX - this.innerWidth;
-        if (scrollX > itemTopX) {
-            if (smooth) {
-                this.smoothScrollTo(itemTopX, this.scrollY());
-            } else {
-                this.scrollTo(itemTopX, this.scrollY());
-            }
-        } else if (scrollX < scrollMinX) {
-            if (smooth) {
-                this.smoothScrollTo(scrollMinX, this.scrollY());
-            } else {
-                this.scrollTo(scrollMinX, this.scrollY());
-            }
-        }
-    }
-    if (this.innerHeight > 0 && this.row() >= 0) {
-        const scrollY = this.scrollY();
-        const itemTop = this.row() * this.itemHeight();
-        const itemBottom = itemTop + this.itemHeight();
-        const scrollMin = itemBottom - this.innerHeight;
-        if (scrollY > itemTop) {
-            if (smooth) {
-                this.smoothScrollTo(this.scrollX(), itemTop);
-            } else {
-                this.scrollTo(this.scrollX(), itemTop);
-            }
-        } else if (scrollY < scrollMin) {
-            if (smooth) {
-                this.smoothScrollTo(this.scrollX(), scrollMin);
-            } else {
-                this.scrollTo(this.scrollX(), scrollMin);
-            }
-        }
-    }
+		const scrollX = this.scrollX();
+		const itemTopX = this.column() * this.itemWidth();
+		const itemBottomX = itemTopX + this.itemWidth();
+		const scrollMinX = itemBottomX - this.innerWidth;
+		if (scrollX > itemTopX) {
+			if (smooth) {
+				this.smoothScrollTo(itemTopX, this.scrollY());
+			} else {
+				this.scrollTo(itemTopX, this.scrollY());
+			}
+		} else if (scrollX < scrollMinX) {
+			if (smooth) {
+				this.smoothScrollTo(scrollMinX, this.scrollY());
+			} else {
+				this.scrollTo(scrollMinX, this.scrollY());
+			}
+		}
+	}
+	if (this.innerHeight > 0 && this.row() >= 0) {
+		const scrollY = this.scrollY();
+		const itemTop = this.row() * this.itemHeight();
+		const itemBottom = itemTop + this.itemHeight();
+		const scrollMin = itemBottom - this.innerHeight;
+		if (scrollY > itemTop) {
+			if (smooth) {
+				this.smoothScrollTo(this.scrollX(), itemTop);
+			} else {
+				this.scrollTo(this.scrollX(), itemTop);
+			}
+		} else if (scrollY < scrollMin) {
+			if (smooth) {
+				this.smoothScrollTo(this.scrollX(), scrollMin);
+			} else {
+				this.scrollTo(this.scrollX(), scrollMin);
+			}
+		}
+	}
 };
 //-----------------------------------------------------------------------------
 // Create left and right arrow sprites too
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype._createArrowSprites = function() {
 	Window_Selectable.prototype._createArrowSprites.call(this);
-    this._leftArrowSprite = new Sprite();
-    this.addChild(this._leftArrowSprite);
-    this._rightArrowSprite = new Sprite();
-    this.addChild(this._rightArrowSprite);
+	this._leftArrowSprite = new Sprite();
+	this.addChild(this._leftArrowSprite);
+	this._rightArrowSprite = new Sprite();
+	this.addChild(this._rightArrowSprite);
 };
 //-----------------------------------------------------------------------------
 // Update arrow visibility
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype.updateArrows = function() {
 	Window_Selectable.prototype.updateArrows.call(this);
-    this.rightArrowVisible = this.scrollX() < this.maxScrollX();
-    this.leftArrowVisible = this.scrollX() > 0;
+	this.rightArrowVisible = this.scrollX() < this.maxScrollX();
+	this.leftArrowVisible = this.scrollX() > 0;
 };
 //-----------------------------------------------------------------------------
 // Update the left and right arrows
@@ -2991,29 +3101,29 @@ CGMZ_Window_Map.prototype.updateArrows = function() {
 CGMZ_Window_Map.prototype._updateArrows = function() {
 	Window_Selectable.prototype._updateArrows.call(this);
 	this._leftArrowSprite.visible = this.isOpen() && this.leftArrowVisible;
-    this._rightArrowSprite.visible = this.isOpen() && this.rightArrowVisible;
+	this._rightArrowSprite.visible = this.isOpen() && this.rightArrowVisible;
 };
 //-----------------------------------------------------------------------------
 // Refresh the left and right arrows
 //-----------------------------------------------------------------------------
 CGMZ_Window_Map.prototype._refreshArrows = function() {
-    Window_Selectable.prototype._refreshArrows.call(this);
+	Window_Selectable.prototype._refreshArrows.call(this);
 	const w = this._width;
-    const h = this._height;
-    const p = 24;
-    const q = p / 2;
-    const sx = 96 + p;
-    const sy = 0 + p;
-    this._rightArrowSprite.bitmap = this._windowskin;
-    this._rightArrowSprite.anchor.x = 0.5;
-    this._rightArrowSprite.anchor.y = 0.5;
+	const h = this._height;
+	const p = 24;
+	const q = p / 2;
+	const sx = 96 + p;
+	const sy = 0 + p;
+	this._rightArrowSprite.bitmap = this._windowskin;
+	this._rightArrowSprite.anchor.x = 0.5;
+	this._rightArrowSprite.anchor.y = 0.5;
 	this._rightArrowSprite.setFrame(sx + p + q, sy + q, q, p);
-    this._rightArrowSprite.move(w - q, h / 2);
-    this._leftArrowSprite.bitmap = this._windowskin;
-    this._leftArrowSprite.anchor.x = 0.5;
-    this._leftArrowSprite.anchor.y = 0.5;
+	this._rightArrowSprite.move(w - q, h / 2);
+	this._leftArrowSprite.bitmap = this._windowskin;
+	this._leftArrowSprite.anchor.x = 0.5;
+	this._leftArrowSprite.anchor.y = 0.5;
 	this._leftArrowSprite.setFrame(sx, sy + q, q, p);
-    this._leftArrowSprite.move(q, h / 2);
+	this._leftArrowSprite.move(q, h / 2);
 };
 //-----------------------------------------------------------------------------
 // Do not update padding
